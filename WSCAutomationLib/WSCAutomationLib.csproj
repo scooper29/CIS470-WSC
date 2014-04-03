@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9D8AF6EE-7112-41C5-8DF4-1FF950F609C1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WSCAutomation</RootNamespace>
+    <AssemblyName>WSCAutomationLib</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Customers\Customer.cs" />
+    <Compile Include="Customers\CustomerEmployeeTools.cs" />
+    <Compile Include="Customers\CustomerValidationTools.cs" />
+    <Compile Include="Customers\Payment.cs" />
+    <Compile Include="Database\DatabaseManager.cs" />
+    <Compile Include="Database\DatabaseManagerCustomers.cs" />
+    <Compile Include="Database\DatabaseManagerEmployees.cs" />
+    <Compile Include="Database\DatabaseManagerOrders.cs" />
+    <Compile Include="Employees\AccessCode.cs" />
+    <Compile Include="Employees\Admin.cs" />
+    <Compile Include="Employees\Clerk.cs" />
+    <Compile Include="Employees\Employee.cs" />
+    <Compile Include="Employees\EmployeeValidationTools.cs" />
+    <Compile Include="Employees\Manager.cs" />
+    <Compile Include="Employees\Sales.cs" />
+    <Compile Include="Employees\Specialist.cs" />
+    <Compile Include="Inventory\Inventory.cs" />
+    <Compile Include="Database\DatabaseManagerInventory.cs" />
+    <Compile Include="Inventory\InventoryEmployeeTools.cs" />
+    <Compile Include="Inventory\InventoryOrder.cs" />
+    <Compile Include="Inventory\InventoryValidationTools.cs" />
+    <Compile Include="Orders\Order.cs" />
+    <Compile Include="Orders\OrderEmployeeTools.cs" />
+    <Compile Include="Orders\OrderValidationTools.cs" />
+    <Compile Include="Orders\QualityCheckList.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ValidationTools.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
