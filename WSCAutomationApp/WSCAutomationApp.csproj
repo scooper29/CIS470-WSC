@@ -54,6 +54,12 @@
     <Compile Include="AdminViews\SearchEmployeesDialog.Designer.cs">
       <DependentUpon>SearchEmployeesDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="CustomersViews\EnterEditCustomerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomersViews\EnterEditCustomerForm.Designer.cs">
+      <DependentUpon>EnterEditCustomerForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="LogInDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,6 +96,9 @@
     <EmbeddedResource Include="AdminViews\SearchEmployeesDialog.resx">
       <DependentUpon>SearchEmployeesDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CustomersViews\EnterEditCustomerForm.resx">
+      <DependentUpon>EnterEditCustomerForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LogInDialog.resx">
       <DependentUpon>LogInDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -123,7 +132,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="CustomersViews\" />
     <Folder Include="InventoryViews\" />
     <Folder Include="OrdersViews\" />
   </ItemGroup>
