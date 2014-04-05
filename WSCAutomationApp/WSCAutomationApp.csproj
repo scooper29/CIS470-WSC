@@ -60,7 +60,9 @@
     <Compile Include="CustomersViews\EnterEditCustomerForm.Designer.cs">
       <DependentUpon>EnterEditCustomerForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="InventoryViews\EnterEditInventoryForm.cs" />
+    <Compile Include="InventoryViews\EnterEditInventoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="InventoryViews\EnterEditInventoryForm.Designer.cs">
       <DependentUpon>EnterEditInventoryForm.cs</DependentUpon>
     </Compile>
@@ -84,7 +86,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="InventoryViews\PurchaseInventoryRequest.cs" />
+    <Compile Include="InventoryViews\PurchaseInventoryRequest.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="InventoryViews\PurchaseInventoryRequest.Designer.cs">
       <DependentUpon>PurchaseInventoryRequest.cs</DependentUpon>
     </Compile>
