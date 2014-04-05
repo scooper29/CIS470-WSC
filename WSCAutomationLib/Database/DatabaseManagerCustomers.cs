@@ -6,5 +6,16 @@ namespace WSCAutomation.Database
 
 	partial class DatabaseManager
 	{
+		public void DBAddCustomer()
+		{
+		}
+
+		public void DBEditCustomer()
+		{
+		}
+
+		public void DBGetCustomers()
+		{
+		}
 	};
 }

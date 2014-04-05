@@ -6,5 +6,28 @@ namespace WSCAutomation.Database
 
 	partial class DatabaseManager
 	{
+		public void DBAddInventory()
+		{
+		}
+
+		public void DBEditInventory()
+		{
+		}
+
+		public void DBGetInventory()
+		{
+		}
+
+		public void DBAddInventoryOrder()
+		{
+		}
+
+		public void DBEditInventoryOrder()
+		{
+		}
+
+		public void DBGetInventoryOrders()
+		{
+		}
 	};
 }

@@ -22,7 +22,5 @@ namespace WSCAutomation.App
 		{
 			Authority = authority;
 		}
-
-		// test
 	};
 }
