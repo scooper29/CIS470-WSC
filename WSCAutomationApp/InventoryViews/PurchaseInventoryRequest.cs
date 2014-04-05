@@ -8,18 +8,16 @@ using System.Windows.Forms;
 
 namespace WSCAutomation.App
 {
-    public partial class EnterEditCustomerForm : WSCAutomation.App.EnterEditRecordFormBase
+    public partial class PurchaseInventoryRequest : WSCAutomation.App.EnterEditRecordFormBase
     {
-        public EnterEditCustomerForm()
+        public PurchaseInventoryRequest()
         {
             InitializeComponent();
         }
 
-        private void EnterEditCustomerForm_Load(object sender, EventArgs e)
+        private void PurchaseInventoryRequest_Load(object sender, EventArgs e)
         {
 
         }
-
-       
     }
 }

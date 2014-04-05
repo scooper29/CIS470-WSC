@@ -8,18 +8,18 @@ using System.Windows.Forms;
 
 namespace WSCAutomation.App
 {
-    public partial class EnterEditCustomerForm : WSCAutomation.App.EnterEditRecordFormBase
+    public partial class EnterEditOrderForm : WSCAutomation.App.EnterEditRecordFormBase
     {
-        public EnterEditCustomerForm()
+        public EnterEditOrderForm()
         {
             InitializeComponent();
         }
 
-        private void EnterEditCustomerForm_Load(object sender, EventArgs e)
+        private void EnterEditOrderForm_Load(object sender, EventArgs e)
         {
 
         }
 
-       
+        
     }
 }
