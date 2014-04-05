@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txbInventoryName = new System.Windows.Forms.TextBox();
+            this.txtManufacturerName = new System.Windows.Forms.TextBox();
+            this.txbInventoryID = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -44,26 +44,26 @@
             // 
             this.btnClose.Location = new System.Drawing.Point(12, 186);
             // 
-            // textBox3
+            // txbInventoryName
             // 
-            this.textBox3.Location = new System.Drawing.Point(316, 69);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 20);
-            this.textBox3.TabIndex = 11;
+            this.txbInventoryName.Location = new System.Drawing.Point(316, 69);
+            this.txbInventoryName.Name = "txbInventoryName";
+            this.txbInventoryName.Size = new System.Drawing.Size(100, 20);
+            this.txbInventoryName.TabIndex = 11;
             // 
-            // textBox2
+            // txtManufacturerName
             // 
-            this.textBox2.Location = new System.Drawing.Point(120, 123);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(139, 20);
-            this.textBox2.TabIndex = 10;
+            this.txtManufacturerName.Location = new System.Drawing.Point(120, 123);
+            this.txtManufacturerName.Name = "txtManufacturerName";
+            this.txtManufacturerName.Size = new System.Drawing.Size(139, 20);
+            this.txtManufacturerName.TabIndex = 10;
             // 
-            // textBox1
+            // txbInventoryID
             // 
-            this.textBox1.Location = new System.Drawing.Point(120, 69);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 9;
+            this.txbInventoryID.Location = new System.Drawing.Point(120, 69);
+            this.txbInventoryID.Name = "txbInventoryID";
+            this.txbInventoryID.Size = new System.Drawing.Size(100, 20);
+            this.txbInventoryID.TabIndex = 9;
             // 
             // label3
             // 
@@ -96,9 +96,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(462, 221);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txbInventoryName);
+            this.Controls.Add(this.txtManufacturerName);
+            this.Controls.Add(this.txbInventoryID);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -111,9 +111,9 @@
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.label2, 0);
             this.Controls.SetChildIndex(this.label3, 0);
-            this.Controls.SetChildIndex(this.textBox1, 0);
-            this.Controls.SetChildIndex(this.textBox2, 0);
-            this.Controls.SetChildIndex(this.textBox3, 0);
+            this.Controls.SetChildIndex(this.txbInventoryID, 0);
+            this.Controls.SetChildIndex(this.txtManufacturerName, 0);
+            this.Controls.SetChildIndex(this.txbInventoryName, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -121,9 +121,9 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txbInventoryName;
+        private System.Windows.Forms.TextBox txtManufacturerName;
+        private System.Windows.Forms.TextBox txbInventoryID;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;

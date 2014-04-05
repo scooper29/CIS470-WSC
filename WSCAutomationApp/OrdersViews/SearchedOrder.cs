@@ -6,15 +6,13 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace WSCAutomation.App
+namespace WSCAutomation.App.OrdersViews
 {
-    public partial class PurchaseInventoryRequest : WSCAutomation.App.EnterEditRecordFormBase
+    public partial class SearchedOrder : WSCAutomation.App.SearchRecordsDialogBase
     {
-        public PurchaseInventoryRequest()
+        public SearchedOrder()
         {
             InitializeComponent();
         }
-
-        
     }
 }

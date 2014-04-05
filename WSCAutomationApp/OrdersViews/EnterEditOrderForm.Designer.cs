@@ -28,13 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.txbOrderInvalidMemo = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txbOrderMessage = new System.Windows.Forms.TextBox();
+            this.txbCatalogNum = new System.Windows.Forms.TextBox();
+            this.txbInventoryID = new System.Windows.Forms.TextBox();
+            this.txbEmployeeID = new System.Windows.Forms.TextBox();
+            this.txbCustomerID = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -45,11 +45,11 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
-            this.comboBox5 = new System.Windows.Forms.ComboBox();
+            this.cbxOrderType = new System.Windows.Forms.ComboBox();
+            this.cbxOrderAssigned = new System.Windows.Forms.ComboBox();
+            this.cbxOrderValidated = new System.Windows.Forms.ComboBox();
+            this.cbxOrderPaid = new System.Windows.Forms.ComboBox();
+            this.cbxOrderClosed = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // btnSave
@@ -60,12 +60,12 @@
             // 
             this.btnClose.Location = new System.Drawing.Point(12, 311);
             // 
-            // textBox8
+            // txbOrderInvalidMemo
             // 
-            this.textBox8.Location = new System.Drawing.Point(279, 126);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(100, 20);
-            this.textBox8.TabIndex = 70;
+            this.txbOrderInvalidMemo.Location = new System.Drawing.Point(279, 126);
+            this.txbOrderInvalidMemo.Name = "txbOrderInvalidMemo";
+            this.txbOrderInvalidMemo.Size = new System.Drawing.Size(100, 20);
+            this.txbOrderInvalidMemo.TabIndex = 70;
             // 
             // label10
             // 
@@ -76,40 +76,40 @@
             this.label10.TabIndex = 65;
             this.label10.Text = "Order Invalid Memo:";
             // 
-            // textBox7
+            // txbOrderMessage
             // 
-            this.textBox7.Location = new System.Drawing.Point(166, 229);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(100, 20);
-            this.textBox7.TabIndex = 64;
+            this.txbOrderMessage.Location = new System.Drawing.Point(166, 229);
+            this.txbOrderMessage.Name = "txbOrderMessage";
+            this.txbOrderMessage.Size = new System.Drawing.Size(100, 20);
+            this.txbOrderMessage.TabIndex = 64;
             // 
-            // textBox6
+            // txbCatalogNum
             // 
-            this.textBox6.Location = new System.Drawing.Point(318, 184);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(100, 20);
-            this.textBox6.TabIndex = 63;
+            this.txbCatalogNum.Location = new System.Drawing.Point(318, 184);
+            this.txbCatalogNum.Name = "txbCatalogNum";
+            this.txbCatalogNum.Size = new System.Drawing.Size(100, 20);
+            this.txbCatalogNum.TabIndex = 63;
             // 
-            // textBox4
+            // txbInventoryID
             // 
-            this.textBox4.Location = new System.Drawing.Point(446, 70);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 20);
-            this.textBox4.TabIndex = 61;
+            this.txbInventoryID.Location = new System.Drawing.Point(446, 70);
+            this.txbInventoryID.Name = "txbInventoryID";
+            this.txbInventoryID.Size = new System.Drawing.Size(100, 20);
+            this.txbInventoryID.TabIndex = 61;
             // 
-            // textBox3
+            // txbEmployeeID
             // 
-            this.textBox3.Location = new System.Drawing.Point(262, 70);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(104, 20);
-            this.textBox3.TabIndex = 60;
+            this.txbEmployeeID.Location = new System.Drawing.Point(262, 70);
+            this.txbEmployeeID.Name = "txbEmployeeID";
+            this.txbEmployeeID.Size = new System.Drawing.Size(104, 20);
+            this.txbEmployeeID.TabIndex = 60;
             // 
-            // textBox2
+            // txbCustomerID
             // 
-            this.textBox2.Location = new System.Drawing.Point(86, 74);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(104, 20);
-            this.textBox2.TabIndex = 59;
+            this.txbCustomerID.Location = new System.Drawing.Point(86, 74);
+            this.txbCustomerID.Name = "txbCustomerID";
+            this.txbCustomerID.Size = new System.Drawing.Size(104, 20);
+            this.txbCustomerID.TabIndex = 59;
             // 
             // label9
             // 
@@ -201,71 +201,71 @@
             this.label13.TabIndex = 75;
             this.label13.Text = "Order Closed";
             // 
-            // comboBox1
+            // cbxOrderType
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(86, 126);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(68, 21);
-            this.comboBox1.TabIndex = 76;
+            this.cbxOrderType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxOrderType.FormattingEnabled = true;
+            this.cbxOrderType.Location = new System.Drawing.Point(86, 126);
+            this.cbxOrderType.Name = "cbxOrderType";
+            this.cbxOrderType.Size = new System.Drawing.Size(68, 21);
+            this.cbxOrderType.TabIndex = 76;
             // 
-            // comboBox2
+            // cbxOrderAssigned
             // 
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(137, 181);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(65, 21);
-            this.comboBox2.TabIndex = 77;
+            this.cbxOrderAssigned.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxOrderAssigned.FormattingEnabled = true;
+            this.cbxOrderAssigned.Location = new System.Drawing.Point(137, 181);
+            this.cbxOrderAssigned.Name = "cbxOrderAssigned";
+            this.cbxOrderAssigned.Size = new System.Drawing.Size(65, 21);
+            this.cbxOrderAssigned.TabIndex = 77;
             // 
-            // comboBox3
+            // cbxOrderValidated
             // 
-            this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(471, 126);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(65, 21);
-            this.comboBox3.TabIndex = 78;
+            this.cbxOrderValidated.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxOrderValidated.FormattingEnabled = true;
+            this.cbxOrderValidated.Location = new System.Drawing.Point(471, 126);
+            this.cbxOrderValidated.Name = "cbxOrderValidated";
+            this.cbxOrderValidated.Size = new System.Drawing.Size(65, 21);
+            this.cbxOrderValidated.TabIndex = 78;
             // 
-            // comboBox4
+            // cbxOrderPaid
             // 
-            this.comboBox4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(503, 181);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(43, 21);
-            this.comboBox4.TabIndex = 79;
+            this.cbxOrderPaid.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxOrderPaid.FormattingEnabled = true;
+            this.cbxOrderPaid.Location = new System.Drawing.Point(503, 181);
+            this.cbxOrderPaid.Name = "cbxOrderPaid";
+            this.cbxOrderPaid.Size = new System.Drawing.Size(43, 21);
+            this.cbxOrderPaid.TabIndex = 79;
             // 
-            // comboBox5
+            // cbxOrderClosed
             // 
-            this.comboBox5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox5.FormattingEnabled = true;
-            this.comboBox5.Location = new System.Drawing.Point(350, 229);
-            this.comboBox5.Name = "comboBox5";
-            this.comboBox5.Size = new System.Drawing.Size(50, 21);
-            this.comboBox5.TabIndex = 80;
+            this.cbxOrderClosed.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxOrderClosed.FormattingEnabled = true;
+            this.cbxOrderClosed.Location = new System.Drawing.Point(350, 229);
+            this.cbxOrderClosed.Name = "cbxOrderClosed";
+            this.cbxOrderClosed.Size = new System.Drawing.Size(50, 21);
+            this.cbxOrderClosed.TabIndex = 80;
             // 
             // EnterEditOrderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(581, 346);
-            this.Controls.Add(this.comboBox5);
-            this.Controls.Add(this.comboBox4);
-            this.Controls.Add(this.comboBox3);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cbxOrderClosed);
+            this.Controls.Add(this.cbxOrderPaid);
+            this.Controls.Add(this.cbxOrderValidated);
+            this.Controls.Add(this.cbxOrderAssigned);
+            this.Controls.Add(this.cbxOrderType);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.textBox8);
+            this.Controls.Add(this.txbOrderInvalidMemo);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.textBox7);
-            this.Controls.Add(this.textBox6);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.txbOrderMessage);
+            this.Controls.Add(this.txbCatalogNum);
+            this.Controls.Add(this.txbInventoryID);
+            this.Controls.Add(this.txbEmployeeID);
+            this.Controls.Add(this.txbCustomerID);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
@@ -284,22 +284,22 @@
             this.Controls.SetChildIndex(this.label6, 0);
             this.Controls.SetChildIndex(this.label7, 0);
             this.Controls.SetChildIndex(this.label9, 0);
-            this.Controls.SetChildIndex(this.textBox2, 0);
-            this.Controls.SetChildIndex(this.textBox3, 0);
-            this.Controls.SetChildIndex(this.textBox4, 0);
-            this.Controls.SetChildIndex(this.textBox6, 0);
-            this.Controls.SetChildIndex(this.textBox7, 0);
+            this.Controls.SetChildIndex(this.txbCustomerID, 0);
+            this.Controls.SetChildIndex(this.txbEmployeeID, 0);
+            this.Controls.SetChildIndex(this.txbInventoryID, 0);
+            this.Controls.SetChildIndex(this.txbCatalogNum, 0);
+            this.Controls.SetChildIndex(this.txbOrderMessage, 0);
             this.Controls.SetChildIndex(this.label10, 0);
-            this.Controls.SetChildIndex(this.textBox8, 0);
+            this.Controls.SetChildIndex(this.txbOrderInvalidMemo, 0);
             this.Controls.SetChildIndex(this.label8, 0);
             this.Controls.SetChildIndex(this.label11, 0);
             this.Controls.SetChildIndex(this.label12, 0);
             this.Controls.SetChildIndex(this.label13, 0);
-            this.Controls.SetChildIndex(this.comboBox1, 0);
-            this.Controls.SetChildIndex(this.comboBox2, 0);
-            this.Controls.SetChildIndex(this.comboBox3, 0);
-            this.Controls.SetChildIndex(this.comboBox4, 0);
-            this.Controls.SetChildIndex(this.comboBox5, 0);
+            this.Controls.SetChildIndex(this.cbxOrderType, 0);
+            this.Controls.SetChildIndex(this.cbxOrderAssigned, 0);
+            this.Controls.SetChildIndex(this.cbxOrderValidated, 0);
+            this.Controls.SetChildIndex(this.cbxOrderPaid, 0);
+            this.Controls.SetChildIndex(this.cbxOrderClosed, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -307,13 +307,13 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.TextBox txbOrderInvalidMemo;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txbOrderMessage;
+        private System.Windows.Forms.TextBox txbCatalogNum;
+        private System.Windows.Forms.TextBox txbInventoryID;
+        private System.Windows.Forms.TextBox txbEmployeeID;
+        private System.Windows.Forms.TextBox txbCustomerID;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
@@ -324,10 +324,10 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.ComboBox comboBox3;
-        private System.Windows.Forms.ComboBox comboBox4;
-        private System.Windows.Forms.ComboBox comboBox5;
+        private System.Windows.Forms.ComboBox cbxOrderType;
+        private System.Windows.Forms.ComboBox cbxOrderAssigned;
+        private System.Windows.Forms.ComboBox cbxOrderValidated;
+        private System.Windows.Forms.ComboBox cbxOrderPaid;
+        private System.Windows.Forms.ComboBox cbxOrderClosed;
     }
 }
