@@ -2,24 +2,12 @@
 
 namespace WSCAutomation.Inventory
 {
-	/*public class Inventory
-	{
-		public int Id { get; set; }
-
-		public string ItemName { get; set; }
-		public string Manufacturer { get; set; }
-		public int Quantity { get; set; }
-
-		public Inventory()
-		{
-		}
-	};*/
-
     public class Inventory
     {
-        public int inventoryID;
-        public string itemName;
-        public int quantity;
+        public int inventoryID { get; set; }
+        public string itemName { get; set; }
+        public string manufacturer { get; set; }
+        public int quantity { get; set; }
 
         public Inventory()
         {
