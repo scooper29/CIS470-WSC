@@ -14,7 +14,7 @@ namespace WSCAutomation.Employees
 				"Admins can't check inventory");
 		}
 
-		public virtual void CheckOrder()
+		public override void CheckOrder()
 		{
 			throw new InvalidOperationException(
 				"Admins can't check orders");

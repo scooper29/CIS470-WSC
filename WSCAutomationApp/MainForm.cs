@@ -186,6 +186,8 @@ namespace WSCAutomation.App
 
 		private void OnInventoryAddClick(object sender, EventArgs e)
 		{
+			var enterForm = new EnterEditInventoryForm();
+			HandleNewCreateRecordForm(enterForm);
 		}
 		#endregion
 
@@ -196,16 +198,22 @@ namespace WSCAutomation.App
 
 		private void OnCustomersAddClick(object sender, EventArgs e)
 		{
+			var enterForm = new EnterEditCustomerForm();
+			HandleNewCreateRecordForm(enterForm);
 		}
 		#endregion
 
 		#region ordersMenu events
 		private void OnOrdersSearchClick(object sender, EventArgs e)
 		{
+			var searchDialog = new SearchOrdersDialog();
+			searchDialog.ShowDialog(this);
 		}
 
 		private void OnOrdersAddClick(object sender, EventArgs e)
 		{
+			var enterForm = new EnterEditOrderForm();
+			HandleNewCreateRecordForm(enterForm);
 		}
 		#endregion
 

@@ -103,7 +103,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "EnterEditInventoryForm";
-            this.Load += new System.EventHandler(this.EnterEditInventoryForm_Load);
             this.Controls.SetChildIndex(this.lblRecordId, 0);
             this.Controls.SetChildIndex(this.txtRecordId, 0);
             this.Controls.SetChildIndex(this.btnSave, 0);

@@ -13,8 +13,6 @@ namespace WSCAutomation.App
         public PurchaseInventoryRequest()
         {
             InitializeComponent();
-        }
-
-        
-    }
+        }   
+    };
 }

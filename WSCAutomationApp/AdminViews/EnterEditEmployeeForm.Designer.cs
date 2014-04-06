@@ -187,7 +187,6 @@
             this.Controls.Add(label1);
             this.Name = "EnterEditEmployeeForm";
             this.Text = "EnterEditUser";
-            this.Load += new System.EventHandler(this.EnterEditEmployeeForm_Load);
             this.Controls.SetChildIndex(this.btnSave, 0);
             this.Controls.SetChildIndex(this.btnClose, 0);
             this.Controls.SetChildIndex(this.lblRecordId, 0);
