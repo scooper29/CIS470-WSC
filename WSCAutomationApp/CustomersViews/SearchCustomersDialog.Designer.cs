@@ -30,7 +30,7 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtCustomerID = new System.Windows.Forms.TextBox();
             this.txtCustomerLastName = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
@@ -72,12 +72,12 @@
             this.label3.TabIndex = 9;
             this.label3.Text = "Customer Last Name:";
             // 
-            // textBox2
+            // txtCustomerID
             // 
-            this.textBox2.Location = new System.Drawing.Point(148, 48);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 11;
+            this.txtCustomerID.Location = new System.Drawing.Point(148, 48);
+            this.txtCustomerID.Name = "txtCustomerID";
+            this.txtCustomerID.Size = new System.Drawing.Size(100, 20);
+            this.txtCustomerID.TabIndex = 11;
             // 
             // txtCustomerLastName
             // 
@@ -86,15 +86,15 @@
             this.txtCustomerLastName.Size = new System.Drawing.Size(100, 20);
             this.txtCustomerLastName.TabIndex = 12;
             // 
-            // SearchCustomerDialog
+            // SearchCustomersDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(435, 356);
             this.Controls.Add(this.txtCustomerLastName);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.txtCustomerID);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
-            this.Name = "SearchCustomerDialog";
+            this.Name = "SearchCustomersDialog";
             this.Controls.SetChildIndex(this.lblParameterId, 0);
             this.Controls.SetChildIndex(this.txtParameterId, 0);
             this.Controls.SetChildIndex(this.btnSearch, 0);
@@ -103,7 +103,7 @@
             this.Controls.SetChildIndex(this.btnEdit, 0);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.label3, 0);
-            this.Controls.SetChildIndex(this.textBox2, 0);
+            this.Controls.SetChildIndex(this.txtCustomerID, 0);
             this.Controls.SetChildIndex(this.txtCustomerLastName, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -114,7 +114,7 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtCustomerID;
         private System.Windows.Forms.TextBox txtCustomerLastName;
     }
 }
