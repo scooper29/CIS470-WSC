@@ -8,11 +8,16 @@ using System.Windows.Forms;
 
 namespace WSCAutomation.App.CustomersViews
 {
-    public partial class SearchCustomerDialog : WSCAutomation.App.SearchRecordsDialogBase
+    public partial class SearchCustomersDialog : WSCAutomation.App.SearchRecordsDialogBase
     {
-        public SearchCustomerDialog()
+        public SearchCustomersDialog()
         {
             InitializeComponent();
+        }
+
+        private void lblParameterId_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

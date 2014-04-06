@@ -1,6 +1,6 @@
 ﻿namespace WSCAutomation.App.CustomersViews
 {
-    partial class SearchCustomerDialog
+    partial class SearchCustomersDialog
     {
         /// <summary>
         /// Required designer variable.
@@ -33,6 +33,10 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.txtCustomerLastName = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
+            // 
+            // lblParameterId
+            // 
+            this.lblParameterId.Click += new System.EventHandler(this.lblParameterId_Click);
             // 
             // btnSearch
             // 

@@ -31,11 +31,12 @@
             this.label5 = new System.Windows.Forms.Label();
             this.txbInvReqID = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.cbxInvReqQty = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnSave
@@ -71,14 +72,6 @@
             this.label4.TabIndex = 54;
             this.label4.Text = "Inventory ID:";
             // 
-            // cbxInvReqQty
-            // 
-            this.cbxInvReqQty.FormattingEnabled = true;
-            this.cbxInvReqQty.Location = new System.Drawing.Point(262, 62);
-            this.cbxInvReqQty.Name = "cbxInvReqQty";
-            this.cbxInvReqQty.Size = new System.Drawing.Size(50, 21);
-            this.cbxInvReqQty.TabIndex = 57;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -111,15 +104,22 @@
             this.dateTimePicker2.Size = new System.Drawing.Size(200, 20);
             this.dateTimePicker2.TabIndex = 61;
             // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(272, 63);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(42, 20);
+            this.numericUpDown1.TabIndex = 62;
+            // 
             // PurchaseInventoryRequest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(370, 238);
+            this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.dateTimePicker2);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.cbxInvReqQty);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.txbInvReqID);
             this.Controls.Add(this.label4);
@@ -131,11 +131,12 @@
             this.Controls.SetChildIndex(this.label4, 0);
             this.Controls.SetChildIndex(this.txbInvReqID, 0);
             this.Controls.SetChildIndex(this.label5, 0);
-            this.Controls.SetChildIndex(this.cbxInvReqQty, 0);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.label2, 0);
             this.Controls.SetChildIndex(this.dateTimePicker1, 0);
             this.Controls.SetChildIndex(this.dateTimePicker2, 0);
+            this.Controls.SetChildIndex(this.numericUpDown1, 0);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -146,10 +147,10 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txbInvReqID;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox cbxInvReqQty;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
     }
 }

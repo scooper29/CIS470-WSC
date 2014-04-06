@@ -14,5 +14,10 @@ namespace WSCAutomation.App
         {
             InitializeComponent();
         }
+
+        private void EnterEditInventoryForm_Load(object sender, EventArgs e)
+        {
+
+        }
     };
 }

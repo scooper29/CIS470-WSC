@@ -40,6 +40,7 @@
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdminViews\EnterEditEmployeeForm.cs">
@@ -60,17 +61,35 @@
     <Compile Include="CustomersViews\EnterEditCustomerForm.Designer.cs">
       <DependentUpon>EnterEditCustomerForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="CustomersViews\SearchCustomerDialog.cs">
+    <Compile Include="CustomersViews\SearchCustomersDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CustomersViews\SearchCustomerDialog.Designer.cs">
-      <DependentUpon>SearchCustomerDialog.cs</DependentUpon>
+    <Compile Include="CustomersViews\SearchCustomersDialog.Designer.cs">
+      <DependentUpon>SearchCustomersDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomersViews\EditPaymentDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomersViews\EditPaymentDialog.Designer.cs">
+      <DependentUpon>EditPaymentDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="InventoryViews\EnterEditInventoryForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="InventoryViews\EnterEditInventoryForm.Designer.cs">
       <DependentUpon>EnterEditInventoryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InventoryViews\SearchInventoryDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InventoryViews\SearchInventoryDialog.Designer.cs">
+      <DependentUpon>SearchInventoryDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OrdersViews\EditOrderQualityDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OrdersViews\EditOrderQualityDialog.Designer.cs">
+      <DependentUpon>EditOrderQualityDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="OrdersViews\EnterEditOrderForm.cs">
       <SubType>Form</SubType>
@@ -89,12 +108,6 @@
     </Compile>
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="OrdersViews\SearchedOrder.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="OrdersViews\SearchedOrder.Designer.cs">
-      <DependentUpon>SearchedOrder.cs</DependentUpon>
     </Compile>
     <Compile Include="OrdersViews\SearchOrdersDialog.cs">
       <SubType>Form</SubType>
@@ -132,14 +145,23 @@
     <EmbeddedResource Include="AdminViews\SearchEmployeesDialog.resx">
       <DependentUpon>SearchEmployeesDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CustomersViews\EditPaymentDialog.resx">
+      <DependentUpon>EditPaymentDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CustomersViews\EnterEditCustomerForm.resx">
       <DependentUpon>EnterEditCustomerForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CustomersViews\SearchCustomerDialog.resx">
-      <DependentUpon>SearchCustomerDialog.cs</DependentUpon>
+    <EmbeddedResource Include="CustomersViews\SearchCustomersDialog.resx">
+      <DependentUpon>SearchCustomersDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InventoryViews\EnterEditInventoryForm.resx">
       <DependentUpon>EnterEditInventoryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InventoryViews\SearchInventoryDialog.resx">
+      <DependentUpon>SearchInventoryDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OrdersViews\EditOrderQualityDialog.resx">
+      <DependentUpon>EditOrderQualityDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OrdersViews\EnterEditOrderForm.resx">
       <DependentUpon>EnterEditOrderForm.cs</DependentUpon>
@@ -149,9 +171,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OrdersViews\SearchedOrder.resx">
-      <DependentUpon>SearchedOrder.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OrdersViews\SearchOrdersDialog.resx">
       <DependentUpon>SearchOrdersDialog.cs</DependentUpon>

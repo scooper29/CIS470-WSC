@@ -34,6 +34,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnSave
@@ -53,7 +56,7 @@
             // 
             // txtManufacturerName
             // 
-            this.txtManufacturerName.Location = new System.Drawing.Point(120, 123);
+            this.txtManufacturerName.Location = new System.Drawing.Point(120, 104);
             this.txtManufacturerName.Name = "txtManufacturerName";
             this.txtManufacturerName.Size = new System.Drawing.Size(139, 20);
             this.txtManufacturerName.TabIndex = 10;
@@ -68,7 +71,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(19, 126);
+            this.label3.Location = new System.Drawing.Point(19, 107);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(104, 13);
             this.label3.TabIndex = 8;
@@ -92,10 +95,28 @@
             this.label1.TabIndex = 6;
             this.label1.Text = "Inventory ID:";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(265, 107);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(70, 13);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "Inventoy Qty:";
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(342, 103);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(42, 20);
+            this.numericUpDown1.TabIndex = 13;
+            // 
             // EnterEditInventoryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(462, 221);
+            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.txbInventoryName);
             this.Controls.Add(this.txtManufacturerName);
             this.Controls.Add(this.txbInventoryID);
@@ -103,6 +124,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "EnterEditInventoryForm";
+            this.Load += new System.EventHandler(this.EnterEditInventoryForm_Load);
             this.Controls.SetChildIndex(this.lblRecordId, 0);
             this.Controls.SetChildIndex(this.txtRecordId, 0);
             this.Controls.SetChildIndex(this.btnSave, 0);
@@ -113,6 +135,9 @@
             this.Controls.SetChildIndex(this.txbInventoryID, 0);
             this.Controls.SetChildIndex(this.txtManufacturerName, 0);
             this.Controls.SetChildIndex(this.txbInventoryName, 0);
+            this.Controls.SetChildIndex(this.label4, 0);
+            this.Controls.SetChildIndex(this.numericUpDown1, 0);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -126,5 +151,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
     }
 }
