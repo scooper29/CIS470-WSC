@@ -60,6 +60,12 @@
     <Compile Include="CustomersViews\EnterEditCustomerForm.Designer.cs">
       <DependentUpon>EnterEditCustomerForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CustomersViews\SearchCustomerDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomersViews\SearchCustomerDialog.Designer.cs">
+      <DependentUpon>SearchCustomerDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="InventoryViews\EnterEditInventoryForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -122,6 +128,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CustomersViews\EnterEditCustomerForm.resx">
       <DependentUpon>EnterEditCustomerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomersViews\SearchCustomerDialog.resx">
+      <DependentUpon>SearchCustomerDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InventoryViews\EnterEditInventoryForm.resx">
       <DependentUpon>EnterEditInventoryForm.cs</DependentUpon>
