@@ -8,11 +8,11 @@ using System.Windows.Forms;
 
 namespace WSCAutomation.App
 {
-    public partial class EnterEditInventoryForm : WSCAutomation.App.EnterEditRecordFormBase
-    {
-        public EnterEditInventoryForm()
-        {
-            InitializeComponent();
-        }
-    };
+	public partial class SearchOrdersDialog : WSCAutomation.App.SearchRecordsDialogBase
+	{
+		public SearchOrdersDialog()
+		{
+			InitializeComponent();
+		}
+	};
 }

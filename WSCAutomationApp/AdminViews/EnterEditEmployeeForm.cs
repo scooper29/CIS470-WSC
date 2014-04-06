@@ -16,10 +16,5 @@ namespace WSCAutomation.App
 
 			base.recordKindName = "User";
 		}
-
-        private void EnterEditEmployeeForm_Load(object sender, EventArgs e)
-        {
-
-        }
 	};
 }

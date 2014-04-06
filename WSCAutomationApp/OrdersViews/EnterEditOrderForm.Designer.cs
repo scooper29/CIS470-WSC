@@ -273,7 +273,6 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label2);
             this.Name = "EnterEditOrderForm";
-            this.Load += new System.EventHandler(this.EnterEditOrderForm_Load);
             this.Controls.SetChildIndex(this.lblRecordId, 0);
             this.Controls.SetChildIndex(this.txtRecordId, 0);
             this.Controls.SetChildIndex(this.btnSave, 0);

@@ -6,8 +6,8 @@ namespace WSCAutomation.Orders
 	{
 		Null = 0,
 
-		Yes = 'y',
-		No = 'n',
+		Yes = (byte)'y',
+		No = (byte)'n',
 	};
 
 	public class QualityCheckList

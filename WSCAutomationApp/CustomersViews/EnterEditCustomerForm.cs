@@ -13,15 +13,8 @@ namespace WSCAutomation.App
         public EnterEditCustomerForm()
         {
             InitializeComponent();
+
+			base.recordKindName = "Customer";
         }
-
-        private void EnterEditCustomerForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        
-
-       
-    }
+    };
 }
