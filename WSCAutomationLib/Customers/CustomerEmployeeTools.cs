@@ -8,6 +8,7 @@ namespace WSCAutomation.Customers
 	{
 		public static void AccessCustomer()
 		{
+
 		}
 	};
 }

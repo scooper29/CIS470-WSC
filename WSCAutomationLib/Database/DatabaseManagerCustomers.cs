@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.OleDb;
 using System.Data;
+using System.Collections.Generic;
 
 namespace WSCAutomation.Database
 {
@@ -48,9 +49,27 @@ namespace WSCAutomation.Database
 
 		}
 
-		public void DBGetCustomers()
+		public List<Customers.Customer> DBGetCustomers(string CustomerSearch)
 		{
+        
+            var list = new List<Customers.Customer>();
+       
+            OleDbConnection sqlConn;
+            OleDbDataAdapter sqlDA;
 
+            //assign the connection
+            sqlConn = new OleDbConnection("PROVIDER=Microsoft.Jet.OLEDB.4.0;" +
+            "Data Source=" + Database);
+        
+            //assign the adapter
+            if (CustomerSearch == "")
+                sqlDA = new OleDbDataAdapter("select * from Customer", sqlConn);
+            else
+                sqlDA = new OleDbDataAdapter("select * from Customer where Cust_LastName = '" + CustomerSearch + "'", sqlConn);
+            
+
+
+            return list;
 		}
 	};
 }
