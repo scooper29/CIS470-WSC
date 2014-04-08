@@ -26,7 +26,7 @@ namespace WSCAutomation.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=|DataDirectory|\\Database\\WSCDatabase.sdf")]
+		[global::System.Configuration.DefaultSettingValueAttribute("Data Source=|DataDirectory|\\Database\\WSCDatabase.sdf")]
         public string WSCDatabaseConnectionString {
             get {
                 return ((string)(this["WSCDatabaseConnectionString"]));

@@ -13,7 +13,7 @@ namespace WSCAutomation.Database
 		{
             bool CustomerSaved;
 
-            OleDbTransaction ThisTransaction = null;
+            //OleDbTransaction ThisTransaction = null;
 
             try
             {
@@ -26,17 +26,17 @@ namespace WSCAutomation.Database
                 //command.Transaction = ThisTransaction;
 
                 //strSQL = "INSERT into Customer " + "(Cust_FirstName, Cust_LastName, Cust_Address, Cust_City, Cust_State, Cust_ZipCode, Cust_Email, Cust_Phone) values
-                ('" + Cust_FirstName + "', '" + Cust_LastName + '", '" + Cust_Address + "', '" + Cust_City + "', '" + Cust_ZipCode + "', '" + Cust_Email + "', '" + Cust_Phone "');
+                //('" + Cust_FirstName + "', '" + Cust_LastName + '", '" + Cust_Address + "', '" + Cust_City + "', '" + Cust_ZipCode + "', '" + Cust_Email + "', '" + Cust_Phone "');
 
-                ThisTransaction.Commit();
+                //ThisTransaction.Commit();
 
-                conn.Close();
+                //conn.Close();
                 CustomerSaved = true;
             }
 
             catch (Exception ex)
             {
-                ThisTransaction.Rollback();
+                //ThisTransaction.Rollback();
 
                 CustomerSaved = false;
 
@@ -59,7 +59,7 @@ namespace WSCAutomation.Database
 
             //assign the connection
             sqlConn = new OleDbConnection("PROVIDER=Microsoft.Jet.OLEDB.4.0;" +
-            "Data Source=" + Database);
+            "Data Source=" /*+ Database*/);
         
             //assign the adapter
             if (CustomerSearch == "")

@@ -62,6 +62,8 @@
     <Compile Include="Database\DatabaseManagerCustomers.cs" />
     <Compile Include="Database\DatabaseManagerEmployees.cs" />
     <Compile Include="Database\DatabaseManagerOrders.cs" />
+    <Compile Include="Database\ModificationQueryBuilder.cs" />
+    <Compile Include="Database\SelectQueryBuilder.cs" />
     <Compile Include="Database\WSCDatabaseDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -75,6 +77,7 @@
     <Compile Include="Employees\Manager.cs" />
     <Compile Include="Employees\Sales.cs" />
     <Compile Include="Employees\Specialist.cs" />
+    <Compile Include="InitialSetup.cs" />
     <Compile Include="Inventory\Inventory.cs" />
     <Compile Include="Database\DatabaseManagerInventory.cs" />
     <Compile Include="Inventory\InventoryEmployeeTools.cs" />
