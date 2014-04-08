@@ -16,6 +16,13 @@ namespace WSCAutomation.App
 		[STAThread]
 		static void Main()
 		{
+			// HACK: temporary way of setting up the database.
+			// Will need to be removed for 'production'.
+			// This needs to happen as the .SDF is copied from the Lib\Database\ folder
+			// and thus should have NO records of any kind
+			var setup = new WSCAutomation.InitialSetup();
+			setup.Perform();
+
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 			Application.Run(new MainForm());
