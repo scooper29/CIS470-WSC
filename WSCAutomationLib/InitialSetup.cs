@@ -41,7 +41,7 @@ namespace WSCAutomation
 		/// <summary>Perform all the initial setup steps</summary>
 		public void Perform()
 		{
-			if (dbm.InitializeAccessCodes())
+			if (!dbm.InitializeAccessCodes())
 				throw new Exception("Failed to initialize AccessCode table");
 
 			SetupEmployees();

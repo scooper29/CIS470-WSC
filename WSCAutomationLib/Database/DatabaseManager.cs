@@ -44,7 +44,7 @@ namespace WSCAutomation.Database
 				idCommand.CommandText = "SELECT @@IDENTITY";
 
 				// returns the 1st column of the 1st row returned by the query (should be the ID value)
-				return (decimal)command.ExecuteScalar();
+				return (decimal)idCommand.ExecuteScalar();
 			}
 			else if (type == ModificationQueryType.Update)
 			{

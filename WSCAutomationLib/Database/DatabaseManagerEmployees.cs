@@ -214,7 +214,6 @@ namespace WSCAutomation.Database
 					success &= DBAddAccessCode(command, AccessCode.Specialist);
 					success &= DBAddAccessCode(command, AccessCode.StockClerk);
 
-
 					command.Transaction.Commit();
 				} catch(Exception ex) {
 					command.Transaction.Rollback();
