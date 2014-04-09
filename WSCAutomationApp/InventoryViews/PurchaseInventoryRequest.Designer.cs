@@ -33,15 +33,16 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.dateTimePickerOrderDate = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePickerDelieveryDate = new System.Windows.Forms.DateTimePicker();
+            this.upDownInventoryQty = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.upDownInventoryQty)).BeginInit();
             this.SuspendLayout();
             // 
             // btnSave
             // 
             this.btnSave.Location = new System.Drawing.Point(93, 203);
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnClose
             // 
@@ -90,34 +91,49 @@
             this.label2.TabIndex = 59;
             this.label2.Text = "Delievery Date:";
             // 
-            // dateTimePicker1
+            // dateTimePickerOrderDate
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(85, 95);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker1.TabIndex = 60;
+            this.dateTimePickerOrderDate.Location = new System.Drawing.Point(85, 95);
+            this.dateTimePickerOrderDate.Name = "dateTimePickerOrderDate";
+            this.dateTimePickerOrderDate.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePickerOrderDate.TabIndex = 60;
             // 
-            // dateTimePicker2
+            // dateTimePickerDelieveryDate
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(85, 125);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker2.TabIndex = 61;
+            this.dateTimePickerDelieveryDate.Location = new System.Drawing.Point(85, 125);
+            this.dateTimePickerDelieveryDate.Name = "dateTimePickerDelieveryDate";
+            this.dateTimePickerDelieveryDate.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePickerDelieveryDate.TabIndex = 61;
             // 
-            // numericUpDown1
+            // upDownInventoryQty
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(272, 63);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(42, 20);
-            this.numericUpDown1.TabIndex = 62;
+            this.upDownInventoryQty.Location = new System.Drawing.Point(272, 63);
+            this.upDownInventoryQty.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.upDownInventoryQty.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.upDownInventoryQty.Name = "upDownInventoryQty";
+            this.upDownInventoryQty.Size = new System.Drawing.Size(42, 20);
+            this.upDownInventoryQty.TabIndex = 62;
+            this.upDownInventoryQty.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // PurchaseInventoryRequest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(370, 238);
-            this.Controls.Add(this.numericUpDown1);
-            this.Controls.Add(this.dateTimePicker2);
-            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.upDownInventoryQty);
+            this.Controls.Add(this.dateTimePickerDelieveryDate);
+            this.Controls.Add(this.dateTimePickerOrderDate);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label5);
@@ -133,10 +149,10 @@
             this.Controls.SetChildIndex(this.label5, 0);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.label2, 0);
-            this.Controls.SetChildIndex(this.dateTimePicker1, 0);
-            this.Controls.SetChildIndex(this.dateTimePicker2, 0);
-            this.Controls.SetChildIndex(this.numericUpDown1, 0);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            this.Controls.SetChildIndex(this.dateTimePickerOrderDate, 0);
+            this.Controls.SetChildIndex(this.dateTimePickerDelieveryDate, 0);
+            this.Controls.SetChildIndex(this.upDownInventoryQty, 0);
+            ((System.ComponentModel.ISupportInitialize)(this.upDownInventoryQty)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -149,8 +165,8 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.DateTimePicker dateTimePickerOrderDate;
+        private System.Windows.Forms.DateTimePicker dateTimePickerDelieveryDate;
+        private System.Windows.Forms.NumericUpDown upDownInventoryQty;
     }
 }
