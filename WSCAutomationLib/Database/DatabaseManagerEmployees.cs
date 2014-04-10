@@ -150,7 +150,7 @@ namespace WSCAutomation.Database
 						emp.Id = (int)reader[EMPLOYEE_ID];
 						
 						emp.FirstName = (string)reader[EMPLOYEE_FIRST_NAME];
-						emp.LastName = (string)reader[EMPLOYEE_FIRST_NAME];
+						emp.LastName = (string)reader[EMPLOYEE_LAST_NAME];
 						emp.Email = (string)reader[EMPLOYEE_EMAIL];
 
 						emp.UserName = (string)reader[EMPLOYEE_USER_ID];

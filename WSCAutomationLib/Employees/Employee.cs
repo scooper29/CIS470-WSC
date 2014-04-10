@@ -80,7 +80,7 @@ namespace WSCAutomation.Employees
 		/// <param name="userName">Username the user provided</param>
 		/// <param name="password">Password the user provided</param>
 		/// <returns>A fully functioning Employee-based object if the username and password match the Employee record. Otherwise, null</returns>
-		public Employee TryLogin(string userName, string password)
+		public static Employee TryLogin(string userName, string password)
 		{
 			var dbm = new Database.DatabaseManager();
 
