@@ -59,9 +59,13 @@
     <Compile Include="Customers\CustomerValidationTools.cs" />
     <Compile Include="Customers\Payment.cs" />
     <Compile Include="Database\DatabaseManager.cs" />
+    <Compile Include="Database\DatabaseManagerAccessCode.cs" />
     <Compile Include="Database\DatabaseManagerCustomers.cs" />
     <Compile Include="Database\DatabaseManagerEmployees.cs" />
+    <Compile Include="Database\DatabaseManagerInventoryOrder.cs" />
     <Compile Include="Database\DatabaseManagerOrders.cs" />
+    <Compile Include="Database\DatabaseManagerPayments.cs" />
+    <Compile Include="Database\DatabaseManagerQualityCheckList.cs" />
     <Compile Include="Database\ModificationQueryBuilder.cs" />
     <Compile Include="Database\SelectQueryBuilder.cs" />
     <Compile Include="Database\WSCDatabaseDataSet.Designer.cs">

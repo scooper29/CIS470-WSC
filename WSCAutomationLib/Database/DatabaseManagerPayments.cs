@@ -5,19 +5,17 @@ using System.Data.SqlServerCe;
 
 namespace WSCAutomation.Database
 {
-	// TODO: DatabaseManager methods relating to the Orders tables should go here
-
 	partial class DatabaseManager
 	{
-		public void DBAddOrder()
+		public void DBAddPayment()
 		{
 		}
 
-		public void DBEditOrder()
+		public void DBEditPayment()
 		{
 		}
 
-		public void DBGetOrders()
+		public void DBGetPayments()
 		{
 		}
 	};

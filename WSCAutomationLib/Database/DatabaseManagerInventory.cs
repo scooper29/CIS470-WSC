@@ -53,17 +53,5 @@ namespace WSCAutomation.Database
                 conn.Close();
             }
 		}
-
-		public void DBAddInventoryOrder()
-		{
-		}
-
-		public void DBEditInventoryOrder()
-		{
-		}
-
-		public void DBGetInventoryOrders()
-		{
-		}
 	};
 }
