@@ -20,6 +20,11 @@ namespace WSCAutomation.Customers
 
 		public Customer()
 		{
+            Id = -1;
+
+            FirstName = LastName = Email = Address = City = State = ZipCode = Phone =
+                "";
 		}
+
 	};
 }

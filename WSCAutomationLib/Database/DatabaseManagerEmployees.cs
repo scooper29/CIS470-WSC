@@ -29,8 +29,7 @@ namespace WSCAutomation.Database
 		static SqlCeCommand BuildModificationQuery(SqlCeConnection connection, ModificationQueryType type,
 			Employee emp)
 		{
-			var query = new ModificationQueryBuilder(connection, type, 
-				EMPLOYEE_TABLE);
+			var query = new ModificationQueryBuilder(connection, type, EMPLOYEE_TABLE);
 
 			query.AddIdParameter(EMPLOYEE_ID, "empId", emp.Id);
 
@@ -115,9 +114,7 @@ namespace WSCAutomation.Database
 		/// <param name="employeeId">Employee ID to use in the search. Use -1 to skip this search parameter</param>
 		/// <param name="userId">Employee's user name to use in the search. Use an empty string to skip this search parameter</param>
 		/// <returns>A collection of 0 or more <see cref="Employee"/>s that match the search parameters</returns>
-		public List<Employee> DBGetEmployees(
-			int employeeId = -1, 
-			string userId = "")
+		public List<Employee> DBGetEmployees(int employeeId = -1, string userId = "")
 		{
 			VerifySearchParameter(employeeId, "employeeId");
 			VerifySearchParameter(userId, "userId");

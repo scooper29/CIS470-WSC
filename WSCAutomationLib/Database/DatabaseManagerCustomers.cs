@@ -1,75 +1,144 @@
 ﻿using System;
-using System.Data.OleDb;
-using System.Data;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlServerCe;
 
 namespace WSCAutomation.Database
 {
-	// TODO: DatabaseManager methods relating to the Customer tables should go here
+    using Customers;
 
 	partial class DatabaseManager
 	{
-		public void DBAddCustomer(string Cust_FirstName, string Cust_LastName, string Cust_Address, string Cust_City, string Cust_State, string Cust_ZipCode, string Cust_Email, string Cust_Phone)
+        #region Customer table column names
+        const string CUSTOMER_TABLE = "Customer";
+
+        const string CUSTOMER_ID = "CustomerID";
+        const string CUSTOMER_PAYMENT = "PaymentID";
+        const string CUSTOMER_FIRST_NAME = "Cust_FirstName";
+        const string CUSTOMER_LAST_NAME = "Cust_LastName";
+        const string CUSTOMER_ADDRESS = "Cust_Address";
+        const string CUSTOMER_CITY = "Cust_City";
+        const string CUSTOMER_STATE = "Cust_State";
+        const string CUSTOMER_ZIPCDOE = "Cust_ZipCode";
+        const string CUSTOMER_EMAIL = "Cust_Email";
+        const string CUSTOMER_PHONE = "Cust_Phone";
+        #endregion
+
+        static SqlCeCommand BuildModificationQuery(SqlCeConnection connection, ModificationQueryType type,
+            Customer cust)
+        {
+            var query = new ModificationQueryBuilder(connection, type, CUSTOMER_TABLE);
+
+            query.AddIdParameter(CUSTOMER_ID, "custId", cust.Id);
+
+            query.AddParameter(CUSTOMER_FIRST_NAME, "firstName", cust.FirstName);
+            query.AddParameter(CUSTOMER_LAST_NAME, "lastName", cust.LastName);
+            query.AddParameter(CUSTOMER_ADDRESS, "address", cust.Address);
+            query.AddParameter(CUSTOMER_CITY, "city", cust.City);
+            query.AddParameter(CUSTOMER_STATE, "state", cust.State);
+            query.AddParameter(CUSTOMER_ZIPCDOE, "zipcode", cust.ZipCode);
+            query.AddParameter(CUSTOMER_EMAIL, "email", cust.Email);
+            query.AddParameter(CUSTOMER_PHONE, "password", cust.Phone);
+
+            return query.ToDbCommand();
+        }
+
+        object PerformModificationQuery(ModificationQueryType type, Customer cust)
+        {
+            object result = null;
+
+            // open a connection to the SQL DB
+            using (var connection = OpenConnection())
+            {
+                var command = BuildModificationQuery(connection, type, cust);
+
+                // try to perform the modification, committing it if successful
+                try
+                {
+                    result = ExecuteModification(command, type);
+
+                    command.Transaction.Commit();
+                }
+                catch (Exception ex)
+                {
+                    // rollback the changes before we re-throw the exception
+                    command.Transaction.Rollback();
+
+                    throw ex;
+                }
+            }
+
+            return result;
+        }
+
+		public int DBAddCustomer(Customer cust)
 		{
-            bool CustomerSaved;
+            object idObj = PerformModificationQuery(ModificationQueryType.Insert, cust);
 
-            //OleDbTransaction ThisTransaction = null;
-
-            try
+            if (idObj != null)
             {
-                //OleDbConnection conn = new OleDbConnection(
+                cust.Id = Convert.ToInt32(idObj);
 
-                //OleDbCommand command = 
-
-                //ThisTransaction = conn.BeginTransaction();
-
-                //command.Transaction = ThisTransaction;
-
-                //strSQL = "INSERT into Customer " + "(Cust_FirstName, Cust_LastName, Cust_Address, Cust_City, Cust_State, Cust_ZipCode, Cust_Email, Cust_Phone) values
-                //('" + Cust_FirstName + "', '" + Cust_LastName + '", '" + Cust_Address + "', '" + Cust_City + "', '" + Cust_ZipCode + "', '" + Cust_Email + "', '" + Cust_Phone "');
-
-                //ThisTransaction.Commit();
-
-                //conn.Close();
-                CustomerSaved = true;
+                return cust.Id;
             }
 
-            catch (Exception ex)
-            {
-                //ThisTransaction.Rollback();
-
-                CustomerSaved = false;
-
-            }
+            return -1;
   
 		}
 
-		public void DBEditCustomer()
+		public bool DBEditCustomer(Customer cust)
 		{
+            var rowsAffected = (int)PerformModificationQuery(ModificationQueryType.Update, cust);
 
+            return rowsAffected == 1;
 		}
 
-		public List<Customers.Customer> DBGetCustomers(string CustomerSearch)
-		{
-        
-            var list = new List<Customers.Customer>();
-       
-            OleDbConnection sqlConn;
-            OleDbDataAdapter sqlDA;
+        public List<Customer> DBGetCustomers(int customerId = -1, string cust_lastname = "")
+        {
+            VerifySearchParameter(customerId, "customerId");
+            VerifySearchParameter(cust_lastname, "cust_lastname");
 
-            //assign the connection
-            sqlConn = new OleDbConnection("PROVIDER=Microsoft.Jet.OLEDB.4.0;" +
-            "Data Source=" /*+ Database*/);
-        
-            //assign the adapter
-            if (CustomerSearch == "")
-                sqlDA = new OleDbDataAdapter("select * from Customer", sqlConn);
-            else
-                sqlDA = new OleDbDataAdapter("select * from Customer where Cust_LastName = '" + CustomerSearch + "'", sqlConn);
-            
+            var results = new List<Customer>();
 
+            // open a connection to the SQL DB
+            using (var connection = OpenConnection())
+            {
+                // create a SELECT query builder for the Employee table
+                var command = new SelectQueryBuilder(connection, CUSTOMER_TABLE);
 
-            return list;
-		}
+                // Add employeeId parameter
+                if (!SkipSearchParameter(customerId))
+                    command.AddParameter(CUSTOMER_ID, "customerId", customerId);
+
+                // Add userId parameter
+                if (!SkipSearchParameter(cust_lastname))
+                    command.AddParameter(CUSTOMER_LAST_NAME, "cust_lastname", cust_lastname);
+
+                using (var reader = command.ToDbCommand().ExecuteReader())
+                {
+                    // each Read() fetches the next record that matches our SELECT query
+                    // build our code object from each record and add it to the list of results
+                    while (reader.Read())
+                    {
+                        Customer cust;
+              
+                        cust.Id = (int)reader[CUSTOMER_ID];
+
+                        cust.FirstName = (string)reader[CUSTOMER_FIRST_NAME];
+                        cust.LastName = (string)reader[CUSTOMER_LAST_NAME];
+                        cust.Address = (string)reader[CUSTOMER_ADDRESS];
+                        cust.City = (string)reader[CUSTOMER_CITY];
+                        cust.State = (string)reader[CUSTOMER_STATE];
+                        cust.ZipCode = (string)reader[CUSTOMER_ZIPCDOE];
+                        cust.Email = (string)reader[CUSTOMER_EMAIL];
+                        cust.Phone = (string)reader[CUSTOMER_PHONE];                        
+
+                        results.Add(cust);
+                    }
+                }
+            }
+
+            return results;
+        }
 	};
 }
