@@ -1,57 +1,128 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlServerCe;
 
 namespace WSCAutomation.Database
 {
-	// TODO: DatabaseManager methods relating to the Inventory tables should go here
+    using Inventory;
 
 	partial class DatabaseManager
 	{
-        public void DBAddInventory(string item, string manufacturer, int quantity)
+        #region Inventory table column names
+        const string INVENTORY_TABLE = "Inventory";
+
+        const string INVENTORY_ID = "InventoryID";
+        const string INVENTORY_NAME = "Inv_Name";
+        const string INVENTORY_MANUFACTURER = "Inv_Manufacturer";
+        const string INVENTORY_QUANTITY = "Inv_Quantity";
+        const string INVENTORY_QTYSOLD = "Inv_QtySold";
+        #endregion
+
+        static SqlCeCommand BuildModificationQuery(SqlCeConnection connection, ModificationQueryType type,
+            Inventory inv)
+        {
+            var query = new ModificationQueryBuilder(connection, type, INVENTORY_TABLE);
+
+            query.AddParameter(INVENTORY_ID, "invId", inv.InventoryID);
+
+            query.AddParameter(INVENTORY_NAME, "invName", inv.Name);
+            query.AddParameter(INVENTORY_MANUFACTURER, "manufacturerName", inv.Manufacturer);
+            query.AddParameter(INVENTORY_QUANTITY, "quantity", inv.Quantity);
+            query.AddParameter(INVENTORY_QTYSOLD, "qtySold", inv.QtySold);
+
+            return query.ToDbCommand();
+        }
+
+        object PerformModificationQuery(ModificationQueryType type, Inventory inv)
+        {
+            object result = null;
+
+            // open a connection to the SQL DB
+            using (var connection = OpenConnection())
+            {
+                var command = BuildModificationQuery(connection, type, inv);
+
+                // try to perform the modification, committing it if successful
+                try
+                {
+                    result = ExecuteModification(command, type);
+
+                    command.Transaction.Commit();
+                }
+                catch (Exception ex)
+                {
+                    // rollback the changes before we re-throw the exception
+                    command.Transaction.Rollback();
+
+                    throw ex;
+                }
+            }
+
+            return result;
+        }
+
+        public int DBAddInventory(Inventory inv)
 		{
-            string stringCommand = "INSERT INTO Inventory (In_Name,In_Manufacturer, In_Quantity) VALUES (\'" + item + "\',\'" + manufacturer + "\'," + quantity + ");";
-            OleDBConnection conn = DBgetConnection();
-            try
+            object Obj = PerformModificationQuery(ModificationQueryType.Insert, inv);
+
+            if (Obj != null)
             {
-                OleDbCommand command = new OleDbCommand(stringCommand, conn);
-                OleDbDataAdapter adapter = new OleDbDataAdapter(command);
-                conn.Open();
-                adapter.InsertCommand = command;
+                inv.InventoryID = Convert.ToInt32(Obj);
+
+                return inv.InventoryID;
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error: Failed to write data to the database.\n{0}", ex.Message);
-                return;
-            }
-            finally
-            {
-                conn.Close();
-            }
+
+            return -1;
 		}
 
-		public void DBEditInventory()
+		public bool DBEditInventory(Inventory inv)
 		{
+            var rowsAffected = (int)PerformModificationQuery(ModificationQueryType.Update, inv);
+
+            return rowsAffected == 1;
 		}
 
-		public void DBGetInventory()
+		public List<Inventory> DBGetInventory(string inv_invname, string inv_manufacturer = "")
 		{
-            string stringCommand = "SELECT * FROM Inventory";
-            OleDBConnection conn = DBgetConnection();
-            try
+            VerifySearchParameter(inv_invname, "inv_name");
+            VerifySearchParameter(inv_manufacturer, "inv_manufacturer");
+
+            var results = new List<Inventory>();
+
+            // open a connection to the SQL DB
+            using (var connection = OpenConnection())
             {
-                OleDbCommand command = new OleDbCommand(stringCommand, conn);
-                OleDbDataAdapter adapter = new OleDbDataAdapter(command);
-                conn.Open();
-                adapter.Fill(data, "Inventory");
+                // create a SELECT query builder for the Employee table
+                var command = new SelectQueryBuilder(connection, CUSTOMER_TABLE);
+
+                // Add employeeId parameter
+                if (!SkipSearchParameter(inv_invname))
+                    command.AddParameter(INVENTORY_NAME, "inv_name", inv_invname);
+
+                // Add userId parameter
+                if (!SkipSearchParameter(inv_manufacturer))
+                    command.AddParameter(INVENTORY_MANUFACTURER, "inv_manufacturer", inv_manufacturer);
+
+                using (var reader = command.ToDbCommand().ExecuteReader())
+                {
+                    // each Read() fetches the next record that matches our SELECT query
+                    // build our code object from each record and add it to the list of results
+                    while (reader.Read())
+                    {
+                        Inventory inv;
+
+                        inv.Name = (string)reader[INVENTORY_NAME];
+                        inv.Manufacturer = (string)reader[INVENTORY_MANUFACTURER];
+                        inv.Quantity = (int)reader[INVENTORY_QUANTITY];
+                        inv.QtySold = (int)reader[INVENTORY_QTYSOLD];
+
+                        results.Add(inv);
+                    }
+                }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error: Failed to retrieve data to the database.\n{0}", ex.Message);
-                return;
-            }
-            finally
-            {
-                conn.Close();
-            }
+
+            return results;
 		}
 	};
 }
