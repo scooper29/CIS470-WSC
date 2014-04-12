@@ -110,7 +110,7 @@ namespace WSCAutomation.Database
                     // build our code object from each record and add it to the list of results
                     while (reader.Read())
                     {
-                        Inventory inv;
+                        Inventory inv = new Inventory();
 
                         inv.Name = (string)reader[INVENTORY_NAME];
                         inv.Manufacturer = (string)reader[INVENTORY_MANUFACTURER];

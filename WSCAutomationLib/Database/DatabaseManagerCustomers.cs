@@ -120,7 +120,7 @@ namespace WSCAutomation.Database
                     // build our code object from each record and add it to the list of results
                     while (reader.Read())
                     {
-                        Customer cust;
+                        Customer cust = new Customer();
               
                         cust.Id = (int)reader[CUSTOMER_ID];
 
