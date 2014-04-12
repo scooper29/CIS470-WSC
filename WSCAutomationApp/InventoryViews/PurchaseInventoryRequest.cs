@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.Net;
 using System.Net.Mail;
 
 namespace WSCAutomation.App
@@ -80,14 +81,15 @@ namespace WSCAutomation.App
             // Mainline
 
             // Create email
-            MailAddress from = new MailAddress("Clerk@WSC.com");
-            MailAddress to = new MailAddress("Specialist@WSC.com");
-            MailMessage message = new MailMessage(from, to);
-
-            message.Subject = "Inventory order purchase made";
-            message.Body = @"The order you requested for inventory ID " 
+            var fromAddress = new MailAddress("wscclerk60683@gmail.com"
+                , "WSC Clerk Automated");
+            var toAddress = new MailAddress("wscspec60683@gmail.com"
+                , "Specialist");
+            const string FROM_PASSWORD = "senprojCIS470";
+            const string SUBJECT = "Inventory order purchase made";
+            string body = "The order you requested for inventory ID "
                 + inventoryID
-                + "has been ordered from our supplier. Details below." 
+                + "has been ordered from our supplier. Details below."
                 + System.Environment.NewLine
                 + System.Environment.NewLine
                 + "Inventory ID: "
@@ -102,22 +104,25 @@ namespace WSCAutomation.App
                 + "Expected Delivery Date: "
                 + deliveryDate;
 
-            SmtpClient client = new SmtpClient(server); //NEED SERVER
-
-            // Attempt to send email
-            try
+            // Use gmail SMTP client
+            var smtp = new SmtpClient
             {
-                client.Send(message);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(this
-                    , "Exception caught while attempting to send email in btnSave_Click(): {0}"
-                    , "email send error"
-                    , MessageBoxButtons.OK
-                    , MessageBoxIcon.Error);
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(fromAddress.Address, FROM_PASSWORD)
+            };
 
-                return;
+            // Send message
+            using (var message = new MailMessage(fromAddress, toAddress)
+            {
+                Subject = SUBJECT
+                , Body = body
+            })
+            {
+                smtp.Send(message);
             }
 
             // Format Results
