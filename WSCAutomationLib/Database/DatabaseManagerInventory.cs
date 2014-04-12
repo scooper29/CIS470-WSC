@@ -112,6 +112,7 @@ namespace WSCAutomation.Database
                     {
                         Inventory inv = new Inventory();
 
+                        inv.InventoryID = (int)reader[INVENTORY_ID];
                         inv.Name = (string)reader[INVENTORY_NAME];
                         inv.Manufacturer = (string)reader[INVENTORY_MANUFACTURER];
                         inv.Quantity = (int)reader[INVENTORY_QUANTITY];
