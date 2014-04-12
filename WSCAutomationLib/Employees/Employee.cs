@@ -25,6 +25,18 @@ namespace WSCAutomation.Employees
 
 		public virtual void CheckInventory()
 		{
+            // recieve inventory information from UI
+            try
+            {
+                // if passed check value, search all and return all results
+                // else call to DBCheckInventory(itemID, itemName, manufacturerName)
+                // return list of objects to UI (Inventory is quantity - qtySold)
+                // if nothing found, send check value to imply nothing found???
+            }
+            catch (Exception ex)
+            {
+                // do somthing here to alert user to error MessagoBox.Show()???
+            }
 		}
 
 		public virtual void CheckOrder()
