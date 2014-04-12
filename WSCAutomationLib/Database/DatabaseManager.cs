@@ -9,6 +9,15 @@ namespace WSCAutomation.Database
 
 	public partial class DatabaseManager
 	{
+		public static DatabaseManager Instance = new DatabaseManager();
+
+		/// <summary>
+		/// Private constructor so no one besides this class can create an instance
+		/// </summary>
+		private DatabaseManager()
+		{
+		}
+
 		/// <summary>Open an <see cref="IDbConnection"/> to the WSC database</summary>
 		/// <returns></returns>
 		SqlCeConnection OpenConnection()
