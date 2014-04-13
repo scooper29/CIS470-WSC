@@ -12,6 +12,7 @@ namespace WSCAutomation.Inventory
 
         public Inventory()
         {
+
         }
 
     }

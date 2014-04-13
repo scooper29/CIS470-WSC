@@ -16,6 +16,7 @@ namespace WSCAutomation.Database
 		/// </summary>
 		private DatabaseManager()
 		{
+
 		}
 
 		/// <summary>Open an <see cref="IDbConnection"/> to the WSC database</summary>
