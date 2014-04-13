@@ -17,32 +17,6 @@ namespace WSCAutomation.App
 		}
 
 		#region Log In process logic
-		static UserAuthorityType UserAuthorityFromUserNameHack(string username)
-		{
-			username = username.ToLowerInvariant();
-
-			switch (username)
-			{
-				case "admin":
-					return UserAuthorityType.Admin;
-
-				case "manager":
-					return UserAuthorityType.Manager;
-
-				case "sales":
-					return UserAuthorityType.Sales;
-
-				case "specialist":
-					return UserAuthorityType.Specialist;
-
-				case "clerk":
-					return UserAuthorityType.StockClerk;
-
-				default:
-					return UserAuthorityType.None;
-			}
-		}
-		
 		/// <summary>Show the login dialog and validate the provided user credentials</summary>
 		/// <param name="loginDialog"></param>
 		/// <param name="dialogResult"></param>
@@ -51,9 +25,8 @@ namespace WSCAutomation.App
 		{
 			dialogResult = loginDialog.ShowDialog(this);
 
-			// HACK: temporary setup, until there's an actual backend
-			var userAuthorityType = UserAuthorityFromUserNameHack(loginDialog.UserName);
-			if (userAuthorityType == UserAuthorityType.None && dialogResult == DialogResult.OK)
+			var emp = Employees.Employee.TryLogin(loginDialog.UserName, loginDialog.Password);
+			if (emp == null && dialogResult == DialogResult.OK)
 			{
 				MessageBox.Show(this, "Unrecognized username or password",
 					"Log In failure",
@@ -61,8 +34,10 @@ namespace WSCAutomation.App
 
 				return false;
 			}
+			else if (dialogResult == DialogResult.Cancel) // "Exit" button translates to Cancel
+				return false;
 
-			Program.CurrentUser = new UserInfo(userAuthorityType);
+			Program.CurrentUser = new UserInfo(emp);
 
 			return true;
 		}
@@ -227,6 +202,7 @@ namespace WSCAutomation.App
 		private void OnAdminAddUserClick(object sender, EventArgs e)
 		{
 			var enterForm = new EnterEditEmployeeForm();
+			enterForm.SetEnterEditData(new Employees.Employee());
 			HandleNewCreateRecordForm(enterForm);
 		}
 		#endregion

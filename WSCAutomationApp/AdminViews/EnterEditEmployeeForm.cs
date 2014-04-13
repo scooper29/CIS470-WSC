@@ -10,11 +10,27 @@ namespace WSCAutomation.App
 {
 	public partial class EnterEditEmployeeForm : WSCAutomation.App.EnterEditRecordFormBase
 	{
+		Employees.Employee employeeData;
+
 		public EnterEditEmployeeForm()
 		{
 			InitializeComponent();
 
 			base.recordKindName = "User";
+		}
+
+		void DataBindToEmployeeData()
+		{
+			// TODO
+		}
+
+		public void SetEnterEditData(Employees.Employee emp)
+		{
+			if (emp == null)
+				throw new ArgumentNullException("emp");
+
+			employeeData = emp;
+			DataBindToEmployeeData();
 		}
 	};
 }

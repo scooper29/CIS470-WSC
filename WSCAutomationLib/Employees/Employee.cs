@@ -94,7 +94,7 @@ namespace WSCAutomation.Employees
 		/// <returns>A fully functioning Employee-based object if the username and password match the Employee record. Otherwise, null</returns>
 		public static Employee TryLogin(string userName, string password)
 		{
-			var dbm = new Database.DatabaseManager();
+			var dbm = Database.DatabaseManager.Instance;
 
 			// try and find the employee using the provided username
 			var employees = dbm.DBGetEmployees(userId: userName);

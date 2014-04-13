@@ -9,8 +9,9 @@ namespace WSCAutomation.Employees
 	/// Each member of the Enum is set to the character value (truncated to a byte) that
 	/// is associated with the given access
 	/// 
-	/// Thus, when going to the DB, AccessCode values should be casted to 'char'.
-	/// And when coming from the DB, column values should be casted to AccessCode
+	/// Thus, when going to the DB, AccessCode values should be casted to 'char', then ToString()'d
+	/// And when coming from the DB, column values should be casted to 'string' first, then 
+	/// the first character should be casted to AccessCode
 	/// 
 	/// The DB's AccessCode table should be initialized with these values, except
 	/// for 'None'.

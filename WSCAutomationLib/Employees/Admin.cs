@@ -20,12 +20,43 @@ namespace WSCAutomation.Employees
 				"Admins can't check orders");
 		}
 
-		public void AddEmployee(Employee employee)
+		public bool UserNameAlreadyTaken(string userName)
 		{
+			var dbm = Database.DatabaseManager.Instance;
+
+			var existingUser = dbm.DBGetEmployees(userId: userName);
+
+			return existingUser.Count != 0;
 		}
 
-		public void EditEmployee()
+		public int AddEmployee(Employee emp)
 		{
+			var dbm = Database.DatabaseManager.Instance;
+
+			// verify no other employees with the same user name exist
+			if (UserNameAlreadyTaken(emp.UserName))
+			{
+				// we found an existing employee in the DB with a matching user name
+				// set the employee ID to be 'invalid' and return it so callers of this
+				// method know the add operation failed
+				emp.Id = -1;
+				return emp.Id;
+			}
+
+			// no other employee has the same user name, so go ahead and add the
+			// employee to the DB and return its new, valid ID
+			return dbm.DBAddEmployee(emp);
+		}
+
+		public bool EditEmployee(Employee emp)
+		{
+			var dbm = Database.DatabaseManager.Instance;
+
+			// TODO: if we allow the user name to be changed in the UI, then we'll want
+			// to verify here or there that no other user exists with the same user name
+
+			// run the UPDATE operation and return whether it was successful or not
+			return dbm.DBEditEmployee(emp);
 		}
 	};
 }

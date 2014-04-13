@@ -17,6 +17,8 @@ namespace WSCAutomation.App
 		}
 		/// <summary>Provided user name</summary>
 		public string UserName { get { return txtUserName.Text; } }
+		/// <summary>Provided user password</summary>
+		public string Password { get { return txtPassword.Text; } }
 
 		private void OnLogInClick(object sender, EventArgs e)
 		{

@@ -33,11 +33,12 @@ namespace WSCAutomation.Database
 
 			query.AddIdParameter(EMPLOYEE_ID, "empId", emp.Id);
 
-			// Internally, AccessCode is represented by an Enum, but the DB uses an NCHAR
+			// Internally, AccessCode is represented by an Enum, but the DB uses an NCHAR.
+			// SqlServerCe's code treats NCHAR data as a string.
 			// DbCommand uses reflection to determine how to serialize an object to the DB
-			// Hence we explicitly cast Access to 'char' here.
+			// Hence we explicitly cast Access to 'char' here and then put it in string form.
 			// See Employees\AccessCode.cs for more details
-			query.AddParameter(EMPLOYEE_ACCESS_CODE, "accessCode", (char)emp.Access);
+			query.AddParameter(EMPLOYEE_ACCESS_CODE, "accessCode", ((char)emp.Access).ToString());
 
 			query.AddParameter(EMPLOYEE_FIRST_NAME, "firstName", emp.FirstName);
 			query.AddParameter(EMPLOYEE_LAST_NAME, "lastName", emp.LastName);
@@ -141,7 +142,9 @@ namespace WSCAutomation.Database
 					// build our code object from each record and add it to the list of results
 					while (reader.Read())
 					{
-						var access = (AccessCode)reader[EMPLOYEE_ACCESS_CODE];
+						// NCHAR is read as a 'string', so we have to convert to a string first then access the first, and only, character
+						var accessString = (string)reader[EMPLOYEE_ACCESS_CODE];
+						var access = (AccessCode)accessString[0];
 
 						var emp = Employee.Create(access);
 						emp.Id = (int)reader[EMPLOYEE_ID];
