@@ -24,7 +24,7 @@ namespace WSCAutomation.Database
         {
             var query = new ModificationQueryBuilder(connection, type, INVENTORY_TABLE);
 
-            query.AddParameter(INVENTORY_ID, "invId", inv.InventoryID);
+            query.AddIdParameter(INVENTORY_ID, "invId", inv.InventoryID);
 
             query.AddParameter(INVENTORY_NAME, "invName", inv.Name);
             query.AddParameter(INVENTORY_MANUFACTURER, "manufacturerName", inv.Manufacturer);
