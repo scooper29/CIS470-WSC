@@ -83,7 +83,7 @@ namespace WSCAutomation.Database
             return rowsAffected == 1;
 		}
 
-		public List<Inventory> DBGetInventory(string inv_invname, int inventoryID, string inv_manufacturer = "")
+		public List<Inventory> DBGetInventory(string inv_invname = "", int inventoryID = -1, string inv_manufacturer = "")
 		{
             VerifySearchParameter(inv_invname, "inv_name");
             VerifySearchParameter(inv_manufacturer, "inv_manufacturer");
