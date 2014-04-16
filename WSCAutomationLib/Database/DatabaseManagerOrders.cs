@@ -11,14 +11,17 @@ namespace WSCAutomation.Database
 	{
 		public void DBAddOrder()
 		{
+
 		}
 
 		public void DBEditOrder()
 		{
+
 		}
 
 		public void DBGetOrders()
 		{
+
 		}
 	};
 }

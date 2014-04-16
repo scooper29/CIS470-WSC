@@ -83,10 +83,11 @@ namespace WSCAutomation.Database
             return rowsAffected == 1;
 		}
 
-		public List<Inventory> DBGetInventory(string inv_invname, string inv_manufacturer = "")
+		public List<Inventory> DBGetInventory(string inv_invname, int inventoryID, string inv_manufacturer = "")
 		{
             VerifySearchParameter(inv_invname, "inv_name");
             VerifySearchParameter(inv_manufacturer, "inv_manufacturer");
+            VerifySearchParameter(inventoryID, "inventoryID");
 
             var results = new List<Inventory>();
 
@@ -96,13 +97,17 @@ namespace WSCAutomation.Database
                 // create a SELECT query builder for the Employee table
                 var command = new SelectQueryBuilder(connection, CUSTOMER_TABLE);
 
-                // Add employeeId parameter
+                // Add inv_name parameter
                 if (!SkipSearchParameter(inv_invname))
                     command.AddParameter(INVENTORY_NAME, "inv_name", inv_invname);
 
-                // Add userId parameter
+                // Add inv_manufacturer parameter
                 if (!SkipSearchParameter(inv_manufacturer))
                     command.AddParameter(INVENTORY_MANUFACTURER, "inv_manufacturer", inv_manufacturer);
+                
+                //Add inventoryID parameter
+                if (!SkipSearchParameter(inventoryID))
+                    command.AddParameter(INVENTORY_ID, "inventoryID", inventoryID);
 
                 using (var reader = command.ToDbCommand().ExecuteReader())
                 {
