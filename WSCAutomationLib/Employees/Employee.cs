@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace WSCAutomation.Employees
 {
@@ -23,21 +24,12 @@ namespace WSCAutomation.Employees
 				"";
 		}
 
-		public virtual void CheckInventory()
-		{
-            // recieve inventory information from UI
-            try
-            {
-                // if passed check value, search all and return all results
-                // else call to DBCheckInventory(itemID, itemName, manufacturerName)
-                // return list of objects to UI (Inventory is quantity - qtySold)
-                // if nothing found, send check value to imply nothing found???
-            }
-            catch (Exception ex)
-            {
-                // do somthing here to alert user to error MessagoBox.Show()???
-            }
-		}
+        // Returns a list of inventory objects of inventory items from DB
+        public virtual List<Inventory.Inventory> CheckInventory(int inventoryIDIn, string mfgNameIn, string itemNameIn)
+        {
+            return Database.DatabaseManager.Instance.DBGetInventory(itemNameIn, inventoryIDIn, mfgNameIn);
+        }
+
 
 		public virtual void CheckOrder()
 		{

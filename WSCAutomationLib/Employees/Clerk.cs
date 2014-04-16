@@ -10,23 +10,40 @@ namespace WSCAutomation.Employees
 		{
 		}
 
-        public void AddInventory()
+        public int AddInventory(Inventory.Inventory invIn)
         {
-            //recieve inventory parameters from UI
-            try
-            {
-                // call DBGetInventory() to search for existing item
-                // if (returned results == 0)
-                //    call DBAddInventory(parameters here) to add inventory
-                // if (returned results == item found)
-                //    call DBUpdateInventory(parameters here) and add to quantity
-                //    of existing table entry
-            }
-            catch (Exception ex)
-            {
-                // Display message box of error???
-            }
+            // returns itemID from DBAddInventory after item added
+            return Database.DatabaseManager.Instance.DBAddInventory(invIn);
         }
+
+        public bool UpdateInventory(Inventory.Inventory invIN)
+        {
+            // creates instance of the DBManager
+            var dbm = Database.DatabaseManager.Instance;
+
+            // returns results from DBGetInventory
+            var results = dbm.DBGetInventory(inventoryID: invIN.InventoryID);
+
+            // this throws an excpetion if more or less that 1 result is returned
+            // should never happen here
+            if (results.Count != 1)
+            {
+                throw new InvalidOperationException("Unexpected inventory results");
+            }
+
+            // creates inv object from the returned list (only one)
+            var inv = results[0];
+
+            // increases the qty sold field
+            inv.Manufacturer = invIN.Manufacturer;
+            inv.Name = invIN.Name;
+            inv.Quantity = invIN.Quantity;
+
+            // returns true of the edit is successful
+            return dbm.DBEditInventory(inv);
+        }
+
+
 
 #region OrderInventory
         /// <summary>
