@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 
 
-namespace WSCAutomation.App : Employee
+namespace WSCAutomation.App 
 {
 	/// <summary>State data representing a user of this app</summary>
-	internal class UserInfo
+	internal class UserInfo 
 	{
 		/// <summary>The <see cref="Employees.Employee"/> object of this user</summary>
 		public Employees.Employee EmployeeData { get; private set; }

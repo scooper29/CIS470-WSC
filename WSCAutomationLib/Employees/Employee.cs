@@ -1,5 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Mail;
+using System.Net.Mime;
+
 
 namespace WSCAutomation.Employees
 {
@@ -35,8 +39,19 @@ namespace WSCAutomation.Employees
 		{
 		}
 
-		protected void SendNotification()
+		protected void SendNotification(string toAddress, string fromAddress, string subject, string bodyMessage)
 		{
+              
+                MailAddress to = new MailAddress (toAddress);
+                MailAddress from = new MailAddress(fromAddress);
+                MailMessage message = new MailMessage(from, to);
+                message.Subject = subject;
+                message.SubjectEncoding = System.Text.Encoding.UTF8;
+                message.Body = bodyMessage;
+                message.BodyEncoding =  System.Text.Encoding.UTF8;
+
+                SmtpClient smtp = new SmtpClient("stmp.gmail.com");
+                smtp.Send(message);
 		}
 
 		/// <summary>
