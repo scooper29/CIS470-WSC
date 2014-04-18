@@ -4,12 +4,13 @@ namespace WSCAutomation.Orders
 {
 	public class Order
 	{
-		public int Id { get; set; }
+		public int orderId { get; set; }
 
 		public int SalesId { get; set; }
 		public int SpecialistId { get; set; }
 		public int CustomerId { get; set; }
 		public int InventoryId { get; set; }
+        public int EmployeeID { get; set; }
 
 		public string Type { get; set; }
 		public int CatalogNumber { get; set; }
