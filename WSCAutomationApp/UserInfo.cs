@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 
-namespace WSCAutomation.App
+
+namespace WSCAutomation.App : Employee
 {
 	/// <summary>State data representing a user of this app</summary>
 	internal class UserInfo

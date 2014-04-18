@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Net.Mail;
+using System.Net.Mime;
 
 namespace WSCAutomation.Employees
 {
@@ -75,7 +76,32 @@ namespace WSCAutomation.Employees
         /// <summary>
         /// Creates and sends email using properties in InventoryOrder
         /// </summary>
-        /// <param name="invOrder">InventoryOrder class object</param>
+        /// <param name="invOrder">InventoryOrder class object</par
+        #region Other Email Code
+       public static void OnlineMail()
+       {
+                
+        MailAddress to = new MailAddress ("wscspec60683@gmail.com", "Specialist");
+        message.Subject = ("Inventory order purchase made");
+        message.SubjectEncoding = System.Text.Encoding.UTF8;
+        MailAddress From = new MailAddress("wscclerk60683@gmail.com", "WSC Clerk Automated",System.Text.Encoding.UTF8);
+        MailMessage message = new MailMessage(from, to);
+        message.body = "The order you requested for inventory ID "+ invOrder.InventoryId + ", has been ordered from our supplier. Details below";
+        message.body += System.Environment.NewLine;
+        message.body += "Inventory ID: "+ invOrder.InventoryId;
+        message.body += System.Environment.NewLine;
+        message.body += "Quantity Ordered: " + invOrder.Quantity;
+        message.body += System.Environment.NewLine;
+        message.body += "Quantity Ordered: " + invOrder.Quantity;
+        message.body += System.Environment.NewLine;
+        message.body += "Expected Delivery Date: "+ invOrder.ArrivalDate;
+        message.BodyEncoding =  System.Text.Encoding.UTF8;
+
+        SmtpClient smtp = new SmtpClient("stmp.gmail.com");
+        smtp.Send(message);
+       }
+#endregion
+
         private void EmailDepartment(Inventory.InventoryOrder invOrder)
         {
             // Create Email
