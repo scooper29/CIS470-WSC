@@ -75,7 +75,6 @@ namespace WSCAutomation.Employees
         /// <summary>
         /// Creates and sends email using properties in InventoryOrder
         /// </summary>
-<<<<<<< HEAD
         /// <param name="invOrder">InventoryOrder class object</par
 
 
@@ -127,7 +126,7 @@ namespace WSCAutomation.Employees
             //        smtp.Send(message);
             //    }
         //}
-=======
+
         /// <param name="invOrder">InventoryOrder class object</param>
         private void EmailDepartment(Inventory.InventoryOrder invOrder)
         {
@@ -177,7 +176,6 @@ namespace WSCAutomation.Employees
                 smtp.Send(message);
             }
         }
->>>>>>> origin/master
 #endregion
     };
 }
