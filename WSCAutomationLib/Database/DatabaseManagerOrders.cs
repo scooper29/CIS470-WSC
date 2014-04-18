@@ -103,23 +103,23 @@ namespace WSCAutomation.Database
             return false;
 		}
 
-        public List<Order> DBGetOrder( int order_orderId = -1, int order_SalesId = -1 , int order_EmpId = -1, int order_SpecialistId =-1, int order_CustomerId = -1 , int order_InventoryId = -1,
-            string order_Type = "" , int order_CatalogNumber = -1, string order_Message = "", string order_InvalidMemo = "", bool order_Paid, bool order_Validated, bool order_Complete, bool order_Closed = "")
+        public List<Order> DBGetOrder(int order_orderId = -1, int order_SalesId = -1, int order_EmpId = -1, int order_SpecialistId = -1, int order_CustomerId = -1, int order_InventoryId = -1,
+            string order_Type = "", int order_CatalogNumber = -1, string order_Message = "", string order_InvalidMemo = "", bool order_Paid, bool order_Validated, bool order_Complete, bool order_Closed = "")
         {
-	        VerifySearchParameter(order_orderId, "order_orderId");
+            VerifySearchParameter(order_orderId, "order_orderId");
             //VerifySearchParameter(order_SalesId, "order_salesId");
-	        VerifySearchParameter(order_EmpId, "order_empId");
+            VerifySearchParameter(order_EmpId, "order_empId");
             //VerifySearchParameter(order_SpecialistId, "order_specialistId");
             VerifySearchParameter(order_CustomerId, "order_customerId");
             VerifySearchParameter(order_InventoryId, "order_inventoryId");
             VerifySearchParameter(order_Type, "order_type");
             VerifySearchParameter(order_CatalogNumber, "order_catalogNumber");
-	        VerifySearchParameter(order_Message, "order_message");
+            VerifySearchParameter(order_Message, "order_message");
             VerifySearchParameter(order_InvalidMemo, "order_invalidMemo");
-            VerifySearchParameter(order_Paid, "order_paid");
-            VerifySearchParameter(order_Validated, "order_validated");
-	        VerifySearchParameter(order_Complete, "order_complete");            
-            VerifySearchParameter(order_Closed, "order_closed");
+            //VerifySearchParameter(order_Paid, "order_paid");
+            //VerifySearchParameter(order_Validated, "order_validated");
+            //VerifySearchParameter(order_Complete, "order_complete");
+            //VerifySearchParameter(order_Closed, "order_closed");
 
             var results = new List<Order>();
 
@@ -145,7 +145,7 @@ namespace WSCAutomation.Database
                 if (!SkipSearchParameter(order_InventoryId))
                     command.AddParameter(ORDER_INVENTORY_ID, "order_InventoryId", order_InventoryId);
 
-                 // Add OrderId parameter
+                // Add OrderId parameter
                 if (!SkipSearchParameter(order_Type))
                     command.AddParameter(ORDER_TYPE, "order_Type", order_Type);
 
@@ -160,7 +160,7 @@ namespace WSCAutomation.Database
                 // Add INVENTORY ORDER DATE parameter
                 if (!SkipSearchParameter(order_InvalidMemo))
                     command.AddParameter(ORDER_INVALID_MEMO, "order_InvalidMemo", order_InvalidMemo);
-                 
+
                 using (var reader = command.ToDbCommand().ExecuteReader())
                 {
                     // each Read() fetches the next record that matches our SELECT query
@@ -178,7 +178,7 @@ namespace WSCAutomation.Database
                         order.Message = (string)reader[ORDER_MESSAGE];
                         order.CustomerId = (int)reader[ORDER_CUST_ID];
                         order.InvalidMemo = (string)reader[ORDER_INVALID_MEMO];
-                        
+
 
                         results.Add(order);
                     }
@@ -186,5 +186,6 @@ namespace WSCAutomation.Database
             }
 
             return results;
+        }
 	};
 }
