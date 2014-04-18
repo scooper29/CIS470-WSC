@@ -9,19 +9,22 @@ namespace WSCAutomation.Database
 
 	partial class DatabaseManager
 	{
-		public void DBAddOrder()
+		public int DBAddOrder(Orders.Order order)
 		{
-
+            //Replace with actual id to be returned
+            //This is just a place holder to actually return a value for program to compile
+            return -1;
 		}
 
-		public void DBEditOrder()
+		public bool DBEditOrder(Orders.Order order)
 		{
-
+            //Need the code to actually edit the order object
+            return false;
 		}
 
-		public void DBGetOrders()
+        public List<Orders.Order> DBGetOrders(int orderID = -1, int customerId = -1, int empId = -1)
 		{
-
+            return null;
 		}
 	};
 }
