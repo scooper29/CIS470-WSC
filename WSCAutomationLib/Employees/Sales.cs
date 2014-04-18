@@ -16,20 +16,32 @@ namespace WSCAutomation.Employees
 		{
 		}
 
-		public void AddOrder()
+		public int AddOrder(Orders.Order order)
 		{
+            var dbm = Database.DatabaseManager.Instance;
+
+            return dbm.DBAddOrder(order);
 		}
 
-		public void EditOrder()
+		public bool EditOrder(Orders.Order order)
 		{
+            var dbm = Database.DatabaseManager.Instance;
+
+            return dbm.DBEditOrder(order);
 		}
 
-		public void AddPayment()
+		public int AddPayment(Customers.Payment payment)
 		{
+            var dbm = Database.DatabaseManager.Instance;
+
+            return dbm.DBAddPayment(payment);
 		}
 
-		public void EditPayment()
+		public bool EditPayment(Customers.Payment payment)
 		{
+            var dbm = Database.DatabaseManager.Instance;
+
+            return dbm.DBEditPayment(payment);
 		}
 	};
 }

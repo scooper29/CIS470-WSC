@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace WSCAutomation.Employees
 {
@@ -9,7 +8,7 @@ namespace WSCAutomation.Employees
 		{
 		}
 
-		public override List<Inventory.Inventory> CheckInventory(int inventoryIDIn, string mfgNameIn, string itemNameIn)
+		public override void CheckInventory()
 		{
 			throw new InvalidOperationException(
 				"Admins can't check inventory");
@@ -59,7 +58,5 @@ namespace WSCAutomation.Employees
 			// run the UPDATE operation and return whether it was successful or not
 			return dbm.DBEditEmployee(emp);
 		}
-
-
 	};
 }

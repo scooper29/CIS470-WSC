@@ -35,8 +35,9 @@ namespace WSCAutomation.Employees
         }
 
 
-		public virtual void CheckOrder()
+		public virtual List<Orders.Order> CheckOrder(int orderId, int customerId, int specialistId)
 		{
+            return Database.DatabaseManager.Instance.DBGetOrders(orderId, customerId, specialistId);
 		}
 
 		protected void SendNotification(string toAddress, string fromAddress, string subject, string bodyMessage)
