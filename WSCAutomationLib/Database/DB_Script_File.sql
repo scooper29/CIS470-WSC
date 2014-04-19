@@ -25,14 +25,14 @@ INSERT INTO AccessCode VALUES ('w', 'Worker');
 INSERT INTO AccessCode VALUES ('c', 'Clerk');
 
 //Employee Table Inserts
-INSERT INTO Employee (AccessCodeID, Emp_FirstName, Emp_LastName, Emp_Email, Emp_UserID, Emp_Password) VALUES ('a', 'Ryan', 'Oftedahl', 'wscadm60683@gmail.com', 'admin', 'admin');
-INSERT INTO Employee (AccessCodeID, Emp_FirstName, Emp_LastName, Emp_Email, Emp_UserID, Emp_Password) VALUES ('a', 'Thomas', 'Ford', 'wscadm60683@gmail.com', 'admin', 'admin');
-INSERT INTO Employee (AccessCodeID, Emp_FirstName, Emp_LastName, Emp_Email, Emp_UserID, Emp_Password) VALUES ('m', 'Jon', 'Hartis', 'wscman60683@gmail.com', 'manager', 'manager');
-INSERT INTO Employee (AccessCodeID, Emp_FirstName, Emp_LastName, Emp_Email, Emp_UserID, Emp_Password) VALUES ('m', 'Colby', 'Gauff', 'wscman60683@gmail.com', 'manager', 'manager');
-INSERT INTO Employee (AccessCodeID, Emp_FirstName, Emp_LastName, Emp_Email, Emp_UserID, Emp_Password) VALUES ('c', 'Jason', 'Grey', 'wscclerk60683@gmail.com', 'clerk', 'clerk');
-INSERT INTO Employee (AccessCodeID, Emp_FirstName, Emp_LastName, Emp_Email, Emp_UserID, Emp_Password) VALUES ('w', 'Sean', 'Cooper', 'wscspec60683@gmail.com', 'specialist', 'specialist');
-INSERT INTO Employee (AccessCodeID, Emp_FirstName, Emp_LastName, Emp_Email, Emp_UserID, Emp_Password) VALUES ('s', 'Chris', 'Newby', 'wscsales60683@gmail.com', 'sales', 'sales');
-INSERT INTO Employee (AccessCodeID, Emp_FirstName, Emp_LastName, Emp_Email, Emp_UserID, Emp_Password) VALUES ('s', 'Andy', 'Show', 'wscsales60683@gmail.com', 'sales', 'sales');
+INSERT INTO Employee (AccessCodeID, Emp_FirstName, Emp_LastName, Emp_Email, Emp_UserID, Emp_Password) VALUES ('a', 'Ryan', 'Oftedahl', 'wscadm60683@gmail.com', 'ryan', 'admin');
+INSERT INTO Employee (AccessCodeID, Emp_FirstName, Emp_LastName, Emp_Email, Emp_UserID, Emp_Password) VALUES ('a', 'Thomas', 'Ford', 'wscadm60683@gmail.com', 'thomas', 'admin');
+INSERT INTO Employee (AccessCodeID, Emp_FirstName, Emp_LastName, Emp_Email, Emp_UserID, Emp_Password) VALUES ('m', 'Jon', 'Hartis', 'wscman60683@gmail.com', 'jon', 'manager');
+INSERT INTO Employee (AccessCodeID, Emp_FirstName, Emp_LastName, Emp_Email, Emp_UserID, Emp_Password) VALUES ('m', 'Colby', 'Gauff', 'wscman60683@gmail.com', 'colby', 'manager');
+INSERT INTO Employee (AccessCodeID, Emp_FirstName, Emp_LastName, Emp_Email, Emp_UserID, Emp_Password) VALUES ('c', 'Jason', 'Grey', 'wscclerk60683@gmail.com', 'jason', 'clerk');
+INSERT INTO Employee (AccessCodeID, Emp_FirstName, Emp_LastName, Emp_Email, Emp_UserID, Emp_Password) VALUES ('w', 'Sean', 'Cooper', 'wscspec60683@gmail.com', 'sean', 'specialist');
+INSERT INTO Employee (AccessCodeID, Emp_FirstName, Emp_LastName, Emp_Email, Emp_UserID, Emp_Password) VALUES ('s', 'Chris', 'Newby', 'wscsales60683@gmail.com', 'chris', 'sales');
+INSERT INTO Employee (AccessCodeID, Emp_FirstName, Emp_LastName, Emp_Email, Emp_UserID, Emp_Password) VALUES ('s', 'Andy', 'Show', 'wscsales60683@gmail.com', 'andy', 'sales');
 
 //Customer Table Inserts
 INSERT INTO Customer (PaymentID, Cust_FirstName, Cust_LastName, Cust_Address, Cust_City, Cust_State, Cust_ZipCode, Cust_Email, Cust_Phone) VALUES (51, 'John', 'Doe', '123 Anywhere St', 'Anytown', 'IA', 12345, 'johndoe@nowhere.com', '1112223333');
