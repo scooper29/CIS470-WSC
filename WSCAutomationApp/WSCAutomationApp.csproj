@@ -139,6 +139,7 @@
       <DependentUpon>SearchRecordsDialogBase.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\SearchRecordsDialogMode.cs" />
+    <Compile Include="Views\SearchRecordsDialogResult.cs" />
     <EmbeddedResource Include="AdminViews\EnterEditEmployeeForm.resx">
       <DependentUpon>EnterEditEmployeeForm.cs</DependentUpon>
     </EmbeddedResource>

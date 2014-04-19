@@ -14,5 +14,25 @@ namespace WSCAutomation.App
 		{
 			InitializeComponent();
 		}
+
+		protected override void CreateSearchResultsColumns()
+		{
+			base.CreateSearchResultsColumns();
+
+			var dgcUserName = new DataGridViewTextBoxColumn();
+			dgcUserName.DataPropertyName = "UserName";
+			dgcUserName.Name = "User Name";
+			dgvSearchResults.Columns.Add(dgcUserName);
+		}
+
+		protected override void PerformSearch(BindingSource searchResultsBindingSource)
+		{
+			var empId = ParameterId;
+			var userId = txtParameterUserName.Text;
+
+			var adminAccess = Program.CurrentUser.AsAdmin;
+			foreach (var e in adminAccess.GetEmployees(empId, txtParameterUserName.Text))
+				searchResultsBindingSource.Add(e);
+		}
 	};
 }

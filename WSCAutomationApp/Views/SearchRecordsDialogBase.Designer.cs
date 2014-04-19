@@ -87,8 +87,10 @@
 			this.dgvSearchResults.MultiSelect = false;
 			this.dgvSearchResults.Name = "dgvSearchResults";
 			this.dgvSearchResults.ReadOnly = true;
+			this.dgvSearchResults.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.dgvSearchResults.Size = new System.Drawing.Size(278, 150);
 			this.dgvSearchResults.TabIndex = 4;
+			this.dgvSearchResults.SelectionChanged += new System.EventHandler(this.OnSearchResultsSelectionChanged);
 			// 
 			// btnSelect
 			// 
@@ -129,6 +131,7 @@
 			this.Controls.Add(this.lblParameterId);
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
+			this.MinimumSize = new System.Drawing.Size(292, 327);
 			this.Name = "SearchRecordsDialogBase";
 			this.ShowIcon = false;
 			this.ShowInTaskbar = false;

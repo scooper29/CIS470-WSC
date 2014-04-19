@@ -59,5 +59,12 @@ namespace WSCAutomation.Employees
 			// run the UPDATE operation and return whether it was successful or not
 			return dbm.DBEditEmployee(emp);
 		}
+
+		public List<Employee> GetEmployees(int employeeId = -1, string userName = "")
+		{
+			var dbm = Database.DatabaseManager.Instance;
+
+			return dbm.DBGetEmployees(employeeId, userName);
+		}
 	};
 }

@@ -42,10 +42,35 @@ namespace WSCAutomation.App
 					break;
 			}
 		}
-		// HACK: temporary constructor, until the Employee class comes online
-		public UserInfo(UserAuthorityType authority)
-		{
-			Authority = authority;
-		}
+
+		public Employees.Admin AsAdmin { get {
+			System.Diagnostics.Debug.Assert(Authority == UserAuthorityType.Admin);
+
+			return (Employees.Admin)EmployeeData;
+		} }
+
+		public Employees.Manager AsManager { get {
+			System.Diagnostics.Debug.Assert(Authority == UserAuthorityType.Manager);
+
+			return (Employees.Manager)EmployeeData;
+		} }
+
+		public Employees.Sales AsSales { get {
+			System.Diagnostics.Debug.Assert(Authority == UserAuthorityType.Sales);
+
+			return (Employees.Sales)EmployeeData;
+		} }
+
+		public Employees.Specialist AsSpecialist { get {
+			System.Diagnostics.Debug.Assert(Authority == UserAuthorityType.Specialist);
+
+			return (Employees.Specialist)EmployeeData;
+		} }
+
+		public Employees.Clerk AsStockClerk { get {
+			System.Diagnostics.Debug.Assert(Authority == UserAuthorityType.StockClerk);
+
+			return (Employees.Clerk)EmployeeData;
+		} }
 	};
 }

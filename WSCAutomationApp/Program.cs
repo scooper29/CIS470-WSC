@@ -31,5 +31,17 @@ namespace WSCAutomation.App
 			Application.SetCompatibleTextRenderingDefault(false);
 			Application.Run(new MainForm());
 		}
+
+		/// <summary>
+		/// Event handler for TextBox's KeyPress to limit input to digits and backspace (for deleting previous input)
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		/// <remarks>http://stackoverflow.com/a/14659892</remarks>
+		public static void OnTextBoxKeyPressAllowNumbersOnly(object sender, KeyPressEventArgs e)
+		{
+			if (!(char.IsDigit(e.KeyChar) && (e.KeyChar == (char)Keys.Back)))
+				e.Handled = true;
+		}
 	};
 }
