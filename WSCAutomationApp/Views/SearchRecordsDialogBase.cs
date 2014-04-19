@@ -155,7 +155,7 @@ namespace WSCAutomation.App
 			this.DialogResult = DialogResult.OK;
 		}
 
-		private void OnEditClick(object sender, EventArgs e)
+		protected virtual void OnEditClick(object sender, EventArgs e)
 		{
 			SearchDialogResult = SearchRecordsDialogResult.Edit;
 
