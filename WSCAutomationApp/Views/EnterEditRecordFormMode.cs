@@ -4,6 +4,8 @@ namespace WSCAutomation.App
 	/// <summary>The ways in which <see cref="EnterEditRecordFormBase"/> can be used</summary>
 	public enum EnterEditRecordFormMode
 	{
+		None,
+
 		/// <summary>Form is for presenting a read-only view of a record</summary>
 		View,
 

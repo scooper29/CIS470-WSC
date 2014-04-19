@@ -10,6 +10,9 @@ namespace WSCAutomation.App
 		/// <summary>User information of the Employee currently logged in</summary>
 		internal static UserInfo CurrentUser { get; set; }
 
+		/// <summary>Instance of the currently running MainForm</summary>
+		internal static MainForm MainForm { get; set; }
+
 		/// <summary>
 		/// The main entry point for the application.
 		/// </summary>
@@ -29,7 +32,7 @@ namespace WSCAutomation.App
 
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new MainForm());
+			Application.Run(Program.MainForm = new MainForm());
 		}
 
 		/// <summary>

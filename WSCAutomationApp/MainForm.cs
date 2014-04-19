@@ -9,6 +9,11 @@ using System.Windows.Forms;
 
 namespace WSCAutomation.App
 {
+	// NOTE: we don't currently track open records.
+	// Meaning right now, a person could search for an employee, edit the
+	// record and not close the edit form. Then search for the record again,
+	// and open another edit form while the old edit form is still open.
+
 	public partial class MainForm : Form
 	{
 		public MainForm()
@@ -131,7 +136,11 @@ namespace WSCAutomation.App
 		void HandleNewSearchDialog(SearchRecordsDialogBase searchDialog)
 		{
 			searchDialog.SearchDialogMode = SearchRecordsDialogMode.Query;
-			searchDialog.ShowDialog(this);
+			if (searchDialog.ShowDialog(this) == DialogResult.OK)
+			{
+				if (searchDialog.SearchDialogMode == SearchRecordsDialogMode.Query)
+					HandleQueriedRecord(searchDialog);
+			}
 		}
 
 		void HandleNewChildForm(Form form)
@@ -140,10 +149,71 @@ namespace WSCAutomation.App
 			form.Show();
 			form.BringToFront();
 		}
-		void HandleNewCreateRecordForm(EnterEditRecordFormBase enterForm)
+		void HandleNewCreateRecordForm(EnterEditRecordFormBase enterForm, object enterEditData)
 		{
+			enterForm.SetEnterEditData(enterEditData);
 			enterForm.EnterEditFormMode = EnterEditRecordFormMode.Create;
 			HandleNewChildForm(enterForm);
+		}
+		/// <summary>Presents a form for editing or viewing a record</summary>
+		/// <param name="recordForm"></param>
+		/// <param name="formMode"></param>
+		/// <param name="enterEditData"></param>
+		void HandleNewQueryRecordForm(EnterEditRecordFormBase recordForm, EnterEditRecordFormMode formMode,
+			object enterEditData)
+		{
+			// TODO: if we track any open records, we should handle the logic for adding them to whatever tracker here
+
+			recordForm.SetEnterEditData(enterEditData);
+			recordForm.EnterEditFormMode = formMode;
+			HandleNewChildForm(recordForm);
+		}
+
+		/// <summary>Handle the selected record that was queried in a search dialog</summary>
+		/// <param name="searchDialog"></param>
+		/// <remarks>Figures out how to present a record for editing or just viewing</remarks>
+		void HandleQueriedRecord(SearchRecordsDialogBase searchDialog)
+		{
+			var enterEditData = searchDialog.SelectedRecord;
+			var formMode = EnterEditRecordFormMode.None;
+			EnterEditRecordFormBase recordForm = null;
+
+			#region Determine formMode
+			switch (searchDialog.SearchDialogResult)
+			{
+				case SearchRecordsDialogResult.Edit:
+					formMode = EnterEditRecordFormMode.Edit;
+					break;
+
+				case SearchRecordsDialogResult.View:
+					formMode = EnterEditRecordFormMode.View;
+					break;
+
+				default:
+					throw new InvalidOperationException("Unexpected search dialog result: " +
+						searchDialog.SearchDialogResult);
+			}
+			#endregion
+
+			#region Determine enterEditData
+			if (enterEditData is Employees.Employee)
+				recordForm = new EnterEditEmployeeForm();
+			else if (enterEditData is Customers.Customer)
+				recordForm = new EnterEditCustomerForm();
+			else if (enterEditData is Inventory.Inventory)
+				recordForm = new EnterEditInventoryForm();
+			else if (enterEditData is Orders.Order)
+				recordForm = new EnterEditOrderForm();
+			else
+			{
+				System.Diagnostics.Debug.Assert(enterEditData != null);
+
+				throw new NotImplementedException("Didn't know how to handle record data of type: " + 
+					enterEditData.GetType().Name);
+			}
+			#endregion
+
+			HandleNewQueryRecordForm(recordForm, formMode, enterEditData);
 		}
 
 		#region fileMenu events
@@ -158,6 +228,7 @@ namespace WSCAutomation.App
 		private void OnFileExitClick(object sender, EventArgs e)
 		{
 			Application.Exit();
+			Program.MainForm = null;
 		}
 		#endregion
 
@@ -171,7 +242,8 @@ namespace WSCAutomation.App
 		private void OnInventoryAddClick(object sender, EventArgs e)
 		{
 			var enterForm = new EnterEditInventoryForm();
-			HandleNewCreateRecordForm(enterForm);
+			HandleNewCreateRecordForm(enterForm,
+				new Inventory.Inventory());
 		}
 		#endregion
 
@@ -185,7 +257,8 @@ namespace WSCAutomation.App
 		private void OnCustomersAddClick(object sender, EventArgs e)
 		{
 			var enterForm = new EnterEditCustomerForm();
-			HandleNewCreateRecordForm(enterForm);
+			HandleNewCreateRecordForm(enterForm,
+				new Customers.Customer());
 		}
 		#endregion
 
@@ -199,7 +272,8 @@ namespace WSCAutomation.App
 		private void OnOrdersAddClick(object sender, EventArgs e)
 		{
 			var enterForm = new EnterEditOrderForm();
-			HandleNewCreateRecordForm(enterForm);
+			HandleNewCreateRecordForm(enterForm,
+				new Orders.Order());
 		}
 		#endregion
 
@@ -213,8 +287,8 @@ namespace WSCAutomation.App
 		private void OnAdminAddUserClick(object sender, EventArgs e)
 		{
 			var enterForm = new EnterEditEmployeeForm();
-			enterForm.SetEnterEditData(new Employees.Employee());
-			HandleNewCreateRecordForm(enterForm);
+			HandleNewCreateRecordForm(enterForm,
+				new Employees.Employee());
 		}
 		#endregion
 

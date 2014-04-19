@@ -13,11 +13,28 @@ namespace WSCAutomation.App
 		/// <summary>What kind of record this enter/edit form is for</summary>
 		protected string recordKindName = "UNKNOWN";
 
+		Binding txtRecordIdBinding;
+
 		public EnterEditRecordFormBase()
 		{
 			InitializeComponent();
 
-			EnterEditFormMode = EnterEditRecordFormMode.View;
+			EnterEditFormMode = EnterEditRecordFormMode.None;
+		}
+
+		void SetAllEditableControlsToReadOnly()
+		{
+			foreach (Control control in base.Controls)
+			{
+				if (control is TextBox)
+					(control as TextBox).ReadOnly = true;
+				else if (control is NumericUpDown)
+					(control as NumericUpDown).ReadOnly = true;
+				else if (control is ComboBox)
+					(control as ComboBox).Enabled = false; // ComboBox doesn't have a ReadOnly property
+				else if (control is DateTimePicker)
+					(control as DateTimePicker).Enabled = false; // DateTimePicker doesn't have a ReadOnly property
+			}
 		}
 
 		/// <summary>Turns fields on/off or in/visible depending on the EnterEditFormMode state</summary>
@@ -25,19 +42,22 @@ namespace WSCAutomation.App
 		{
 			switch (enterEditFormMode)
 			{
+				case EnterEditRecordFormMode.None:
+					throw new InvalidOperationException();
+
 				case EnterEditRecordFormMode.View:
 					this.Text = GetTitleForViewMode();
-					//btnSave.Visible = false;
+					SetAllEditableControlsToReadOnly();
+					btnSave.Visible = false;
 					break;
 
 				case EnterEditRecordFormMode.Edit:
 					this.Text = GetTitleForViewMode();
-					txtRecordId.ReadOnly = true;
 					break;
 
 				case EnterEditRecordFormMode.Create:
 					this.Text = GetTitleForCreationMode();
-					txtRecordId.Text = "N/A"; // Record doesn't have a ID yet
+					txtRecordId.Text = "-1"; // Record doesn't have a ID yet
 					break;
 			}
 		}
@@ -57,9 +77,19 @@ namespace WSCAutomation.App
 			}
 		}
 
+		protected void SetRecordIdDataBinding(object dataSource, string dataMember = "Id")
+		{
+			txtRecordIdBinding = txtRecordId.DataBindings.Add("Text", dataSource, dataMember);
+		}
+
+		public virtual void SetEnterEditData(object enterEditData)
+		{
+			throw new NotImplementedException("Child forms should implement this");
+		}
+
 		/// <summary>Get the ID of the record (Employee, Order, etc) which this form is ultimately editing</summary>
 		/// <returns></returns>
-		protected virtual int GetRecordIdValue()
+		public virtual int GetRecordIdValue()
 		{
 			return -1;
 		}
@@ -93,11 +123,17 @@ namespace WSCAutomation.App
 		{
 			return true;
 		}
-		/// <summary>Invokes the business layer to save the underlying record data</summary>
+		/// <summary>Invokes the business layer to add the underlying record data to the DB</summary>
 		/// <returns>The record's ID, or -1 if saving failed</returns>
-		protected virtual int SaveEnterEditData()
+		protected virtual int AddEnterEditData()
 		{
 			return -1;
+		}
+		/// <summary>Invokes the business layer to save the underlying record data to the DB</summary>
+		/// <returns>True if saving succeeded, false if it failed</returns>
+		protected virtual bool SaveEnterEditData()
+		{
+			return false;
 		}
 		private void OnSaveClick(object sender, EventArgs e)
 		{
@@ -105,19 +141,75 @@ namespace WSCAutomation.App
 				"Save functionality shouldn't be usable in View modes");
 
 			bool isValid = false;
-			int saveDataId = -1;
 
 			isValid = PreSaveValidation();
+			bool saveSucessful = false;
 			if (isValid)
-				saveDataId = SaveEnterEditData();
+			{
+				switch (EnterEditFormMode)
+				{
+					#region Save for 'Add New'
+					case EnterEditRecordFormMode.Create:
+						int saveDataId = AddEnterEditData();
+						saveSucessful = saveDataId != -1;
+
+						if (!saveSucessful)
+						{
+							MessageBox.Show(this,
+								"TODO",
+								"Failed to add a new " + recordKindName,
+								MessageBoxButtons.OK, MessageBoxIcon.Error);
+						}
+						else
+						{
+							// cause the RecordId TextBox to refresh its binding to the business object's Id property
+							txtRecordIdBinding.ReadValue();
+
+							MessageBox.Show(this,
+								string.Format("New {0} ID: {1}", recordKindName, saveDataId),
+								"Add successful!",
+								MessageBoxButtons.OK);
+
+							// we're now editing an existing record
+							EnterEditFormMode = EnterEditRecordFormMode.Edit;
+						}
+						break;
+					#endregion
+
+					#region Save existing record
+					case EnterEditRecordFormMode.Edit:
+						saveSucessful = SaveEnterEditData();
+
+						if (!saveSucessful)
+						{
+							MessageBox.Show(this,
+								"TODO",
+								"Failed to save record",
+								MessageBoxButtons.OK, MessageBoxIcon.Error);
+						}
+						else
+						{
+							MessageBox.Show(this,
+								string.Format("Successfully saved {0} #{1}", recordKindName, GetRecordIdValue()),
+								"Save successful!",
+								MessageBoxButtons.OK);
+						}
+						break;
+					#endregion
+
+					default:
+						throw new InvalidOperationException("No other form mode should try to save data...");
+				}
+			}
 
 			// if validation or saving fails prevent the form from closing
-			if (!isValid || saveDataId == -1)
+			if (!isValid || !saveSucessful)
 				this.DialogResult = DialogResult.None;
 		}
 
 		private void OnCloseClick(object sender, EventArgs e)
 		{
+			this.Close();
 		}
 	};
 }
