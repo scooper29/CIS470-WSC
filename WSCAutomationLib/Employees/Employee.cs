@@ -37,7 +37,7 @@ namespace WSCAutomation.Employees
 
 		public virtual List<Orders.Order> CheckOrder(int orderId, int customerId, int specialistId)
 		{
-            return Database.DatabaseManager.Instance.DBGetOrders(orderId, customerId, specialistId);
+			return Database.DatabaseManager.Instance.DBGetOrders(orderID: orderId, customerId: customerId, specialistId: specialistId);
 		}
 
 		protected void SendNotification(string toAddress, string fromAddress, string subject, string bodyMessage)
@@ -61,36 +61,41 @@ namespace WSCAutomation.Employees
 		/// the specific Employee subclass based on the AccessCodeID value in the Employee record
 		/// </summary>
 		/// <param name="access"></param>
+		/// <param name="asEmployeeObjectsOnly">
+		/// If true, will create as instances of Employee only, not any of the subclasses. Required in order to bind Employee objects to a DataGrid</param>
 		/// <returns>An instance of the Employee subclass associated with the given access</returns>
-		internal static Employee Create(AccessCode access)
+		internal static Employee Create(AccessCode access, bool asEmployeeObjectsOnly)
 		{
-			Employee emp;
+			Employee emp = asEmployeeObjectsOnly
+				? new Employee()
+				: null;
 
-			switch (access)
-			{
-				case AccessCode.Admin:
-					emp = new Admin();
-					break;
+			if (!asEmployeeObjectsOnly)
+				switch (access)
+				{
+					case AccessCode.Admin:
+						emp = new Admin();
+						break;
 
-				case AccessCode.Manager:
-					emp = new Manager();
-					break;
+					case AccessCode.Manager:
+						emp = new Manager();
+						break;
 
-				case AccessCode.Sales:
-					emp = new Sales();
-					break;
+					case AccessCode.Sales:
+						emp = new Sales();
+						break;
 
-				case AccessCode.Specialist:
-					emp = new Specialist();
-					break;
+					case AccessCode.Specialist:
+						emp = new Specialist();
+						break;
 
-				case AccessCode.StockClerk:
-					emp = new Clerk();
-					break;
+					case AccessCode.StockClerk:
+						emp = new Clerk();
+						break;
 
-				default:
-					throw new InvalidOperationException(access.ToString());
-			}
+					default:
+						throw new InvalidOperationException(access.ToString());
+				}
 
 			emp.Access = access;
 			return emp;
@@ -105,7 +110,8 @@ namespace WSCAutomation.Employees
 			var dbm = Database.DatabaseManager.Instance;
 
 			// try and find the employee using the provided username
-			var employees = dbm.DBGetEmployees(userId: userName);
+			// The employees need to instances of our Employee subclasses since that's where we put all of the business logic for them...
+			var employees = dbm.DBGetEmployees(userId: userName, asEmployeeObjectsOnly: false);
 
 			Employee validEmp = null;
 			// There should only be one employee with the given username

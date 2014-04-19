@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace WSCAutomation.Employees
 {
@@ -8,13 +9,13 @@ namespace WSCAutomation.Employees
 		{
 		}
 
-		public override void CheckInventory()
+		public override List<Inventory.Inventory> CheckInventory(int inventoryIDIn, string mfgNameIn, string itemNameIn)
 		{
 			throw new InvalidOperationException(
 				"Admins can't check inventory");
 		}
 
-		public override void CheckOrder()
+		public override List<Orders.Order> CheckOrder(int orderId, int customerId, int specialistId)
 		{
 			throw new InvalidOperationException(
 				"Admins can't check orders");

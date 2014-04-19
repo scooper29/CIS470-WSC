@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace WSCAutomation.App.InventoryViews
+namespace WSCAutomation.App
 {
     public partial class SearchInventoryDialog : WSCAutomation.App.SearchRecordsDialogBase
     {

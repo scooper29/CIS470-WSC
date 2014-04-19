@@ -187,7 +187,6 @@
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Williams Specialty Company";
-            this.Load += new System.EventHandler(this.MainForm_Load);
             this.Shown += new System.EventHandler(this.OnFormShown);
             this.mainMenu.ResumeLayout(false);
             this.mainMenu.PerformLayout();

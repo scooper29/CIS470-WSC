@@ -13,11 +13,8 @@ namespace WSCAutomation.App
         public EnterEditInventoryForm()
         {
             InitializeComponent();
-        }
 
-        private void EnterEditInventoryForm_Load(object sender, EventArgs e)
-        {
-
+			base.recordKindName = "Inventory";
         }
     };
 }

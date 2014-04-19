@@ -25,6 +25,9 @@ namespace WSCAutomation.App
 		{
 			dialogResult = loginDialog.ShowDialog(this);
 
+			if (dialogResult == DialogResult.Cancel) // "Exit" button translates to Cancel
+				return false;
+
 			var emp = Employees.Employee.TryLogin(loginDialog.UserName, loginDialog.Password);
 			if (emp == null && dialogResult == DialogResult.OK)
 			{
@@ -34,8 +37,6 @@ namespace WSCAutomation.App
 
 				return false;
 			}
-			else if (dialogResult == DialogResult.Cancel) // "Exit" button translates to Cancel
-				return false;
 
 			Program.CurrentUser = new UserInfo(emp);
 
@@ -49,7 +50,7 @@ namespace WSCAutomation.App
 
 			// Keep letting the user attempt to log in until they exit or successfully enter user credentials
 			DialogResult dialogResult;
-			while (!AttemptLogIn(loginDialog, out dialogResult))
+			while (!AttemptLogIn(loginDialog, out dialogResult) && dialogResult != DialogResult.Cancel)
 				continue;
 
 			switch (dialogResult)
@@ -157,6 +158,8 @@ namespace WSCAutomation.App
 		#region inventoryMenu events
 		private void OnInventorySearchClick(object sender, EventArgs e)
 		{
+			var searchDialog = new SearchInventoryDialog();
+			searchDialog.ShowDialog(this);
 		}
 
 		private void OnInventoryAddClick(object sender, EventArgs e)
@@ -169,6 +172,8 @@ namespace WSCAutomation.App
 		#region customersMenu events
 		private void OnCustomersSearchClick(object sender, EventArgs e)
 		{
+			var searchDialog = new SearchCustomersDialog();
+			searchDialog.ShowDialog(this);
 		}
 
 		private void OnCustomersAddClick(object sender, EventArgs e)
@@ -213,10 +218,5 @@ namespace WSCAutomation.App
 
 			EnterLogInPrompt();
 		}
-
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-
-        }
 	};
 }

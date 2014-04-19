@@ -6,18 +6,13 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace WSCAutomation.App.CustomersViews
+namespace WSCAutomation.App
 {
     public partial class SearchCustomersDialog : WSCAutomation.App.SearchRecordsDialogBase
     {
         public SearchCustomersDialog()
         {
             InitializeComponent();
-        }
-
-        private void lblParameterId_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

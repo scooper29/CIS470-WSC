@@ -45,6 +45,15 @@
 			label1.TabIndex = 7;
 			label1.Text = "Customer ID";
 			// 
+			// label2
+			// 
+			label2.AutoSize = true;
+			label2.Location = new System.Drawing.Point(1, 59);
+			label2.Name = "label2";
+			label2.Size = new System.Drawing.Size(66, 13);
+			label2.TabIndex = 9;
+			label2.Text = "Specialist ID";
+			// 
 			// txtParameterCustomerId
 			// 
 			this.txtParameterCustomerId.Location = new System.Drawing.Point(85, 30);
@@ -59,15 +68,6 @@
 			this.txtParameterSpecialistId.Size = new System.Drawing.Size(100, 20);
 			this.txtParameterSpecialistId.TabIndex = 10;
 			// 
-			// label2
-			// 
-			label2.AutoSize = true;
-			label2.Location = new System.Drawing.Point(1, 59);
-			label2.Name = "label2";
-			label2.Size = new System.Drawing.Size(66, 13);
-			label2.TabIndex = 9;
-			label2.Text = "Specialist ID";
-			// 
 			// SearchOrdersDialog
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -77,6 +77,7 @@
 			this.Controls.Add(this.txtParameterCustomerId);
 			this.Controls.Add(label1);
 			this.Name = "SearchOrdersDialog";
+			this.Text = "Search Orders";
 			this.Controls.SetChildIndex(this.lblParameterId, 0);
 			this.Controls.SetChildIndex(this.txtParameterId, 0);
 			this.Controls.SetChildIndex(this.btnSearch, 0);

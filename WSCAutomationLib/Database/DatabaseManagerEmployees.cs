@@ -114,8 +114,9 @@ namespace WSCAutomation.Database
 		/// </summary>
 		/// <param name="employeeId">Employee ID to use in the search. Use -1 to skip this search parameter</param>
 		/// <param name="userId">Employee's user name to use in the search. Use an empty string to skip this search parameter</param>
+		/// <param name="asEmployeeObjectsOnly"></param>
 		/// <returns>A collection of 0 or more <see cref="Employee"/>s that match the search parameters</returns>
-		public List<Employee> DBGetEmployees(int employeeId = -1, string userId = "")
+		public List<Employee> DBGetEmployees(int employeeId = -1, string userId = "", bool asEmployeeObjectsOnly = true)
 		{
 			VerifySearchParameter(employeeId, "employeeId");
 			VerifySearchParameter(userId, "userId");
@@ -146,7 +147,7 @@ namespace WSCAutomation.Database
 						var accessString = (string)reader[EMPLOYEE_ACCESS_CODE];
 						var access = (AccessCode)accessString[0];
 
-						var emp = Employee.Create(access);
+						var emp = Employee.Create(access, asEmployeeObjectsOnly);
 						emp.Id = (int)reader[EMPLOYEE_ID];
 						
 						emp.FirstName = (string)reader[EMPLOYEE_FIRST_NAME];

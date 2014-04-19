@@ -33,10 +33,11 @@ namespace WSCAutomation.Database
         {
             var query = new ModificationQueryBuilder(connection, type, ORDER_TABLE);
 
-            query.AddParameter(ORDER_ORDER_ID, "OrderId", order.orderId);
+            query.AddParameter(ORDER_ORDER_ID, "OrderId", order.Id);
 
+			// TODO: get with Ryan and figure out the column names for the Order's sales and specialist IDs and update this code
 	        //query.AddParameter(ORDER_SALES_ID, "SalesId", order.SalesId );
-	        query.AddParameter(ORDER_EMPLOYEE_ID, "EmployeeId", order.EmpId);
+	        query.AddParameter(ORDER_EMPLOYEE_ID, "EmployeeId", order.SpecialistId);
             // query.AddParameter(ORDER_SPECLIST_ID, "SpecialistId", order.SpecialistId );
             query.AddParameter(ORDER_CUST_ID, "CustomerId", order.CustomerId );
             query.AddParameter(ORDER_INVENTORY_ID, "InventoryId", order.InventoryId );
@@ -87,9 +88,9 @@ namespace WSCAutomation.Database
 
             if (Obj != null)
             {
-                order.orderId = Convert.ToInt32(Obj);
+                order.Id = Convert.ToInt32(Obj);
 
-                return order.orderId;
+                return order.Id;
             }
             return -1;
 		}
@@ -98,28 +99,22 @@ namespace WSCAutomation.Database
 		{
             var rowsAffected = (int)PerformModificationQuery(ModificationQueryType.Update, order);
 
-            return false;
-            //Need the code to actually edit the order object
-            return false;
+            return rowsAffected == 1;
 		}
 
-        public List<Order> DBGetOrder(int order_orderId = -1, int order_SalesId = -1, int order_EmpId = -1, int order_SpecialistId = -1, int order_CustomerId = -1, int order_InventoryId = -1,
-            string order_Type = "", int order_CatalogNumber = -1, string order_Message = "", string order_InvalidMemo = "", bool order_Paid, bool order_Validated, bool order_Complete, bool order_Closed = "")
+		public List<Order> DBGetOrders(int orderID = -1, int order_SalesId = -1, int order_EmpId = -1, int specialistId = -1, int customerId = -1, int order_InventoryId = -1,
+            string order_Type = "", int order_CatalogNumber = -1, string order_Message = "", string order_InvalidMemo = "")
         {
-            VerifySearchParameter(order_orderId, "order_orderId");
+			VerifySearchParameter(orderID, "orderID");
             //VerifySearchParameter(order_SalesId, "order_salesId");
             VerifySearchParameter(order_EmpId, "order_empId");
-            //VerifySearchParameter(order_SpecialistId, "order_specialistId");
-            VerifySearchParameter(order_CustomerId, "order_customerId");
+			//VerifySearchParameter(specialistId, "specialistId");
+			VerifySearchParameter(customerId, "customerId");
             VerifySearchParameter(order_InventoryId, "order_inventoryId");
             VerifySearchParameter(order_Type, "order_type");
             VerifySearchParameter(order_CatalogNumber, "order_catalogNumber");
             VerifySearchParameter(order_Message, "order_message");
             VerifySearchParameter(order_InvalidMemo, "order_invalidMemo");
-            //VerifySearchParameter(order_Paid, "order_paid");
-            //VerifySearchParameter(order_Validated, "order_validated");
-            //VerifySearchParameter(order_Complete, "order_complete");
-            //VerifySearchParameter(order_Closed, "order_closed");
 
             var results = new List<Order>();
 
@@ -130,16 +125,16 @@ namespace WSCAutomation.Database
                 var command = new SelectQueryBuilder(connection, ORDER_TABLE);
 
                 // Add OrderId parameter
-                if (!SkipSearchParameter(order_orderId))
-                    command.AddParameter(ORDER_ORDER_ID, "order_orderId", order_orderId);
+				if (!SkipSearchParameter(orderID))
+					command.AddParameter(ORDER_ORDER_ID, "orderID", orderID);
 
                 // Add INVENTORY ORDER QUANTITY parameter
                 if (!SkipSearchParameter(order_EmpId))
                     command.AddParameter(ORDER_EMPLOYEE_ID, "order_empId", order_EmpId);
 
                 // Add INVENTORY Order Cmplete parameter
-                if (!SkipSearchParameter(order_CustomerId))
-                    command.AddParameter(ORDER_CUST_ID, "order_CustomerId", order_CustomerId);
+				if (!SkipSearchParameter(customerId))
+					command.AddParameter(ORDER_CUST_ID, "customerId", customerId);
 
                 // Add INVENTORY ORDER DATE parameter
                 if (!SkipSearchParameter(order_InventoryId))
@@ -169,8 +164,9 @@ namespace WSCAutomation.Database
                     {
                         Order order = new Order();
 
-                        order.orderId = (int)reader[ORDER_ORDER_ID];
-                        order.EmpId = (int)reader[ORDER_EMPLOYEE_ID];
+                        order.Id = (int)reader[ORDER_ORDER_ID];
+						// TODO: get with Ryan and figure out the column names for the Order's sales and specialist IDs and update this code
+                        order.SpecialistId = (int)reader[ORDER_EMPLOYEE_ID];
                         order.CustomerId = (int)reader[ORDER_CUST_ID];
                         order.InventoryId = (int)reader[ORDER_INVENTORY_ID];
                         order.Type = (string)reader[ORDER_TYPE];
