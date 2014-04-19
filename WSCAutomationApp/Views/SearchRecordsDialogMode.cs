@@ -4,6 +4,8 @@ namespace WSCAutomation.App
 	/// <summary>The ways in which <see cref="SearchRecordsDialogBase"/> can be used</summary>
 	public enum SearchRecordsDialogMode
 	{
+		None,
+
 		/// <summary>Dialog is for querying the database for Viewing or Editing the record</summary>
 		Query,
 

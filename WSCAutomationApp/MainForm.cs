@@ -128,6 +128,12 @@ namespace WSCAutomation.App
 		}
 		#endregion
 
+		void HandleNewSearchDialog(SearchRecordsDialogBase searchDialog)
+		{
+			searchDialog.SearchDialogMode = SearchRecordsDialogMode.Query;
+			searchDialog.ShowDialog(this);
+		}
+
 		void HandleNewChildForm(Form form)
 		{
 			form.MdiParent = this;
@@ -159,7 +165,7 @@ namespace WSCAutomation.App
 		private void OnInventorySearchClick(object sender, EventArgs e)
 		{
 			var searchDialog = new SearchInventoryDialog();
-			searchDialog.ShowDialog(this);
+			HandleNewSearchDialog(searchDialog);
 		}
 
 		private void OnInventoryAddClick(object sender, EventArgs e)
@@ -173,7 +179,7 @@ namespace WSCAutomation.App
 		private void OnCustomersSearchClick(object sender, EventArgs e)
 		{
 			var searchDialog = new SearchCustomersDialog();
-			searchDialog.ShowDialog(this);
+			HandleNewSearchDialog(searchDialog);
 		}
 
 		private void OnCustomersAddClick(object sender, EventArgs e)
@@ -187,7 +193,7 @@ namespace WSCAutomation.App
 		private void OnOrdersSearchClick(object sender, EventArgs e)
 		{
 			var searchDialog = new SearchOrdersDialog();
-			searchDialog.ShowDialog(this);
+			HandleNewSearchDialog(searchDialog);
 		}
 
 		private void OnOrdersAddClick(object sender, EventArgs e)
@@ -201,7 +207,7 @@ namespace WSCAutomation.App
 		private void OnAdminSearchUsersClick(object sender, EventArgs e)
 		{
 			var searchDialog = new SearchEmployeesDialog();
-			searchDialog.ShowDialog(this);
+			HandleNewSearchDialog(searchDialog);
 		}
 
 		private void OnAdminAddUserClick(object sender, EventArgs e)

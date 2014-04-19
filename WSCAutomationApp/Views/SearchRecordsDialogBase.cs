@@ -9,7 +9,7 @@ namespace WSCAutomation.App
 {
 	public partial class SearchRecordsDialogBase : Form
 	{
-		SearchRecordsDialogMode searchDialogMode;
+		SearchRecordsDialogMode searchDialogMode = SearchRecordsDialogMode.None;
 
 		protected DataGridViewTextBoxColumn dgcRecordId;
 
@@ -28,7 +28,6 @@ namespace WSCAutomation.App
 
 			txtParameterId.KeyPress += new KeyPressEventHandler(Program.OnTextBoxKeyPressAllowNumbersOnly);
 
-			SearchDialogMode = SearchRecordsDialogMode.Query;
 			SearchDialogResult = SearchRecordsDialogResult.None;
 
 			SelectedRecord = null;
@@ -67,6 +66,9 @@ namespace WSCAutomation.App
 
 				switch(value)
 				{
+					case SearchRecordsDialogMode.None:
+						throw new InvalidOperationException();
+
 					case SearchRecordsDialogMode.Query:
 						btnSelect.Text = "&View";
 						btnEdit.Visible = CurrentUserCanEditRecords;

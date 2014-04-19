@@ -15,6 +15,10 @@ namespace WSCAutomation.App
 			InitializeComponent();
 		}
 
+		protected override bool CurrentUserCanEditRecords { get {
+			return Program.CurrentUser.Authority == UserAuthorityType.Admin;
+		} }
+
 		protected override void CreateSearchResultsColumns()
 		{
 			base.CreateSearchResultsColumns();
@@ -30,8 +34,8 @@ namespace WSCAutomation.App
 			var empId = ParameterId;
 			var userId = txtParameterUserName.Text;
 
-			var adminAccess = Program.CurrentUser.AsAdmin;
-			foreach (var e in adminAccess.GetEmployees(empId, txtParameterUserName.Text))
+			var emp = Program.CurrentUser.EmployeeData;
+			foreach (var e in emp.GetEmployees(empId, txtParameterUserName.Text))
 				searchResultsBindingSource.Add(e);
 		}
 	};
