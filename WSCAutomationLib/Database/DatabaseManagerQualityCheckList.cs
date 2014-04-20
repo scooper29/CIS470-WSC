@@ -74,6 +74,13 @@ namespace WSCAutomation.Database
             return -1;
         }
 
+        public bool DBEditQualityChecklist(QualityCheckList qual)
+        {
+            var rowsAffected = (int)PerformModificationQuery(ModificationQueryType.Update, qual);
+
+            return rowsAffected == 1;
+        }
+
         public List<QualityCheckList> DBGetInventory(string QUALITY_Log_ID, string QUAl_Pass, string QUAl_Description = "")
         {
             VerifySearchParameter(QUALITY_ID, "quality_log_Id");
