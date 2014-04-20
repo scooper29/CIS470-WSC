@@ -8,12 +8,16 @@ namespace WSCAutomation.Employees
 		{
 		}
 
-		public void AddCustomer()
+		public int AddCustomer(Customers.Customer custIn)
 		{
+            // returns customerID from DBAddCustomer after customer added
+            return Database.DatabaseManager.Instance.DBAddCustomer(custIn);
 		}
 
-		public void EditCustomer()
+		public bool EditCustomer(Customers.Customer custIn)
 		{
+            // returns true of the edit is successful
+            return Database.DatabaseManager.Instance.DBEditCustomer(custIn);
 		}
 
 		public int AddOrder(Orders.Order order)

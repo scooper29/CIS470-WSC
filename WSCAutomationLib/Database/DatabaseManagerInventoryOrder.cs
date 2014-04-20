@@ -61,7 +61,7 @@ namespace WSCAutomation.Database
 
             return result;
         }
-		public int DBAddInventory(InventoryOrder invOrder)
+		public int DBAddInventoryOrder(InventoryOrder invOrder)
 		{
             object Obj = PerformModificationQuery(ModificationQueryType.Insert, invOrder);
 
@@ -75,7 +75,7 @@ namespace WSCAutomation.Database
             return -1;
 		}
 
-		public bool DBEditInventory(InventoryOrder invOrder)
+		public bool DBEditInventoryOrder(InventoryOrder invOrder)
 		{
             var rowsAffected = (int)PerformModificationQuery(ModificationQueryType.Update, invOrder);
 

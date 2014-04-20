@@ -8,7 +8,7 @@ namespace WSCAutomation.Employees
 		{
 		}
 
-        public bool RequestInventory(int invIDIn)
+        public bool RequestInstockInventory(int invIDIn)
         {
             // creates instance of the DBManager
             var dbm = Database.DatabaseManager.Instance;
@@ -28,9 +28,18 @@ namespace WSCAutomation.Employees
 
             // increases the qty sold field
             inv.QtySold += 1;
-
+            
+            string body = "Inventory item " + Convert.ToString(invIDIn) + " is in stock, please pull from shelf.";
+            SendNotification("wscclerk60683@gmail.com", this.Email, "In stock inventory requested", body);
+            
             // returns true of the edit is successful
             return dbm.DBEditInventory(inv);
+        }
+
+        public void RequestOutofstockInventory(Inventory.Inventory invIn)
+        {
+            string body = "Inventory item " + invIn.InventoryID.ToString() + " is out of stock, please order more.";
+            SendNotification("wscclerk60683@gmail.com", this.Email, "Out of stock inventory needed", body);
         }
 
         public void MarkOrderComplete(Orders.Order order, bool complete)
@@ -39,10 +48,9 @@ namespace WSCAutomation.Employees
             
             SendNotification("wscman60683@gmail.com", this.Email, "Order Complete", "[THIS ORDER] has been completed.");
         }
-
-        //public Orders.QualityCheckList ReviewQualityChecklist(int checkId)
-        //{
-
-        //}
+        
+        public void ReviewQualityCheck()
+		{
+		}
 	};
 }
