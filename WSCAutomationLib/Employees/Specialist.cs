@@ -39,9 +39,10 @@ namespace WSCAutomation.Employees
             
             SendNotification("wscman60683@gmail.com", this.Email, "Order Complete", "[THIS ORDER] has been completed.");
         }
-        
-        public void ReviewQualityCheck()
-		{
-		}
+
+        //public Orders.QualityCheckList ReviewQualityChecklist(int checkId)
+        //{
+
+        //}
 	};
 }

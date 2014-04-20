@@ -74,7 +74,7 @@ namespace WSCAutomation.Database
             return -1;
         }
 
-        public List<QualityCheckList> DBGetInventory(string QUALITY_Log_ID, string QUAl_Pass, string QUAl_Description = "")
+        public List<QualityCheckList> DBGetQualityCheckList(string QUALITY_Log_ID, string QUAl_Pass, string QUAl_Description = "")
         {
             VerifySearchParameter(QUALITY_ID, "quality_log_Id");
             VerifySearchParameter(QUAl_Pass, "qual_pass");
