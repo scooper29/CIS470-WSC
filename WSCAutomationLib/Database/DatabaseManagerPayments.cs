@@ -81,8 +81,56 @@ namespace WSCAutomation.Database
             return rowsAffected == 1;
 		}
 
-		public void DBGetPayments()
+		public List <Payment> DBGetPayments(int pay_Id, string Pay_Type, string pay_CardNumber, string pay_ExpirationDate)
 		{
+            VerifySearchParameter(pay_Id, "pay_Id");
+            VerifySearchParameter(Pay_Type, "Pay_Type");
+            VerifySearchParameter(pay_CardNumber, "pay_CardNumber");
+            VerifySearchParameter(pay_ExpirationDate, "pay_ExpirationDate");
+            
+            
+            var results = new List<Payment>();
+
+            // open a connection to the SQL DB
+            using (var connection = OpenConnection())
+            {
+                // create a SELECT query builder for the Customertable
+                var command = new SelectQueryBuilder(connection, PAYMENT_TABLE);
+
+                // Add Payment Id parameter
+                if (!SkipSearchParameter(pay_Id))
+                    command.AddParameter(PAYMENT_ID, "pay_Id", pay_Id);
+
+                // Add PAYMENT TYPE parameter
+                if (!SkipSearchParameter(Pay_Type))
+                    command.AddParameter(PAYMENT_TYPE, "Pay_Type", Pay_Type);
+
+                // Add PAYMENT CARD NUMBER parameter
+                if (!SkipSearchParameter(pay_CardNumber))
+                    command.AddParameter(PAYMENT_CARD_NUMBER, "pay_CardNumber", pay_CardNumber);
+
+                // Add PAYMENT EXP DATE parameter
+                if (!SkipSearchParameter(pay_ExpirationDate))
+                    command.AddParameter(PAYMENT_EXP_DATE, "pay_ExpirationDate", pay_ExpirationDate);
+
+                using (var reader = command.ToDbCommand().ExecuteReader())
+                {
+                    // each Read() fetches the next record that matches our SELECT query
+                    // build our code object from each record and add it to the list of results
+                    while (reader.Read())
+                    {
+                        Payment pay = new Payment();
+
+                        pay.Id = (int)reader[PAYMENT_ID];
+                        pay.Type = (string)reader[PAYMENT_TYPE];
+                        pay.CardNumber = (string)reader[PAYMENT_CARD_NUMBER];
+                        pay.ExpirationDate = (DateTime)reader[PAYMENT_EXP_DATE];
+
+                        results.Add(pay);
+                    }
+                }
+            }
+            return results;
 		}
 	};
 }
