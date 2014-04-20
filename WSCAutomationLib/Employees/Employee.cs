@@ -46,22 +46,24 @@ namespace WSCAutomation.Employees
 
 			return dbm.DBGetEmployees(employeeId, userName);
 		}
-
-		protected void SendNotification(string toAddress, string fromAddress, string subject, string bodyMessage)
-		{
-              
-                MailAddress to = new MailAddress (toAddress);
-                MailAddress from = new MailAddress(fromAddress);
-                MailMessage message = new MailMessage(from, to);
-                message.Subject = subject;
-                message.SubjectEncoding = System.Text.Encoding.UTF8;
-                message.Body = bodyMessage;
-                message.BodyEncoding =  System.Text.Encoding.UTF8;
-
-                SmtpClient smtp = new SmtpClient("stmp.gmail.com");
-                smtp.Send(message);
-		}
-
+        
+        protected void SendNotification(string toAddress, string fromAddress, string subject, string bodyMessage)
+        {
+            MailAddress to = new MailAddress(toAddress);
+            MailAddress from = new MailAddress(fromAddress);
+            MailMessage message = new MailMessage(from, to);
+            message.Subject = subject;
+            message.SubjectEncoding = System.Text.Encoding.UTF8;
+            message.Body = bodyMessage;
+            message.BodyEncoding = System.Text.Encoding.UTF8;
+            string server;
+            int port;
+            server = "stmp.gmail.com";
+            port = 587;
+            SmtpClient smtp = new SmtpClient(server, port);
+            smtp.Credentials = new System.Net.NetworkCredential(fromAddress, "senprojCIS470");
+            smtp.Send(message);
+        }
 		/// <summary>
 		/// Do to the fact we don't use controllers for employee operations, but instead use
 		/// child classes of Employee, our DBGetEmployees function needs a way to create
@@ -134,5 +136,30 @@ namespace WSCAutomation.Employees
 
 			return validEmp;
 		}
+
+        public void UpdateOrder(int orderID, bool complete)
+        {
+            // creates instance of the DBManager
+            var dbm = Database.DatabaseManager.Instance;
+
+            // returns results from DBGetInventory
+            var result = dbm.DBGetOrders(orderID: orderID);
+
+            // this throws an excpetion if more or less that 1 result is returned
+            // should never happen here
+            if (result.Count != 1)
+            {
+                throw new InvalidOperationException("Unexpected order results");
+            }
+
+            // creates inv object from the returned list (only one)
+            var ord = result[0];
+
+            // assign values to corresponding attributes of the order object
+            ord.Complete = complete;
+
+            // call make the change in the DB
+            dbm.DBEditOrder(ord);
+        }
 	};
 }

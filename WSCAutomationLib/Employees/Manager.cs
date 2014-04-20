@@ -8,6 +8,11 @@ namespace WSCAutomation.Employees
 		{
 		}
 
+        public void ReviewPayment()
+        {
+            SendNotification("showandy@gmail.com", this.Email, "Payment Failed", "We were unable to complete your payment.  Please contact your sales representative to arrange a new payment.");
+        }
+
 		public void ValidateOrder(int orderID, bool validated, int specialistId)
 		{
             // creates instance of the DBManager
@@ -32,15 +37,18 @@ namespace WSCAutomation.Employees
 
             // call make the change in the DB
             dbm.DBEditOrder(ord);
+
+            SendNotification("wscspec60683@gmail.com", this.Email, "Order has been assigned to you", "An order has been assigned to you");
 		}
 
 		public void PerformQualityCheck()
 		{
-		}
 
-        public void UpdateOrder()
-        {
-            //Bring up with group
-        }
+
+            SendNotification("wscspec60683@gmail.com", this.Email, "Order Failed Quality Check", "The order that you worked on did not pass the quality check.");
+
+            SendNotification("showandy@gmail.com", this.Email, "Order Finished", "Your order is finished and is ready to be shipped or picked up.");
+            SendNotification("wscsales60683@gmail.com", this.Email, "Close Order", "Please close [THIS ORDER].");
+		}
 	};
 }
