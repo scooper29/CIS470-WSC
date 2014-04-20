@@ -19,6 +19,7 @@ namespace WSCAutomation.Database
         // const string ORDER_SPECLIST_ID = "order_SpeclistId";
         const string ORDER_CUST_ID = "order_CustId";
         const string ORDER_INVENTORY_ID = "order_InvId";
+        //const string ORDER_QUALITY_ID = "order_QualId";
         const string ORDER_TYPE = "order_Type";
 	    const string ORDER_CATALOG_NUM = "order_CatlogNum";
         const string ORDER_MESSAGE = "order_Message";
@@ -41,6 +42,7 @@ namespace WSCAutomation.Database
             // query.AddParameter(ORDER_SPECLIST_ID, "SpecialistId", order.SpecialistId );
             query.AddParameter(ORDER_CUST_ID, "CustomerId", order.CustomerId );
             query.AddParameter(ORDER_INVENTORY_ID, "InventoryId", order.InventoryId );
+            //query.AddParameter(ORDER_QUALITY_ID, "QualityID", order.QualityID );
             query.AddParameter(ORDER_TYPE, "Type", order.Type);
 	        query.AddParameter(ORDER_CATALOG_NUM, "CatalogNumber", order.CatalogNumber);
             query.AddParameter(ORDER_MESSAGE, "Message", order.Message);
