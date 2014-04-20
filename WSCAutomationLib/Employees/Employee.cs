@@ -46,22 +46,24 @@ namespace WSCAutomation.Employees
 
 			return dbm.DBGetEmployees(employeeId, userName);
 		}
-
-		protected void SendNotification(string toAddress, string fromAddress, string subject, string bodyMessage)
-		{
-              
-                MailAddress to = new MailAddress (toAddress);
-                MailAddress from = new MailAddress(fromAddress);
-                MailMessage message = new MailMessage(from, to);
-                message.Subject = subject;
-                message.SubjectEncoding = System.Text.Encoding.UTF8;
-                message.Body = bodyMessage;
-                message.BodyEncoding =  System.Text.Encoding.UTF8;
-
-                SmtpClient smtp = new SmtpClient("stmp.gmail.com");
-                smtp.Send(message);
-		}
-
+        
+        protected void SendNotification(string toAddress, string fromAddress, string subject, string bodyMessage)
+        {
+            MailAddress to = new MailAddress(toAddress);
+            MailAddress from = new MailAddress(fromAddress);
+            MailMessage message = new MailMessage(from, to);
+            message.Subject = subject;
+            message.SubjectEncoding = System.Text.Encoding.UTF8;
+            message.Body = bodyMessage;
+            message.BodyEncoding = System.Text.Encoding.UTF8;
+            string server;
+            int port;
+            server = "stmp.gmail.com";
+            port = 587;
+            SmtpClient smtp = new SmtpClient(server, port);
+            smtp.Credentials = new System.Net.NetworkCredential(fromAddress, "senprojCIS470");
+            smtp.Send(message);
+        }
 		/// <summary>
 		/// Do to the fact we don't use controllers for employee operations, but instead use
 		/// child classes of Employee, our DBGetEmployees function needs a way to create
