@@ -8,7 +8,7 @@ namespace WSCAutomation.Employees
 		{
 		}
 
-        public bool UpdateInventory(int invIDIn)
+        public bool RequestInventory(int invIDIn)
         {
             // creates instance of the DBManager
             var dbm = Database.DatabaseManager.Instance;
@@ -33,8 +33,14 @@ namespace WSCAutomation.Employees
             return dbm.DBEditInventory(inv);
         }
 
-
-		public void ReviewQualityCheck()
+        public void MarkOrderComplete(Orders.Order order, bool complete)
+        {
+            UpdateOrder(order.Id, true);
+            
+            SendNotification("wscman60683@gmail.com", this.Email, "Order Complete", "[THIS ORDER] has been completed.");
+        }
+        
+        public void ReviewQualityCheck()
 		{
 		}
 	};
