@@ -38,7 +38,7 @@ namespace WSCAutomation.Employees
 
         public void RequestOutofstockInventory(Inventory.Inventory invIn)
         {
-            string body = "Inventory item " + invIn.InventoryID.ToString() + " is out of stock, please order more.";
+            string body = "Inventory item " + invIn.Id + " is out of stock, please order more.";
             SendNotification("wscclerk60683@gmail.com", this.Email, "Out of stock inventory needed", body);
         }
 

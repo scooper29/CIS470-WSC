@@ -162,5 +162,18 @@ namespace WSCAutomation.App
 			// will cause the dialog to close
 			this.DialogResult = DialogResult.OK;
 		}
+
+		private void OnLoad(object sender, EventArgs e)
+		{
+			int width = this.Size.Width;
+			// adjust for the padding on the left side of the dialog
+			width -= dgvSearchResults.Location.X;
+			// adjust for the padding on the right side of the dialog
+			width -= dgvSearchResults.Location.X * 2;
+
+			dgvSearchResults.Size = new Size(
+				width, 
+				dgvSearchResults.Size.Height);
+		}
 	};
 }

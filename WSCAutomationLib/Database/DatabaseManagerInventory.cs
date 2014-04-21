@@ -24,7 +24,7 @@ namespace WSCAutomation.Database
         {
             var query = new ModificationQueryBuilder(connection, type, INVENTORY_TABLE);
 
-            query.AddIdParameter(INVENTORY_ID, "invId", inv.InventoryID);
+            query.AddIdParameter(INVENTORY_ID, "invId", inv.Id);
 
             query.AddParameter(INVENTORY_NAME, "invName", inv.Name);
             query.AddParameter(INVENTORY_MANUFACTURER, "manufacturerName", inv.Manufacturer);
@@ -64,13 +64,13 @@ namespace WSCAutomation.Database
 
         public int DBAddInventory(Inventory inv)
 		{
-            object Obj = PerformModificationQuery(ModificationQueryType.Insert, inv);
+            object idObj = PerformModificationQuery(ModificationQueryType.Insert, inv);
 
-            if (Obj != null)
+			if (idObj != null)
             {
-                inv.InventoryID = Convert.ToInt32(Obj);
+				inv.Id = Convert.ToInt32(idObj);
 
-                return inv.InventoryID;
+				return inv.Id;
             }
 
             return -1;
@@ -95,7 +95,7 @@ namespace WSCAutomation.Database
             using (var connection = OpenConnection())
             {
                 // create a SELECT query builder for the Employee table
-                var command = new SelectQueryBuilder(connection, CUSTOMER_TABLE);
+				var command = new SelectQueryBuilder(connection, INVENTORY_TABLE);
 
                 // Add inv_name parameter
                 if (!SkipSearchParameter(inv_invname))
@@ -117,7 +117,7 @@ namespace WSCAutomation.Database
                     {
                         Inventory inv = new Inventory();
 
-                        inv.InventoryID = (int)reader[INVENTORY_ID];
+                        inv.Id = (int)reader[INVENTORY_ID];
                         inv.Name = (string)reader[INVENTORY_NAME];
                         inv.Manufacturer = (string)reader[INVENTORY_MANUFACTURER];
                         inv.Quantity = (int)reader[INVENTORY_QUANTITY];

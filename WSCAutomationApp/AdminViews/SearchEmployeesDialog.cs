@@ -32,10 +32,10 @@ namespace WSCAutomation.App
 		protected override void PerformSearch(BindingSource searchResultsBindingSource)
 		{
 			var empId = ParameterId;
-			var userId = txtParameterUserName.Text;
+			var userName = txtParameterUserName.Text;
 
 			var emp = Program.CurrentUser.EmployeeData;
-			foreach (var e in emp.GetEmployees(empId, txtParameterUserName.Text))
+			foreach (var e in emp.GetEmployees(empId, userName))
 				searchResultsBindingSource.Add(e);
 		}
 

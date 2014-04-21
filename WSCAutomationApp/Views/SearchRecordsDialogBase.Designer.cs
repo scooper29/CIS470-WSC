@@ -137,6 +137,7 @@
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "SearchRecordsDialogBase";
+			this.Load += new System.EventHandler(this.OnLoad);
 			((System.ComponentModel.ISupportInitialize)(this.dgvSearchResults)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();

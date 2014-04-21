@@ -20,8 +20,12 @@ namespace WSCAutomation.Customers
 
 		public Customer()
 		{
+			Id = PaymentId = 
+				-1;
 
+			FirstName = LastName = Email = 
+				Address = City = State = ZipCode = Phone =
+				"";
 		}
-
 	};
 }

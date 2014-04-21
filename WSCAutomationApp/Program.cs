@@ -46,5 +46,22 @@ namespace WSCAutomation.App
 			if (!(char.IsDigit(e.KeyChar) && (e.KeyChar == (char)Keys.Back)))
 				e.Handled = true;
 		}
+
+		public static void StringToBoolean(object sender, ConvertEventArgs e)
+		{
+			if (e.DesiredType != typeof(bool)) return;
+			if (e.Value.GetType() != typeof(string)) return;
+
+			string str = (string)e.Value;
+			e.Value = bool.Parse(str);
+		}
+		static void BooleanToString(object sender, ConvertEventArgs e)
+		{
+			if (e.DesiredType != typeof(string)) return;
+			if (e.Value.GetType() != typeof(bool)) return;
+
+			bool b = (bool)e.Value;
+			e.Value = b.ToString();
+		}
 	};
 }

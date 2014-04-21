@@ -47,13 +47,6 @@
 			label1.TabIndex = 0;
 			label1.Text = "User Name";
 			// 
-			// txtUserName
-			// 
-			this.txtUserName.Location = new System.Drawing.Point(78, 6);
-			this.txtUserName.Name = "txtUserName";
-			this.txtUserName.Size = new System.Drawing.Size(194, 20);
-			this.txtUserName.TabIndex = 1;
-			// 
 			// label2
 			// 
 			label2.AutoSize = true;
@@ -63,12 +56,20 @@
 			label2.TabIndex = 2;
 			label2.Text = "Password";
 			// 
+			// txtUserName
+			// 
+			this.txtUserName.Location = new System.Drawing.Point(78, 6);
+			this.txtUserName.Name = "txtUserName";
+			this.txtUserName.Size = new System.Drawing.Size(194, 20);
+			this.txtUserName.TabIndex = 1;
+			// 
 			// txtPassword
 			// 
 			this.txtPassword.Location = new System.Drawing.Point(78, 32);
 			this.txtPassword.Name = "txtPassword";
 			this.txtPassword.Size = new System.Drawing.Size(194, 20);
 			this.txtPassword.TabIndex = 3;
+			this.txtPassword.UseSystemPasswordChar = true;
 			// 
 			// btnLogin
 			// 

@@ -4,7 +4,7 @@ namespace WSCAutomation.Inventory
 {
     public class Inventory
     {
-        public int InventoryID { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Manufacturer { get; set; }
         public int Quantity { get; set; }
@@ -12,8 +12,10 @@ namespace WSCAutomation.Inventory
 
         public Inventory()
         {
+			Id = -1;
 
+			Name = Manufacturer =
+				"";
         }
-
-    }
+    };
 }
