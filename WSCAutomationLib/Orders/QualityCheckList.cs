@@ -2,20 +2,13 @@
 
 namespace WSCAutomation.Orders
 {
-	public enum QualityPassCode : byte
-	{
-		Null = 0,
-
-		Yes = (byte)'y',
-		No = (byte)'n',
-	};
-
 	public class QualityCheckList
 	{
-		public int Id { get; set; }
+		//took out old datatype create "QualityPassCode" because it was unnecessary and hindered call of quality check method - Andy
+        public int Id { get; set; }
 
 		public int OrderId { get; set; }
-		public QualityPassCode Pass { get; set; }
+		public bool Pass { get; set; }
 		public string Description { get; set; }
 
 		public QualityCheckList()

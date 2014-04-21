@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace WSCAutomation.Employees
 {
@@ -49,8 +50,9 @@ namespace WSCAutomation.Employees
             SendNotification("wscman60683@gmail.com", this.Email, "Order Complete", "[THIS ORDER] has been completed.");
         }
         
-        public void ReviewQualityCheck()
+        public List<Orders.QualityCheckList> ReviewQualityCheck(int checkId)
 		{
+            return Database.DatabaseManager.Instance.DBGetQualityCheckList(QUALITY_Log_ID:checkId.ToString());
 		}
 	};
 }

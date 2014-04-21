@@ -41,14 +41,34 @@ namespace WSCAutomation.Employees
             SendNotification("wscspec60683@gmail.com", this.Email, "Order has been assigned to you", "An order has been assigned to you");
 		}
 
-		public void PerformQualityCheck()
+		public int PerformQualityCheck(Orders.QualityCheckList check)
 		{
+            if (check.Pass)
+            {
+                SendNotification("showandy@gmail.com", this.Email, "Order Finished", "Your order " + check.OrderId + " is finished and is ready to be shipped or picked up.");
+                SendNotification("wscsales60683@gmail.com", this.Email, "Close Order", "Please close Order number " + check.OrderId);
+            }
+            else
+            {
+                SendNotification("wscspec60683@gmail.com", this.Email, "Order Failed Quality Check", "Order number " + check.OrderId + " that you worked on did not pass the quality check.");
+            }
 
-
-            SendNotification("wscspec60683@gmail.com", this.Email, "Order Failed Quality Check", "The order that you worked on did not pass the quality check.");
-
-            SendNotification("showandy@gmail.com", this.Email, "Order Finished", "Your order is finished and is ready to be shipped or picked up.");
-            SendNotification("wscsales60683@gmail.com", this.Email, "Close Order", "Please close [THIS ORDER].");
+            return Database.DatabaseManager.Instance.DBAddQualityCheckList(check);
 		}
+
+        public bool ReevaluateQualityCheck(Orders.QualityCheckList check)
+        {
+            if (check.Pass)
+            {
+                SendNotification("showandy@gmail.com", this.Email, "Order Finished", "Your order " + check.OrderId + " is finished and is ready to be shipped or picked up.");
+                SendNotification("wscsales60683@gmail.com", this.Email, "Close Order", "Please close Order number " + check.OrderId);
+            }
+            else
+            {
+                SendNotification("wscspec60683@gmail.com", this.Email, "Order Failed Quality Check", "Order number " + check.OrderId + " that you worked on did not pass the quality check, again.");
+            }
+
+            return Database.DatabaseManager.Instance.DBEditQualityChecklist(check);
+        }
 	};
 }

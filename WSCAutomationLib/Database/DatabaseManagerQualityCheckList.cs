@@ -81,7 +81,7 @@ namespace WSCAutomation.Database
             return rowsAffected == 1;
         }
 
-        public List<QualityCheckList> DBGetInventory(string QUALITY_Log_ID, string QUAl_Pass, string QUAl_Description = "")
+        public List<QualityCheckList> DBGetQualityCheckList(string QUALITY_Log_ID = "", string QUAl_Pass = "", string QUAl_Description = "")
         {
             VerifySearchParameter(QUALITY_ID, "quality_log_Id");
             VerifySearchParameter(QUAl_Pass, "qual_pass");
@@ -118,7 +118,7 @@ namespace WSCAutomation.Database
                         qual.Id = (int)reader[QUALITY_Log_ID];
                         qual.OrderId = (int)reader[ORDER_ID];
                         qual.Description = (string)reader[QUAl_Description];
-                        qual.Pass = (QualityPassCode)reader[QUAl_Pass];
+                        qual.Pass = (bool)reader[QUAl_Pass];
 
                         results.Add(qual);
                     }
