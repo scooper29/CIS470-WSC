@@ -16,6 +16,11 @@ namespace WSCAutomation.Inventory
 
 		public InventoryOrder()
 		{
+			Id = InventoryId =
+				-1;
+
+			OrderDate = DateTime.Today;
+			ArrivalDate = DateTime.Today.AddDays(1);
 		}
 	};
 }

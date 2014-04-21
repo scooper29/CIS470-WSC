@@ -116,13 +116,20 @@ namespace WSCAutomation.App
 			string str = (string)e.Value;
 			e.Value = bool.Parse(str);
 		}
-		static void BooleanToString(object sender, ConvertEventArgs e)
+		public static void BooleanToString(object sender, ConvertEventArgs e)
 		{
 			if (e.DesiredType != typeof(string)) return;
 			if (e.Value.GetType() != typeof(bool)) return;
 
 			bool b = (bool)e.Value;
 			e.Value = b.ToString();
+		}
+		public static void SetBooleanComboBoxBinding(ComboBox control,
+			object dataSource, string dataMember)
+		{
+			var binding = control.DataBindings.Add("Text", dataSource, dataMember);
+			binding.Format += new ConvertEventHandler(Program.BooleanToString);
+			binding.Parse += new ConvertEventHandler(Program.StringToBoolean);
 		}
 
 		public static TRecord UserSearchForRecord<TDialog, TRecord>(

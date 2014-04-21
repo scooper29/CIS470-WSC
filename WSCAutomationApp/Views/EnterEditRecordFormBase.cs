@@ -135,7 +135,7 @@ namespace WSCAutomation.App
 		{
 			return false;
 		}
-		private void OnSaveClick(object sender, EventArgs e)
+		protected virtual void OnSaveClick(object sender, EventArgs e)
 		{
 			System.Diagnostics.Debug.Assert(enterEditFormMode != EnterEditRecordFormMode.View,
 				"Save functionality shouldn't be usable in View modes");

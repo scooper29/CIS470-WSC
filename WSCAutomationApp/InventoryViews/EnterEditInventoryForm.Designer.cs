@@ -34,6 +34,7 @@
 			this.label2 = new System.Windows.Forms.Label();
 			this.label4 = new System.Windows.Forms.Label();
 			this.numericUpDownQuantity = new System.Windows.Forms.NumericUpDown();
+			this.btnSubmitRequestDetails = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -93,10 +94,21 @@
 			this.numericUpDownQuantity.Size = new System.Drawing.Size(42, 20);
 			this.numericUpDownQuantity.TabIndex = 13;
 			// 
+			// btnSubmitRequestDetails
+			// 
+			this.btnSubmitRequestDetails.Location = new System.Drawing.Point(85, 108);
+			this.btnSubmitRequestDetails.Name = "btnSubmitRequestDetails";
+			this.btnSubmitRequestDetails.Size = new System.Drawing.Size(139, 23);
+			this.btnSubmitRequestDetails.TabIndex = 14;
+			this.btnSubmitRequestDetails.Text = "Log Purchase Request";
+			this.btnSubmitRequestDetails.UseVisualStyleBackColor = true;
+			this.btnSubmitRequestDetails.Click += new System.EventHandler(this.OnSubmitRequestDetails);
+			// 
 			// EnterEditInventoryForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.ClientSize = new System.Drawing.Size(237, 221);
+			this.Controls.Add(this.btnSubmitRequestDetails);
 			this.Controls.Add(this.numericUpDownQuantity);
 			this.Controls.Add(this.label4);
 			this.Controls.Add(this.txtInventoryName);
@@ -114,6 +126,7 @@
 			this.Controls.SetChildIndex(this.txtInventoryName, 0);
 			this.Controls.SetChildIndex(this.label4, 0);
 			this.Controls.SetChildIndex(this.numericUpDownQuantity, 0);
+			this.Controls.SetChildIndex(this.btnSubmitRequestDetails, 0);
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
@@ -128,5 +141,6 @@
 		private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.NumericUpDown numericUpDownQuantity;
+		private System.Windows.Forms.Button btnSubmitRequestDetails;
     }
 }

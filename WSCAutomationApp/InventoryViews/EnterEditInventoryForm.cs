@@ -17,7 +17,29 @@ namespace WSCAutomation.App
             InitializeComponent();
 
 			base.recordKindName = "Inventory";
+
+			// only the clerk can enter inv order request details
+			if (Program.CurrentUser.Authority != UserAuthorityType.StockClerk)
+				btnSubmitRequestDetails.Visible = false;
         }
+
+		protected override void ToggleFieldsForEnterEditFormMode()
+		{
+			base.ToggleFieldsForEnterEditFormMode();
+
+			switch (EnterEditFormMode)
+			{
+				case EnterEditRecordFormMode.Edit:
+					if(btnSubmitRequestDetails.Visible)
+						btnSubmitRequestDetails.Enabled = true;
+					break;
+
+				case EnterEditRecordFormMode.Create:
+					if (btnSubmitRequestDetails.Visible)
+						btnSubmitRequestDetails.Enabled = false;
+					break;
+			}
+		}
 
 		void DataBindToInventoryData()
 		{
@@ -77,6 +99,17 @@ namespace WSCAutomation.App
 			var clerkAccess = Program.CurrentUser.AsStockClerk;
 
 			return clerkAccess.UpdateInventory(inventoryData);
+		}
+
+		private void OnSubmitRequestDetails(object sender, EventArgs e)
+		{
+			var invOrder = new Inventory.InventoryOrder();
+			invOrder.InventoryId = inventoryData.Id;
+			
+			var recordForm = new PurchaseInventoryRequest();
+			recordForm.EnterEditFormMode = EnterEditRecordFormMode.Create;
+
+			recordForm.ShowDialog(this);
 		}
     };
 }

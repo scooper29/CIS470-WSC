@@ -51,6 +51,16 @@ namespace WSCAutomation.App
 			txtOrderMessage.DataBindings.Add("Text", orderData, "Message");
 			txtOrderInvalidMemo.DataBindings.Add("Text", orderData, "InvalidMemo");
 
+//			Program.SetBooleanComboBoxBinding(cbxOrderPaidUpFront,
+//				orderData, "PaidUpFront");
+			Program.SetBooleanComboBoxBinding(cbxOrderPaid,
+				orderData, "Paid");
+			Program.SetBooleanComboBoxBinding(cbxOrderValidated,
+				orderData, "Validated");
+//			Program.SetBooleanComboBoxBinding(cbxOrderComplete,
+//				orderData, "Complete");
+			Program.SetBooleanComboBoxBinding(cbxOrderClosed,
+				orderData, "Closed");
 			// TODO
 		}
 
@@ -82,11 +92,17 @@ namespace WSCAutomation.App
 
 		protected override int AddEnterEditData()
 		{
-			throw new NotImplementedException("TODO");
+			var salesAccess = Program.CurrentUser.AsSales;
+
+			return salesAccess.AddOrder(orderData);
 		}
 		protected override bool SaveEnterEditData()
 		{
-			throw new NotImplementedException("TODO");
+			// TODO: need additional save conditions for different employees?
+
+			var salesAccess = Program.CurrentUser.AsSales;
+
+			return salesAccess.EditOrder(orderData);
 		}
 
 		private void OnSelectCustomer(object sender, EventArgs e)
