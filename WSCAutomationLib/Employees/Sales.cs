@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace WSCAutomation.Employees
 {
@@ -48,6 +49,13 @@ namespace WSCAutomation.Employees
             var dbm = Database.DatabaseManager.Instance;
 
             return dbm.DBEditPayment(payment);
+		}
+
+		public List<Customers.Payment> GetPayments(int paymentId = -1)
+		{
+			var dbm = Database.DatabaseManager.Instance;
+
+			return dbm.DBGetPayments(paymentId);
 		}
 	};
 }

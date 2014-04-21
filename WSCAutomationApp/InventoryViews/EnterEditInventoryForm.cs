@@ -51,16 +51,32 @@ namespace WSCAutomation.App
 		{
 			bool valid = true;
 
+			if (inventoryData.Name == "")
+			{
+				valid = false;
+				ShowValidationErrorMessage("Please provide a value for {0}", "Name");
+			}
+
+			if (inventoryData.Manufacturer == "")
+			{
+				valid = false;
+				ShowValidationErrorMessage("Please provide a value for {0}", "Manufacturer");
+			}
+
 			return valid;
 		}
 
 		protected override int AddEnterEditData()
 		{
-			throw new NotImplementedException("TODO");
+			var clerkAccess = Program.CurrentUser.AsStockClerk;
+
+			return clerkAccess.AddInventory(inventoryData);
 		}
 		protected override bool SaveEnterEditData()
 		{
-			throw new NotImplementedException("TODO");
+			var clerkAccess = Program.CurrentUser.AsStockClerk;
+
+			return clerkAccess.UpdateInventory(inventoryData);
 		}
     };
 }

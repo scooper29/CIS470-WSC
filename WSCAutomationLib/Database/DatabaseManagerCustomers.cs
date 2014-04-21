@@ -19,7 +19,7 @@ namespace WSCAutomation.Database
         const string CUSTOMER_ADDRESS = "Cust_Address";
         const string CUSTOMER_CITY = "Cust_City";
         const string CUSTOMER_STATE = "Cust_State";
-        const string CUSTOMER_ZIPCDOE = "Cust_ZipCode";
+        const string CUSTOMER_ZIPCODE = "Cust_ZipCode";
         const string CUSTOMER_EMAIL = "Cust_Email";
         const string CUSTOMER_PHONE = "Cust_Phone";
         #endregion
@@ -31,14 +31,16 @@ namespace WSCAutomation.Database
 
             query.AddIdParameter(CUSTOMER_ID, "custId", cust.Id);
 
+			query.AddParameter(CUSTOMER_PAYMENT, "paymentId", cust.PaymentId);
+
             query.AddParameter(CUSTOMER_FIRST_NAME, "firstName", cust.FirstName);
             query.AddParameter(CUSTOMER_LAST_NAME, "lastName", cust.LastName);
             query.AddParameter(CUSTOMER_ADDRESS, "address", cust.Address);
             query.AddParameter(CUSTOMER_CITY, "city", cust.City);
             query.AddParameter(CUSTOMER_STATE, "state", cust.State);
-            query.AddParameter(CUSTOMER_ZIPCDOE, "zipcode", cust.ZipCode);
+            query.AddParameter(CUSTOMER_ZIPCODE, "zipcode", cust.ZipCode);
             query.AddParameter(CUSTOMER_EMAIL, "email", cust.Email);
-            query.AddParameter(CUSTOMER_PHONE, "password", cust.Phone);
+            query.AddParameter(CUSTOMER_PHONE, "phone", cust.Phone);
 
             return query.ToDbCommand();
         }
@@ -124,12 +126,14 @@ namespace WSCAutomation.Database
               
                         cust.Id = (int)reader[CUSTOMER_ID];
 
+						cust.PaymentId = (int)reader[CUSTOMER_PAYMENT];
+
                         cust.FirstName = (string)reader[CUSTOMER_FIRST_NAME];
                         cust.LastName = (string)reader[CUSTOMER_LAST_NAME];
                         cust.Address = (string)reader[CUSTOMER_ADDRESS];
                         cust.City = (string)reader[CUSTOMER_CITY];
                         cust.State = (string)reader[CUSTOMER_STATE];
-                        cust.ZipCode = (string)reader[CUSTOMER_ZIPCDOE];
+                        cust.ZipCode = (string)reader[CUSTOMER_ZIPCODE];
                         cust.Email = (string)reader[CUSTOMER_EMAIL];
                         cust.Phone = (string)reader[CUSTOMER_PHONE];                        
 

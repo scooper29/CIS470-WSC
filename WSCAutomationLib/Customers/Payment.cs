@@ -12,6 +12,12 @@ namespace WSCAutomation.Customers
 
 		public Payment()
 		{
+			Id = -1;
+
+			Type = CardNumber =
+				"";
+
+			ExpirationDate = DateTime.Today;
 		}
 	};
 }

@@ -44,11 +44,9 @@ namespace WSCAutomation.App
 			var customerId = ParameterId;
 			var lastName = txtCustomerLastName.Text;
 
-			var salesAccess = Program.CurrentUser.AsSales;
-			// TODO: there's no GetCustomers currently...
-			throw new NotImplementedException("TODO");
-//			foreach (var e in salesAccess.GetCustomers(customerId, lastName))
-//				searchResultsBindingSource.Add(e);
+			var emp = Program.CurrentUser.EmployeeData;
+			foreach (var e in emp.GetCustomers(customerId, lastName))
+				searchResultsBindingSource.Add(e);
 		}
     }
 }

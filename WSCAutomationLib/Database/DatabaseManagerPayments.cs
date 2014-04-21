@@ -81,13 +81,11 @@ namespace WSCAutomation.Database
             return rowsAffected == 1;
 		}
 
-		public List <Payment> DBGetPayments(int pay_Id, string Pay_Type, string pay_CardNumber, string pay_ExpirationDate)
+		public List<Payment> DBGetPayments(int payId = -1, string type = "", string cardNumber = "")
 		{
-            VerifySearchParameter(pay_Id, "pay_Id");
-            VerifySearchParameter(Pay_Type, "Pay_Type");
-            VerifySearchParameter(pay_CardNumber, "pay_CardNumber");
-            VerifySearchParameter(pay_ExpirationDate, "pay_ExpirationDate");
-            
+			VerifySearchParameter(payId, "payId");
+			VerifySearchParameter(type, "type");
+			VerifySearchParameter(cardNumber, "pay_CardNumber");
             
             var results = new List<Payment>();
 
@@ -98,20 +96,16 @@ namespace WSCAutomation.Database
                 var command = new SelectQueryBuilder(connection, PAYMENT_TABLE);
 
                 // Add Payment Id parameter
-                if (!SkipSearchParameter(pay_Id))
-                    command.AddParameter(PAYMENT_ID, "pay_Id", pay_Id);
+				if (!SkipSearchParameter(payId))
+					command.AddParameter(PAYMENT_ID, "payId", payId);
 
                 // Add PAYMENT TYPE parameter
-                if (!SkipSearchParameter(Pay_Type))
-                    command.AddParameter(PAYMENT_TYPE, "Pay_Type", Pay_Type);
+				if (!SkipSearchParameter(type))
+					command.AddParameter(PAYMENT_TYPE, "type", type);
 
                 // Add PAYMENT CARD NUMBER parameter
-                if (!SkipSearchParameter(pay_CardNumber))
-                    command.AddParameter(PAYMENT_CARD_NUMBER, "pay_CardNumber", pay_CardNumber);
-
-                // Add PAYMENT EXP DATE parameter
-                if (!SkipSearchParameter(pay_ExpirationDate))
-                    command.AddParameter(PAYMENT_EXP_DATE, "pay_ExpirationDate", pay_ExpirationDate);
+				if (!SkipSearchParameter(cardNumber))
+					command.AddParameter(PAYMENT_CARD_NUMBER, "cardNumber", cardNumber);
 
                 using (var reader = command.ToDbCommand().ExecuteReader())
                 {

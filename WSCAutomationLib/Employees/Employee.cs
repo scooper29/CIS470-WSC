@@ -46,6 +46,13 @@ namespace WSCAutomation.Employees
 
 			return dbm.DBGetEmployees(employeeId, userName);
 		}
+
+		public List<Customers.Customer> GetCustomers(int customerId = -1, string lastName = "")
+		{
+			var dbm = Database.DatabaseManager.Instance;
+
+			return dbm.DBGetCustomers(customerId, lastName);
+		}
         
         protected void SendNotification(string toAddress, string fromAddress, string subject, string bodyMessage)
         {
