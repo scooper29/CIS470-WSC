@@ -13,6 +13,10 @@ namespace WSCAutomation.App
         public SearchInventoryDialog()
         {
             InitializeComponent();
+
+			// only the clerk can enter inv order request details
+			if (Program.CurrentUser.Authority != UserAuthorityType.StockClerk)
+				btnSubmitRequestDetails.Visible = false;
         }
 
 		protected override bool CurrentUserCanEditRecords { get {
@@ -48,6 +52,25 @@ namespace WSCAutomation.App
 			var emp = Program.CurrentUser.EmployeeData;
 			foreach (var e in emp.CheckInventory(invId, invManufacturerName, invName))
 				searchResultsBindingSource.Add(e);
+		}
+
+		protected override void OnSearchResultsSelectionChanged(object sender, EventArgs e)
+		{
+			base.OnSearchResultsSelectionChanged(sender, e);
+
+			btnSubmitRequestDetails.Enabled = SelectedRecord != null;
+		}
+
+		private void OnSubmitRequestDetails(object sender, EventArgs e)
+		{
+			var inv = SelectedRecord as Inventory.Inventory;
+			var invOrder = new Inventory.InventoryOrder();
+			invOrder.InventoryId = inv.Id;
+
+			var recordForm = new PurchaseInventoryRequest();
+			recordForm.EnterEditFormMode = EnterEditRecordFormMode.Create;
+
+			recordForm.ShowDialog(this);
 		}
     }
 }

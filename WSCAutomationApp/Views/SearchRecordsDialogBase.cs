@@ -122,7 +122,7 @@ namespace WSCAutomation.App
 			PerformSearch(bindingSource);
 		}
 
-		private void OnSearchResultsSelectionChanged(object sender, EventArgs e)
+		protected virtual void OnSearchResultsSelectionChanged(object sender, EventArgs e)
 		{
 			// SelectedRows isn't a list, can't query Count or index
 			foreach (DataGridViewRow row in dgvSearchResults.SelectedRows)
