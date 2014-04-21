@@ -104,6 +104,10 @@ namespace WSCAutomation.App
 				e.Handled = true;
 		}
 
+		public static readonly string[] BooleanComboItems = new string[] {
+			"False",
+			"True",
+		};
 		public static void StringToBoolean(object sender, ConvertEventArgs e)
 		{
 			if (e.DesiredType != typeof(bool)) return;
@@ -119,6 +123,21 @@ namespace WSCAutomation.App
 
 			bool b = (bool)e.Value;
 			e.Value = b.ToString();
+		}
+
+		public static TRecord UserSearchForRecord<TDialog, TRecord>(
+			IWin32Window owner)
+			where TDialog : SearchRecordsDialogBase, new()
+			where TRecord : class
+		{
+			var searchDialog = new TDialog();
+			searchDialog.SearchDialogMode = SearchRecordsDialogMode.Selection;
+			if (searchDialog.ShowDialog(owner) == DialogResult.OK)
+			{
+				return searchDialog.SelectedRecord as TRecord;
+			}
+
+			return null;
 		}
 	};
 }

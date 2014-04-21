@@ -1,4 +1,4 @@
-﻿namespace WSCAutomation.App.OrdersViews
+﻿namespace WSCAutomation.App
 {
     partial class EditOrderQualityDialog
     {

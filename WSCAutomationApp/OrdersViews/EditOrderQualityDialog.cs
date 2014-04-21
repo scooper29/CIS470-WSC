@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace WSCAutomation.App.OrdersViews
+namespace WSCAutomation.App
 {
     public partial class EditOrderQualityDialog : Form
     {

@@ -48,8 +48,8 @@
 			this.cbxOrderValidated = new System.Windows.Forms.ComboBox();
 			this.cbxOrderPaid = new System.Windows.Forms.ComboBox();
 			this.cbxOrderClosed = new System.Windows.Forms.ComboBox();
-			this.txtOrderSalesId = new System.Windows.Forms.TextBox();
-			this.txtOrderSpecialistId = new System.Windows.Forms.TextBox();
+			this.txtSalesId = new System.Windows.Forms.TextBox();
+			this.txtSpecialistId = new System.Windows.Forms.TextBox();
 			this.btnSelectCustomer = new System.Windows.Forms.Button();
 			this.btnSelectInventory = new System.Windows.Forms.Button();
 			this.btnSelectSalesEmployee = new System.Windows.Forms.Button();
@@ -75,14 +75,6 @@
 			// 
 			this.btnClose.Location = new System.Drawing.Point(12, 211);
 			// 
-			// txtOrderInvalidMemo
-			// 
-			this.txtOrderInvalidMemo.Location = new System.Drawing.Point(306, 129);
-			this.txtOrderInvalidMemo.Multiline = true;
-			this.txtOrderInvalidMemo.Name = "txtOrderInvalidMemo";
-			this.txtOrderInvalidMemo.Size = new System.Drawing.Size(100, 44);
-			this.txtOrderInvalidMemo.TabIndex = 70;
-			// 
 			// label10
 			// 
 			label10.AutoSize = true;
@@ -91,35 +83,6 @@
 			label10.Size = new System.Drawing.Size(70, 13);
 			label10.TabIndex = 65;
 			label10.Text = "Invalid Memo";
-			// 
-			// txtOrderMessage
-			// 
-			this.txtOrderMessage.Location = new System.Drawing.Point(85, 129);
-			this.txtOrderMessage.Multiline = true;
-			this.txtOrderMessage.Name = "txtOrderMessage";
-			this.txtOrderMessage.Size = new System.Drawing.Size(126, 44);
-			this.txtOrderMessage.TabIndex = 64;
-			// 
-			// txtCatalogNumber
-			// 
-			this.txtCatalogNumber.Location = new System.Drawing.Point(306, 29);
-			this.txtCatalogNumber.Name = "txtCatalogNumber";
-			this.txtCatalogNumber.Size = new System.Drawing.Size(100, 20);
-			this.txtCatalogNumber.TabIndex = 63;
-			// 
-			// txtInventoryId
-			// 
-			this.txtInventoryId.Location = new System.Drawing.Point(85, 55);
-			this.txtInventoryId.Name = "txtInventoryId";
-			this.txtInventoryId.Size = new System.Drawing.Size(100, 20);
-			this.txtInventoryId.TabIndex = 61;
-			// 
-			// txtCustomerId
-			// 
-			this.txtCustomerId.Location = new System.Drawing.Point(85, 29);
-			this.txtCustomerId.Name = "txtCustomerId";
-			this.txtCustomerId.Size = new System.Drawing.Size(100, 20);
-			this.txtCustomerId.TabIndex = 59;
 			// 
 			// label9
 			// 
@@ -193,6 +156,61 @@
 			label13.TabIndex = 75;
 			label13.Text = "Closed";
 			// 
+			// label1
+			// 
+			label1.AutoSize = true;
+			label1.Location = new System.Drawing.Point(1, 84);
+			label1.Name = "label1";
+			label1.Size = new System.Drawing.Size(47, 13);
+			label1.TabIndex = 81;
+			label1.Text = "Sales ID";
+			// 
+			// label3
+			// 
+			label3.AutoSize = true;
+			label3.Location = new System.Drawing.Point(1, 110);
+			label3.Name = "label3";
+			label3.Size = new System.Drawing.Size(66, 13);
+			label3.TabIndex = 83;
+			label3.Text = "Specialist ID";
+			// 
+			// txtOrderInvalidMemo
+			// 
+			this.txtOrderInvalidMemo.Location = new System.Drawing.Point(306, 129);
+			this.txtOrderInvalidMemo.Multiline = true;
+			this.txtOrderInvalidMemo.Name = "txtOrderInvalidMemo";
+			this.txtOrderInvalidMemo.Size = new System.Drawing.Size(100, 44);
+			this.txtOrderInvalidMemo.TabIndex = 70;
+			// 
+			// txtOrderMessage
+			// 
+			this.txtOrderMessage.Location = new System.Drawing.Point(85, 129);
+			this.txtOrderMessage.Multiline = true;
+			this.txtOrderMessage.Name = "txtOrderMessage";
+			this.txtOrderMessage.Size = new System.Drawing.Size(126, 44);
+			this.txtOrderMessage.TabIndex = 64;
+			// 
+			// txtCatalogNumber
+			// 
+			this.txtCatalogNumber.Location = new System.Drawing.Point(306, 29);
+			this.txtCatalogNumber.Name = "txtCatalogNumber";
+			this.txtCatalogNumber.Size = new System.Drawing.Size(100, 20);
+			this.txtCatalogNumber.TabIndex = 63;
+			// 
+			// txtInventoryId
+			// 
+			this.txtInventoryId.Location = new System.Drawing.Point(85, 55);
+			this.txtInventoryId.Name = "txtInventoryId";
+			this.txtInventoryId.Size = new System.Drawing.Size(100, 20);
+			this.txtInventoryId.TabIndex = 61;
+			// 
+			// txtCustomerId
+			// 
+			this.txtCustomerId.Location = new System.Drawing.Point(85, 29);
+			this.txtCustomerId.Name = "txtCustomerId";
+			this.txtCustomerId.Size = new System.Drawing.Size(100, 20);
+			this.txtCustomerId.TabIndex = 59;
+			// 
 			// cbxOrderType
 			// 
 			this.cbxOrderType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -229,37 +247,19 @@
 			this.cbxOrderClosed.Size = new System.Drawing.Size(100, 21);
 			this.cbxOrderClosed.TabIndex = 80;
 			// 
-			// txtOrderSalesId
+			// txtSalesId
 			// 
-			this.txtOrderSalesId.Location = new System.Drawing.Point(85, 81);
-			this.txtOrderSalesId.Name = "txtOrderSalesId";
-			this.txtOrderSalesId.Size = new System.Drawing.Size(100, 20);
-			this.txtOrderSalesId.TabIndex = 82;
+			this.txtSalesId.Location = new System.Drawing.Point(85, 81);
+			this.txtSalesId.Name = "txtSalesId";
+			this.txtSalesId.Size = new System.Drawing.Size(100, 20);
+			this.txtSalesId.TabIndex = 82;
 			// 
-			// label1
+			// txtSpecialistId
 			// 
-			label1.AutoSize = true;
-			label1.Location = new System.Drawing.Point(1, 84);
-			label1.Name = "label1";
-			label1.Size = new System.Drawing.Size(47, 13);
-			label1.TabIndex = 81;
-			label1.Text = "Sales ID";
-			// 
-			// txtOrderSpecialistId
-			// 
-			this.txtOrderSpecialistId.Location = new System.Drawing.Point(85, 107);
-			this.txtOrderSpecialistId.Name = "txtOrderSpecialistId";
-			this.txtOrderSpecialistId.Size = new System.Drawing.Size(100, 20);
-			this.txtOrderSpecialistId.TabIndex = 84;
-			// 
-			// label3
-			// 
-			label3.AutoSize = true;
-			label3.Location = new System.Drawing.Point(1, 110);
-			label3.Name = "label3";
-			label3.Size = new System.Drawing.Size(66, 13);
-			label3.TabIndex = 83;
-			label3.Text = "Specialist ID";
+			this.txtSpecialistId.Location = new System.Drawing.Point(85, 107);
+			this.txtSpecialistId.Name = "txtSpecialistId";
+			this.txtSpecialistId.Size = new System.Drawing.Size(100, 20);
+			this.txtSpecialistId.TabIndex = 84;
 			// 
 			// btnSelectCustomer
 			// 
@@ -309,9 +309,9 @@
 			this.Controls.Add(this.btnSelectSalesEmployee);
 			this.Controls.Add(this.btnSelectInventory);
 			this.Controls.Add(this.btnSelectCustomer);
-			this.Controls.Add(this.txtOrderSpecialistId);
+			this.Controls.Add(this.txtSpecialistId);
 			this.Controls.Add(label3);
-			this.Controls.Add(this.txtOrderSalesId);
+			this.Controls.Add(this.txtSalesId);
 			this.Controls.Add(label1);
 			this.Controls.Add(this.cbxOrderClosed);
 			this.Controls.Add(this.cbxOrderPaid);
@@ -355,9 +355,9 @@
 			this.Controls.SetChildIndex(this.btnSave, 0);
 			this.Controls.SetChildIndex(this.btnClose, 0);
 			this.Controls.SetChildIndex(label1, 0);
-			this.Controls.SetChildIndex(this.txtOrderSalesId, 0);
+			this.Controls.SetChildIndex(this.txtSalesId, 0);
 			this.Controls.SetChildIndex(label3, 0);
-			this.Controls.SetChildIndex(this.txtOrderSpecialistId, 0);
+			this.Controls.SetChildIndex(this.txtSpecialistId, 0);
 			this.Controls.SetChildIndex(this.btnSelectCustomer, 0);
 			this.Controls.SetChildIndex(this.btnSelectInventory, 0);
 			this.Controls.SetChildIndex(this.btnSelectSalesEmployee, 0);
@@ -378,8 +378,8 @@
         private System.Windows.Forms.ComboBox cbxOrderValidated;
         private System.Windows.Forms.ComboBox cbxOrderPaid;
         private System.Windows.Forms.ComboBox cbxOrderClosed;
-		private System.Windows.Forms.TextBox txtOrderSalesId;
-		private System.Windows.Forms.TextBox txtOrderSpecialistId;
+		private System.Windows.Forms.TextBox txtSalesId;
+		private System.Windows.Forms.TextBox txtSpecialistId;
 		private System.Windows.Forms.Button btnSelectCustomer;
 		private System.Windows.Forms.Button btnSelectInventory;
 		private System.Windows.Forms.Button btnSelectSalesEmployee;
