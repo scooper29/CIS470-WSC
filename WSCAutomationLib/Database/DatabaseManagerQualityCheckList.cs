@@ -81,7 +81,7 @@ namespace WSCAutomation.Database
             return rowsAffected == 1;
         }
 
-        public List<QualityCheckList> DBGetQualityCheckList(string QUALITY_Log_ID = "", string QUAl_Pass = "", string QUAl_Description = "")
+        public List<QualityCheckList> DBGetQualityCheckList(int QUALITY_Log_ID = -1, string QUAl_Pass = "", string QUAl_Description = "")
         {
             VerifySearchParameter(QUALITY_ID, "quality_log_Id");
             VerifySearchParameter(QUAl_Pass, "qual_pass");
@@ -97,7 +97,7 @@ namespace WSCAutomation.Database
 
                 // Add QUALITY Log ID
                 if (!SkipSearchParameter(QUALITY_ID))
-                    command.AddParameter(QUALITY_Log_ID, "quallogId", QUALITY_ID);
+                    command.AddParameter(QUALITY_ID, "quality_log_Id", QUALITY_ID);
 
                 // Add Quality Description
                 if (!SkipSearchParameter(QUAl_Description))

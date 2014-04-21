@@ -25,7 +25,7 @@ namespace WSCAutomation.Employees
 		{
             var dbm = Database.DatabaseManager.Instance;
 
-            SendNotification("wscman60683@gmail.com", this.Email, "New Order", "A new order has been placed.");
+            SendNotification("wscman60683@gmail.com", this.Email, "New Order", "Order " + order.Id + " has been placed.");
 
             return dbm.DBAddOrder(order);
 		}

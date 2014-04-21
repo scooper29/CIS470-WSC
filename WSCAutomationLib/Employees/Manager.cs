@@ -38,7 +38,7 @@ namespace WSCAutomation.Employees
             // call make the change in the DB
             dbm.DBEditOrder(ord);
 
-            SendNotification("wscspec60683@gmail.com", this.Email, "Order has been assigned to you", "An order has been assigned to you");
+            SendNotification("wscspec60683@gmail.com", this.Email, "Order has been assigned to you", "Order " + ord.Id + " has been assigned to you");
 		}
 
 		public int PerformQualityCheck(Orders.QualityCheckList check)

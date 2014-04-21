@@ -52,7 +52,7 @@ namespace WSCAutomation.Employees
         
         public List<Orders.QualityCheckList> ReviewQualityCheck(int checkId)
 		{
-            return Database.DatabaseManager.Instance.DBGetQualityCheckList(QUALITY_Log_ID:checkId.ToString());
+            return Database.DatabaseManager.Instance.DBGetQualityCheckList(QUALITY_Log_ID:checkId);
 		}
 	};
 }
