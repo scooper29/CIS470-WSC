@@ -59,5 +59,15 @@ namespace WSCAutomation.App.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap WSCBackgroundSmall {
+            get {
+                object obj = ResourceManager.GetObject("WSCBackgroundSmall", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

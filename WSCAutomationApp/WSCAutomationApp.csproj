@@ -205,7 +205,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\WSCBackgroundSmall.jpg" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WSCAutomationLib\WSCAutomationLib.csproj">
       <Project>{9d8af6ee-7112-41c5-8df4-1ff950f609c1}</Project>
