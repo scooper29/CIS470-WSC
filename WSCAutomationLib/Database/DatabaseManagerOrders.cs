@@ -6,47 +6,47 @@ using System.Data.SqlServerCe;
 namespace WSCAutomation.Database 
 {
     using Orders;
-	// TODO: DatabaseManager methods relating to the Orders tables should go here
 
 	partial class DatabaseManager
 	{
         #region Inventory table column names
         const string ORDER_TABLE = "Order";
 
-        const string ORDER_ORDER_ID = "order_orderId";
-	    //const string ORDER_SALES_ID = "order_SalesId";
-	    const string ORDER_EMPLOYEE_ID = "order_EmpId"; 
-        // const string ORDER_SPECLIST_ID = "order_SpeclistId";
-        const string ORDER_CUST_ID = "order_CustId";
-        const string ORDER_INVENTORY_ID = "order_InvId";
+        const string ORDER_ORDER_ID = "OrderID";
+	    const string ORDER_SALES_ID = "EmployeeID";
+		const string ORDER_SPECIALIST_ID = "Order_AssignedEmpID";
+        const string ORDER_CUST_ID = "CustomerID";
+        const string ORDER_INVENTORY_ID = "InventoryID";
         //const string ORDER_QUALITY_ID = "order_QualId";
-        const string ORDER_TYPE = "order_Type";
-	    const string ORDER_CATALOG_NUM = "order_CatlogNum";
-        const string ORDER_MESSAGE = "order_Message";
-        const string ORDER_INVALID_MEMO = "order_InvalMemo";
-        const string ORDER_PAID = "order_Paid";
-        const string ORDER_VALIDATED = "order_Validated";
-	    const string ORDER_COMPLETE = "0order_Complete";
-        const string ORDER_CLOSED = "order_Closed";
+	    const string ORDER_CATALOG_NUM = "Order_CatologNum";
+        const string ORDER_MESSAGE = "Order_Message";
+        const string ORDER_INVALID_MEMO = "Order_InvalidMemo";
+		const string ORDER_PAID_UP_FRONT = "Order_PaidUpFront";
+        const string ORDER_PAID = "Order_Paid";
+        const string ORDER_VALIDATED = "Order_Validated";
+	    const string ORDER_COMPLETE = "Order_Complete";
+        const string ORDER_CLOSED = "Order_Closed";
         #endregion
 
         static SqlCeCommand BuildModificationQuery(SqlCeConnection connection, ModificationQueryType type, Order order)
         {
             var query = new ModificationQueryBuilder(connection, type, ORDER_TABLE);
 
+			object specialistId = DBNull.Value;
+			if (order.SpecialistId != -1)
+				specialistId = order.SpecialistId;
+
             query.AddParameter(ORDER_ORDER_ID, "OrderId", order.Id);
 
-			// TODO: get with Ryan and figure out the column names for the Order's sales and specialist IDs and update this code
-	        //query.AddParameter(ORDER_SALES_ID, "SalesId", order.SalesId );
-	        query.AddParameter(ORDER_EMPLOYEE_ID, "EmployeeId", order.SpecialistId);
-            // query.AddParameter(ORDER_SPECLIST_ID, "SpecialistId", order.SpecialistId );
-            query.AddParameter(ORDER_CUST_ID, "CustomerId", order.CustomerId );
-            query.AddParameter(ORDER_INVENTORY_ID, "InventoryId", order.InventoryId );
+	        query.AddParameter(ORDER_SALES_ID, "SalesId", order.SalesId );
+			query.AddParameter(ORDER_SPECIALIST_ID, "SpecialistId", specialistId);
+            query.AddParameter(ORDER_CUST_ID, "CustomerId", order.CustomerId);
+            query.AddParameter(ORDER_INVENTORY_ID, "InventoryId", order.InventoryId);
             //query.AddParameter(ORDER_QUALITY_ID, "QualityID", order.QualityID );
-            query.AddParameter(ORDER_TYPE, "Type", order.Type);
 	        query.AddParameter(ORDER_CATALOG_NUM, "CatalogNumber", order.CatalogNumber);
             query.AddParameter(ORDER_MESSAGE, "Message", order.Message);
             query.AddParameter(ORDER_INVALID_MEMO, "InvalidMemo", order.InvalidMemo);
+			query.AddParameter(ORDER_PAID_UP_FRONT, "PaidUpFront", order.PaidUpFront);
             query.AddParameter(ORDER_PAID, "Paid", order.Paid);
   	        query.AddParameter(ORDER_VALIDATED, "Validated", order.Validated);
             query.AddParameter(ORDER_COMPLETE, "Complete", order.Complete);
@@ -84,13 +84,11 @@ namespace WSCAutomation.Database
         }
 		public int DBAddOrder(Order order)
 		{
-            //Replace with actual id to be returned
-            //This is just a place holder to actually return a value for program to compile
-            object Obj = PerformModificationQuery(ModificationQueryType.Insert, order);
+            object idObj = PerformModificationQuery(ModificationQueryType.Insert, order);
 
-            if (Obj != null)
+			if (idObj != null)
             {
-                order.Id = Convert.ToInt32(Obj);
+				order.Id = Convert.ToInt32(idObj);
 
                 return order.Id;
             }
@@ -104,19 +102,11 @@ namespace WSCAutomation.Database
             return rowsAffected == 1;
 		}
 
-		public List<Order> DBGetOrders(int orderID = -1, int order_SalesId = -1, int order_EmpId = -1, int specialistId = -1, int customerId = -1, int order_InventoryId = -1,
-            string order_Type = "", int order_CatalogNumber = -1, string order_Message = "", string order_InvalidMemo = "")
+		public List<Order> DBGetOrders(int orderID = -1, int customerId = -1, int specialistId = -1)
         {
 			VerifySearchParameter(orderID, "orderID");
-            //VerifySearchParameter(order_SalesId, "order_salesId");
-            VerifySearchParameter(order_EmpId, "order_empId");
-			//VerifySearchParameter(specialistId, "specialistId");
+			VerifySearchParameter(specialistId, "specialistId");
 			VerifySearchParameter(customerId, "customerId");
-            VerifySearchParameter(order_InventoryId, "order_inventoryId");
-            VerifySearchParameter(order_Type, "order_type");
-            VerifySearchParameter(order_CatalogNumber, "order_catalogNumber");
-            VerifySearchParameter(order_Message, "order_message");
-            VerifySearchParameter(order_InvalidMemo, "order_invalidMemo");
 
             var results = new List<Order>();
 
@@ -130,33 +120,11 @@ namespace WSCAutomation.Database
 				if (!SkipSearchParameter(orderID))
 					command.AddParameter(ORDER_ORDER_ID, "orderID", orderID);
 
-                // Add INVENTORY ORDER QUANTITY parameter
-                if (!SkipSearchParameter(order_EmpId))
-                    command.AddParameter(ORDER_EMPLOYEE_ID, "order_empId", order_EmpId);
+				if (!SkipSearchParameter(specialistId))
+					command.AddParameter(ORDER_SPECIALIST_ID, "specialistId", specialistId);
 
-                // Add INVENTORY Order Cmplete parameter
 				if (!SkipSearchParameter(customerId))
 					command.AddParameter(ORDER_CUST_ID, "customerId", customerId);
-
-                // Add INVENTORY ORDER DATE parameter
-                if (!SkipSearchParameter(order_InventoryId))
-                    command.AddParameter(ORDER_INVENTORY_ID, "order_InventoryId", order_InventoryId);
-
-                // Add OrderId parameter
-                if (!SkipSearchParameter(order_Type))
-                    command.AddParameter(ORDER_TYPE, "order_Type", order_Type);
-
-                // Add INVENTORY ORDER QUANTITY parameter
-                if (!SkipSearchParameter(order_CatalogNumber))
-                    command.AddParameter(ORDER_CATALOG_NUM, "order_CatalogNumber", order_CatalogNumber);
-
-                // Add INVENTORY Order Cmplete parameter
-                if (!SkipSearchParameter(order_Message))
-                    command.AddParameter(ORDER_MESSAGE, "order_Message", order_Message);
-
-                // Add INVENTORY ORDER DATE parameter
-                if (!SkipSearchParameter(order_InvalidMemo))
-                    command.AddParameter(ORDER_INVALID_MEMO, "order_InvalidMemo", order_InvalidMemo);
 
                 using (var reader = command.ToDbCommand().ExecuteReader())
                 {
@@ -167,15 +135,23 @@ namespace WSCAutomation.Database
                         Order order = new Order();
 
                         order.Id = (int)reader[ORDER_ORDER_ID];
-						// TODO: get with Ryan and figure out the column names for the Order's sales and specialist IDs and update this code
-                        order.SpecialistId = (int)reader[ORDER_EMPLOYEE_ID];
+						order.SalesId = (int)reader[ORDER_SALES_ID];
                         order.CustomerId = (int)reader[ORDER_CUST_ID];
                         order.InventoryId = (int)reader[ORDER_INVENTORY_ID];
-                        order.Type = (string)reader[ORDER_TYPE];
                         order.CatalogNumber = (int)reader[ORDER_CATALOG_NUM];
                         order.Message = (string)reader[ORDER_MESSAGE];
-                        order.CustomerId = (int)reader[ORDER_CUST_ID];
+                        order.PaidUpFront = (bool)reader[ORDER_PAID_UP_FRONT];
+						order.Paid = (bool)reader[ORDER_PAID];
+						order.Validated = (bool)reader[ORDER_VALIDATED];
                         order.InvalidMemo = (string)reader[ORDER_INVALID_MEMO];
+						order.Complete = (bool)reader[ORDER_COMPLETE];
+						order.Closed = (bool)reader[ORDER_CLOSED];
+
+						var specialistIdObj = reader[ORDER_SPECIALIST_ID];
+						if (specialistIdObj is DBNull)
+							order.SpecialistId = -1;
+						else
+							order.SpecialistId = (int)specialistIdObj;
 
 
                         results.Add(order);

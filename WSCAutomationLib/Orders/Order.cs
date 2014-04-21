@@ -11,12 +11,12 @@ namespace WSCAutomation.Orders
 		public int CustomerId { get; set; }
 		public int InventoryId { get; set; }
 
-		public string Type { get; set; }
 		public int CatalogNumber { get; set; }
 
 		public string Message { get; set; }
 		public string InvalidMemo { get; set; }
 
+		public bool PaidUpFront { get; set; }
 		public bool Paid { get; set; }
 		public bool Validated { get; set; }
 		public bool Complete { get; set; }
@@ -27,7 +27,7 @@ namespace WSCAutomation.Orders
 			Id = SalesId = SpecialistId = CustomerId = InventoryId =
 				-1;
 
-			Type = Message = InvalidMemo =
+			Message = InvalidMemo =
 				"";
 		}
 	};
