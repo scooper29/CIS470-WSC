@@ -10,8 +10,7 @@ namespace WSCAutomation.Orders
 		public int SpecialistId { get; set; }
 		public int CustomerId { get; set; }
 		public int InventoryId { get; set; }
-
-		public int CatalogNumber { get; set; }
+		public int QualityId { get; set; }
 
 		public string Message { get; set; }
 		public string InvalidMemo { get; set; }
@@ -24,7 +23,7 @@ namespace WSCAutomation.Orders
 
 		public Order()
 		{
-			Id = SalesId = SpecialistId = CustomerId = InventoryId =
+			Id = SalesId = SpecialistId = CustomerId = InventoryId = QualityId =
 				-1;
 
 			Message = InvalidMemo =

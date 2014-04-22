@@ -114,7 +114,7 @@ namespace WSCAutomation.Database
 
                 // Add userId parameter
                 if (!SkipSearchParameter(cust_lastname))
-                    command.AddParameter(CUSTOMER_LAST_NAME, "cust_lastname", cust_lastname);
+                    command.AddParameter(CUSTOMER_LAST_NAME, "cust_lastname", cust_lastname, useLikeOperator: true);
 
                 using (var reader = command.ToDbCommand().ExecuteReader())
                 {

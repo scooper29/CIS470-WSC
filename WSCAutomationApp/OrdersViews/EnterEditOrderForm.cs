@@ -23,14 +23,63 @@ namespace WSCAutomation.App
 			txtCustomerId.KeyPress += new KeyPressEventHandler(Program.OnTextBoxKeyPressAllowNumbersOnly);
 			txtInventoryId.KeyPress += new KeyPressEventHandler(Program.OnTextBoxKeyPressAllowNumbersOnly);
 
-			txtCatalogNumber.KeyPress += new KeyPressEventHandler(Program.OnTextBoxKeyPressAllowNumbersOnly);
-
-			//cbxOrderPaidUpFront.Items.AddRange(Program.BooleanComboItems);
+			cbxOrderPaidUpFront.Items.AddRange(Program.BooleanComboItems);
 			cbxOrderPaid.Items.AddRange(Program.BooleanComboItems);
 			cbxOrderValidated.Items.AddRange(Program.BooleanComboItems);
-			//cbxOrderComplete.Items.AddRange(Program.BooleanComboItems);
+			cbxOrderComplete.Items.AddRange(Program.BooleanComboItems);
 			cbxOrderClosed.Items.AddRange(Program.BooleanComboItems);
+
+			var authority = Program.CurrentUser.Authority;
+			// only show the Edit/View quality button to managers and specialists
+			btnEditQuality.Visible = 
+				authority == UserAuthorityType.Manager ||
+				authority == UserAuthorityType.Specialist;
+
+			// change the display name of the Edit button to View for specialists
+			if (authority == UserAuthorityType.Specialist)
+				btnEditQuality.Text = "View";
+
+			// we currently shouldn't need to let users change the sales employee
+			if (true)
+			{
+				btnSelectSalesEmployee.Visible = false;
+				txtSalesId.ReadOnly = true;
+			}
+
+			// TODO: once we're out of testing, remove the explicit false
+			// the manager is the only one who can change the assigned specialist
+			if (false && authority != UserAuthorityType.Manager)
+			{
+				btnSelectSpecialistEmployee.Visible = false;
+				txtSpecialistId.ReadOnly = true;
+			}
+			// the sales employee is the only one who can change the paid flags
+			if (false && authority != UserAuthorityType.Sales)
+			{
+				txtCustomerId.ReadOnly = true;
+
+				cbxOrderPaidUpFront.Enabled = false;
+				cbxOrderPaid.Enabled = false;
+			}
         }
+
+		protected override void ToggleFieldsForEnterEditFormMode()
+		{
+			base.ToggleFieldsForEnterEditFormMode();
+
+			switch (EnterEditFormMode)
+			{
+				case EnterEditRecordFormMode.Edit:
+					if (btnEditQuality.Visible)
+						btnEditQuality.Enabled = true;
+					break;
+
+				case EnterEditRecordFormMode.Create:
+					if (btnEditQuality.Visible)
+						btnEditQuality.Enabled = false;
+					break;
+			}
+		}
 
 		Binding txtSalesIdBinding { get { return txtSalesId.DataBindings[0]; } }
 		Binding txtSpecialistIdBinding { get { return txtSpecialistId.DataBindings[0]; } }
@@ -45,23 +94,21 @@ namespace WSCAutomation.App
 			txtSpecialistId.DataBindings.Add("Text", orderData, "SpecialistId");
 			txtCustomerId.DataBindings.Add("Text", orderData, "CustomerId");
 			txtInventoryId.DataBindings.Add("Text", orderData, "InventoryId");
-
-			txtCatalogNumber.DataBindings.Add("Text", orderData, "CatalogNumber");
+			txtQualityId.DataBindings.Add("Text", orderData, "QualityId");
 
 			txtOrderMessage.DataBindings.Add("Text", orderData, "Message");
 			txtOrderInvalidMemo.DataBindings.Add("Text", orderData, "InvalidMemo");
 
-//			Program.SetBooleanComboBoxBinding(cbxOrderPaidUpFront,
-//				orderData, "PaidUpFront");
+			Program.SetBooleanComboBoxBinding(cbxOrderPaidUpFront,
+				orderData, "PaidUpFront");
 			Program.SetBooleanComboBoxBinding(cbxOrderPaid,
 				orderData, "Paid");
 			Program.SetBooleanComboBoxBinding(cbxOrderValidated,
 				orderData, "Validated");
-//			Program.SetBooleanComboBoxBinding(cbxOrderComplete,
-//				orderData, "Complete");
+			Program.SetBooleanComboBoxBinding(cbxOrderComplete,
+				orderData, "Complete");
 			Program.SetBooleanComboBoxBinding(cbxOrderClosed,
 				orderData, "Closed");
-			// TODO
 		}
 
 		public override void SetEnterEditData(object enterEditData)
@@ -73,6 +120,9 @@ namespace WSCAutomation.App
 
 			if (order == null)
 				throw new ArgumentNullException("enterEditData");
+
+			if (EnterEditFormMode == EnterEditRecordFormMode.Create)
+				order.SalesId = Program.CurrentUser.EmployeeData.Id;
 
 			orderData = order;
 			DataBindToOrderData();
@@ -87,6 +137,18 @@ namespace WSCAutomation.App
 		{
 			bool valid = true;
 
+			if (orderData.CustomerId == -1)
+			{
+				valid = false;
+				ShowValidationErrorMessage("Please provide a value for {0}", "Customer ID");
+			}
+
+			if (orderData.InventoryId == -1)
+			{
+				valid = false;
+				ShowValidationErrorMessage("Please provide a value for {0}", "Inventory ID");
+			}
+
 			return valid;
 		}
 
@@ -98,11 +160,21 @@ namespace WSCAutomation.App
 		}
 		protected override bool SaveEnterEditData()
 		{
-			// TODO: need additional save conditions for different employees?
+			var authority = Program.CurrentUser.Authority;
+			if (authority == UserAuthorityType.Sales)
+			{
+				var salesAccess = Program.CurrentUser.AsSales;
 
-			var salesAccess = Program.CurrentUser.AsSales;
+				return salesAccess.EditOrder(orderData);
+			}
+			else if (authority == UserAuthorityType.Manager)
+			{
+				var managerAccess = Program.CurrentUser.AsManager;
 
-			return salesAccess.EditOrder(orderData);
+				return managerAccess.ValidateOrder(orderData.Id, orderData.Validated, orderData.SpecialistId);
+			}
+			else
+				throw new InvalidOperationException("This user doesn't have the authority to save changes to orders...");
 		}
 
 		private void OnSelectCustomer(object sender, EventArgs e)
@@ -151,6 +223,11 @@ namespace WSCAutomation.App
 				orderData.SpecialistId = emp.Id;
 				txtSpecialistIdBinding.ReadValue();
 			}
+		}
+
+		private void OnEditQualityLog(object sender, EventArgs e)
+		{
+			// TODO
 		}
     };
 }

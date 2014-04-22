@@ -39,12 +39,12 @@
 			System.Windows.Forms.Label label13;
 			System.Windows.Forms.Label label1;
 			System.Windows.Forms.Label label3;
+			System.Windows.Forms.Label label6;
 			this.txtOrderInvalidMemo = new System.Windows.Forms.TextBox();
 			this.txtOrderMessage = new System.Windows.Forms.TextBox();
-			this.txtCatalogNumber = new System.Windows.Forms.TextBox();
 			this.txtInventoryId = new System.Windows.Forms.TextBox();
 			this.txtCustomerId = new System.Windows.Forms.TextBox();
-			this.cbxOrderType = new System.Windows.Forms.ComboBox();
+			this.cbxOrderPaidUpFront = new System.Windows.Forms.ComboBox();
 			this.cbxOrderValidated = new System.Windows.Forms.ComboBox();
 			this.cbxOrderPaid = new System.Windows.Forms.ComboBox();
 			this.cbxOrderClosed = new System.Windows.Forms.ComboBox();
@@ -54,6 +54,9 @@
 			this.btnSelectInventory = new System.Windows.Forms.Button();
 			this.btnSelectSalesEmployee = new System.Windows.Forms.Button();
 			this.btnSelectSpecialistEmployee = new System.Windows.Forms.Button();
+			this.cbxOrderComplete = new System.Windows.Forms.ComboBox();
+			this.btnEditQuality = new System.Windows.Forms.Button();
+			this.txtQualityId = new System.Windows.Forms.TextBox();
 			label10 = new System.Windows.Forms.Label();
 			label9 = new System.Windows.Forms.Label();
 			label7 = new System.Windows.Forms.Label();
@@ -65,6 +68,7 @@
 			label13 = new System.Windows.Forms.Label();
 			label1 = new System.Windows.Forms.Label();
 			label3 = new System.Windows.Forms.Label();
+			label6 = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
 			// btnSave
@@ -78,7 +82,7 @@
 			// label10
 			// 
 			label10.AutoSize = true;
-			label10.Location = new System.Drawing.Point(220, 132);
+			label10.Location = new System.Drawing.Point(232, 131);
 			label10.Name = "label10";
 			label10.Size = new System.Drawing.Size(70, 13);
 			label10.TabIndex = 65;
@@ -87,11 +91,11 @@
 			// label9
 			// 
 			label9.AutoSize = true;
-			label9.Location = new System.Drawing.Point(220, 6);
+			label9.Location = new System.Drawing.Point(232, 6);
 			label9.Name = "label9";
-			label9.Size = new System.Drawing.Size(31, 13);
+			label9.Size = new System.Drawing.Size(67, 13);
 			label9.TabIndex = 57;
-			label9.Text = "Type";
+			label9.Text = "Paid up front";
 			// 
 			// label7
 			// 
@@ -114,16 +118,16 @@
 			// label4
 			// 
 			label4.AutoSize = true;
-			label4.Location = new System.Drawing.Point(220, 32);
+			label4.Location = new System.Drawing.Point(232, 87);
 			label4.Name = "label4";
-			label4.Size = new System.Drawing.Size(53, 13);
+			label4.Size = new System.Drawing.Size(51, 13);
 			label4.TabIndex = 53;
-			label4.Text = "Catalog #";
+			label4.Text = "Complete";
 			// 
 			// label2
 			// 
 			label2.AutoSize = true;
-			label2.Location = new System.Drawing.Point(1, 132);
+			label2.Location = new System.Drawing.Point(1, 162);
 			label2.Name = "label2";
 			label2.Size = new System.Drawing.Size(50, 13);
 			label2.TabIndex = 52;
@@ -132,7 +136,7 @@
 			// label11
 			// 
 			label11.AutoSize = true;
-			label11.Location = new System.Drawing.Point(220, 84);
+			label11.Location = new System.Drawing.Point(232, 60);
 			label11.Name = "label11";
 			label11.Size = new System.Drawing.Size(51, 13);
 			label11.TabIndex = 73;
@@ -141,7 +145,7 @@
 			// label12
 			// 
 			label12.AutoSize = true;
-			label12.Location = new System.Drawing.Point(220, 57);
+			label12.Location = new System.Drawing.Point(232, 33);
 			label12.Name = "label12";
 			label12.Size = new System.Drawing.Size(28, 13);
 			label12.TabIndex = 74;
@@ -150,7 +154,7 @@
 			// label13
 			// 
 			label13.AutoSize = true;
-			label13.Location = new System.Drawing.Point(220, 110);
+			label13.Location = new System.Drawing.Point(232, 110);
 			label13.Name = "label13";
 			label13.Size = new System.Drawing.Size(39, 13);
 			label13.TabIndex = 75;
@@ -174,9 +178,18 @@
 			label3.TabIndex = 83;
 			label3.Text = "Specialist ID";
 			// 
+			// label6
+			// 
+			label6.AutoSize = true;
+			label6.Location = new System.Drawing.Point(1, 136);
+			label6.Name = "label6";
+			label6.Size = new System.Drawing.Size(74, 13);
+			label6.TabIndex = 90;
+			label6.Text = "Quality Log ID";
+			// 
 			// txtOrderInvalidMemo
 			// 
-			this.txtOrderInvalidMemo.Location = new System.Drawing.Point(306, 129);
+			this.txtOrderInvalidMemo.Location = new System.Drawing.Point(318, 128);
 			this.txtOrderInvalidMemo.Multiline = true;
 			this.txtOrderInvalidMemo.Name = "txtOrderInvalidMemo";
 			this.txtOrderInvalidMemo.Size = new System.Drawing.Size(100, 44);
@@ -184,18 +197,11 @@
 			// 
 			// txtOrderMessage
 			// 
-			this.txtOrderMessage.Location = new System.Drawing.Point(85, 129);
+			this.txtOrderMessage.Location = new System.Drawing.Point(85, 159);
 			this.txtOrderMessage.Multiline = true;
 			this.txtOrderMessage.Name = "txtOrderMessage";
-			this.txtOrderMessage.Size = new System.Drawing.Size(126, 44);
+			this.txtOrderMessage.Size = new System.Drawing.Size(141, 44);
 			this.txtOrderMessage.TabIndex = 64;
-			// 
-			// txtCatalogNumber
-			// 
-			this.txtCatalogNumber.Location = new System.Drawing.Point(306, 29);
-			this.txtCatalogNumber.Name = "txtCatalogNumber";
-			this.txtCatalogNumber.Size = new System.Drawing.Size(100, 20);
-			this.txtCatalogNumber.TabIndex = 63;
 			// 
 			// txtInventoryId
 			// 
@@ -211,20 +217,20 @@
 			this.txtCustomerId.Size = new System.Drawing.Size(100, 20);
 			this.txtCustomerId.TabIndex = 59;
 			// 
-			// cbxOrderType
+			// cbxOrderPaidUpFront
 			// 
-			this.cbxOrderType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.cbxOrderType.FormattingEnabled = true;
-			this.cbxOrderType.Location = new System.Drawing.Point(306, 3);
-			this.cbxOrderType.Name = "cbxOrderType";
-			this.cbxOrderType.Size = new System.Drawing.Size(100, 21);
-			this.cbxOrderType.TabIndex = 76;
+			this.cbxOrderPaidUpFront.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.cbxOrderPaidUpFront.FormattingEnabled = true;
+			this.cbxOrderPaidUpFront.Location = new System.Drawing.Point(318, 3);
+			this.cbxOrderPaidUpFront.Name = "cbxOrderPaidUpFront";
+			this.cbxOrderPaidUpFront.Size = new System.Drawing.Size(100, 21);
+			this.cbxOrderPaidUpFront.TabIndex = 76;
 			// 
 			// cbxOrderValidated
 			// 
 			this.cbxOrderValidated.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cbxOrderValidated.FormattingEnabled = true;
-			this.cbxOrderValidated.Location = new System.Drawing.Point(306, 79);
+			this.cbxOrderValidated.Location = new System.Drawing.Point(318, 55);
 			this.cbxOrderValidated.Name = "cbxOrderValidated";
 			this.cbxOrderValidated.Size = new System.Drawing.Size(100, 21);
 			this.cbxOrderValidated.TabIndex = 78;
@@ -233,7 +239,7 @@
 			// 
 			this.cbxOrderPaid.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cbxOrderPaid.FormattingEnabled = true;
-			this.cbxOrderPaid.Location = new System.Drawing.Point(306, 54);
+			this.cbxOrderPaid.Location = new System.Drawing.Point(318, 30);
 			this.cbxOrderPaid.Name = "cbxOrderPaid";
 			this.cbxOrderPaid.Size = new System.Drawing.Size(100, 21);
 			this.cbxOrderPaid.TabIndex = 79;
@@ -242,7 +248,7 @@
 			// 
 			this.cbxOrderClosed.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cbxOrderClosed.FormattingEnabled = true;
-			this.cbxOrderClosed.Location = new System.Drawing.Point(306, 102);
+			this.cbxOrderClosed.Location = new System.Drawing.Point(318, 102);
 			this.cbxOrderClosed.Name = "cbxOrderClosed";
 			this.cbxOrderClosed.Size = new System.Drawing.Size(100, 21);
 			this.cbxOrderClosed.TabIndex = 80;
@@ -301,10 +307,41 @@
 			this.btnSelectSpecialistEmployee.UseVisualStyleBackColor = true;
 			this.btnSelectSpecialistEmployee.Click += new System.EventHandler(this.OnSelectSpecialistEmployee);
 			// 
+			// cbxOrderComplete
+			// 
+			this.cbxOrderComplete.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.cbxOrderComplete.FormattingEnabled = true;
+			this.cbxOrderComplete.Location = new System.Drawing.Point(318, 79);
+			this.cbxOrderComplete.Name = "cbxOrderComplete";
+			this.cbxOrderComplete.Size = new System.Drawing.Size(100, 21);
+			this.cbxOrderComplete.TabIndex = 89;
+			// 
+			// btnEditQuality
+			// 
+			this.btnEditQuality.Location = new System.Drawing.Point(186, 131);
+			this.btnEditQuality.Name = "btnEditQuality";
+			this.btnEditQuality.Size = new System.Drawing.Size(40, 23);
+			this.btnEditQuality.TabIndex = 92;
+			this.btnEditQuality.Text = "Edit";
+			this.btnEditQuality.UseVisualStyleBackColor = true;
+			this.btnEditQuality.Click += new System.EventHandler(this.OnEditQualityLog);
+			// 
+			// txtQualityId
+			// 
+			this.txtQualityId.Location = new System.Drawing.Point(85, 133);
+			this.txtQualityId.Name = "txtQualityId";
+			this.txtQualityId.ReadOnly = true;
+			this.txtQualityId.Size = new System.Drawing.Size(100, 20);
+			this.txtQualityId.TabIndex = 91;
+			// 
 			// EnterEditOrderForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.ClientSize = new System.Drawing.Size(423, 246);
+			this.Controls.Add(this.btnEditQuality);
+			this.Controls.Add(this.txtQualityId);
+			this.Controls.Add(label6);
+			this.Controls.Add(this.cbxOrderComplete);
 			this.Controls.Add(this.btnSelectSpecialistEmployee);
 			this.Controls.Add(this.btnSelectSalesEmployee);
 			this.Controls.Add(this.btnSelectInventory);
@@ -316,14 +353,13 @@
 			this.Controls.Add(this.cbxOrderClosed);
 			this.Controls.Add(this.cbxOrderPaid);
 			this.Controls.Add(this.cbxOrderValidated);
-			this.Controls.Add(this.cbxOrderType);
+			this.Controls.Add(this.cbxOrderPaidUpFront);
 			this.Controls.Add(label13);
 			this.Controls.Add(label12);
 			this.Controls.Add(label11);
 			this.Controls.Add(this.txtOrderInvalidMemo);
 			this.Controls.Add(label10);
 			this.Controls.Add(this.txtOrderMessage);
-			this.Controls.Add(this.txtCatalogNumber);
 			this.Controls.Add(this.txtInventoryId);
 			this.Controls.Add(this.txtCustomerId);
 			this.Controls.Add(label9);
@@ -339,14 +375,13 @@
 			this.Controls.SetChildIndex(label9, 0);
 			this.Controls.SetChildIndex(this.txtCustomerId, 0);
 			this.Controls.SetChildIndex(this.txtInventoryId, 0);
-			this.Controls.SetChildIndex(this.txtCatalogNumber, 0);
 			this.Controls.SetChildIndex(this.txtOrderMessage, 0);
 			this.Controls.SetChildIndex(label10, 0);
 			this.Controls.SetChildIndex(this.txtOrderInvalidMemo, 0);
 			this.Controls.SetChildIndex(label11, 0);
 			this.Controls.SetChildIndex(label12, 0);
 			this.Controls.SetChildIndex(label13, 0);
-			this.Controls.SetChildIndex(this.cbxOrderType, 0);
+			this.Controls.SetChildIndex(this.cbxOrderPaidUpFront, 0);
 			this.Controls.SetChildIndex(this.cbxOrderValidated, 0);
 			this.Controls.SetChildIndex(this.cbxOrderPaid, 0);
 			this.Controls.SetChildIndex(this.cbxOrderClosed, 0);
@@ -362,6 +397,10 @@
 			this.Controls.SetChildIndex(this.btnSelectInventory, 0);
 			this.Controls.SetChildIndex(this.btnSelectSalesEmployee, 0);
 			this.Controls.SetChildIndex(this.btnSelectSpecialistEmployee, 0);
+			this.Controls.SetChildIndex(this.cbxOrderComplete, 0);
+			this.Controls.SetChildIndex(label6, 0);
+			this.Controls.SetChildIndex(this.txtQualityId, 0);
+			this.Controls.SetChildIndex(this.btnEditQuality, 0);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -370,11 +409,10 @@
         #endregion
 
 		private System.Windows.Forms.TextBox txtOrderInvalidMemo;
-        private System.Windows.Forms.TextBox txtOrderMessage;
-        private System.Windows.Forms.TextBox txtCatalogNumber;
+		private System.Windows.Forms.TextBox txtOrderMessage;
         private System.Windows.Forms.TextBox txtInventoryId;
 		private System.Windows.Forms.TextBox txtCustomerId;
-        private System.Windows.Forms.ComboBox cbxOrderType;
+        private System.Windows.Forms.ComboBox cbxOrderPaidUpFront;
         private System.Windows.Forms.ComboBox cbxOrderValidated;
         private System.Windows.Forms.ComboBox cbxOrderPaid;
         private System.Windows.Forms.ComboBox cbxOrderClosed;
@@ -384,5 +422,8 @@
 		private System.Windows.Forms.Button btnSelectInventory;
 		private System.Windows.Forms.Button btnSelectSalesEmployee;
 		private System.Windows.Forms.Button btnSelectSpecialistEmployee;
+		private System.Windows.Forms.ComboBox cbxOrderComplete;
+		private System.Windows.Forms.Button btnEditQuality;
+		private System.Windows.Forms.TextBox txtQualityId;
     }
 }

@@ -66,6 +66,15 @@ namespace WSCAutomation.Database
 			throw new InvalidOperationException(type.ToString());
 		}
 
+		static int ReadNullableId(SqlCeDataReader reader, string columnName)
+		{
+			var idObj = reader[columnName];
+
+			return idObj is DBNull
+				? -1
+				: (int)idObj;
+		}
+
 		#region VerifySearchParameter overloads
 		/// <summary>Default test to see if the parameter is invalid for using in SELECT queries</summary>
 		/// <param name="parameter"></param>

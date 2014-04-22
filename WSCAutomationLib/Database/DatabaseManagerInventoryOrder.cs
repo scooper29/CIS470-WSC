@@ -14,7 +14,7 @@ namespace WSCAutomation.Database
 
 		const string INVENTORYORDER_ID = "InvOrderID";
 		const string INVENTORYORDER_INV_ID = "InventoryID";
-        const string INVENTORYORDER_QUANTITY = "InvOrdQty";
+        const string INVENTORYORDER_QUANTITY = "InvOrd_Qty";
         const string INVENTORYORDER_COMPLETED = "InvOrd_Completed";
         const string INVENTORYORDER_ORDERDATE = "InvOrd_Date";
 		const string INVENTORYORDER_ARRIVALDATE = "InvOrd_Delivery";
@@ -25,7 +25,7 @@ namespace WSCAutomation.Database
         {
             var query = new ModificationQueryBuilder(connection, type, INVENTORYORDER_TABLE);
 
-            query.AddParameter(INVENTORYORDER_ID, "invOrderId", invOrder.InventoryId);
+            query.AddIdParameter(INVENTORYORDER_ID, "invOrderId", invOrder.InventoryId);
 
 			query.AddParameter(INVENTORYORDER_INV_ID, "invId", invOrder.InventoryId);
             query.AddParameter(INVENTORYORDER_QUANTITY, "Quantity", invOrder.Quantity);

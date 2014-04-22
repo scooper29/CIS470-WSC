@@ -19,6 +19,8 @@ namespace WSCAutomation.Inventory
 			Id = InventoryId =
 				-1;
 
+			Quantity = 1;
+
 			OrderDate = DateTime.Today;
 			ArrivalDate = DateTime.Today.AddDays(1);
 		}

@@ -71,7 +71,7 @@ namespace WSCAutomation.App
 		{
 			var clerkAccess = Program.CurrentUser.AsStockClerk;
 
-			//return clerkAccess.AddInventoryOrder(invOrderData);
+			return clerkAccess.OrderInventory(invOrderData);
 			throw new NotImplementedException("TODO");
 		}
 		protected override bool SaveEnterEditData()
@@ -79,7 +79,7 @@ namespace WSCAutomation.App
 			var clerkAccess = Program.CurrentUser.AsStockClerk;
 
 			//return clerkAccess.EditInventoryOrder(invOrderData);
-			throw new NotImplementedException("TODO");
+			throw new NotSupportedException("TODO");
 		}
 
 		protected override void OnSaveClick(object sender, EventArgs e)

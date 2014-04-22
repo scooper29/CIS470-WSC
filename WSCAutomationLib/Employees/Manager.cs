@@ -13,7 +13,7 @@ namespace WSCAutomation.Employees
             SendNotification("showandy@gmail.com", this.Email, "Payment Failed", "We were unable to complete your payment.  Please contact your sales representative to arrange a new payment.");
         }
 
-		public void ValidateOrder(int orderID, bool validated, int specialistId)
+		public bool ValidateOrder(int orderID, bool validated, int specialistId)
 		{
             // creates instance of the DBManager
             var dbm = Database.DatabaseManager.Instance;
@@ -36,9 +36,12 @@ namespace WSCAutomation.Employees
             ord.SpecialistId = specialistId;
 
             // call make the change in the DB
-            dbm.DBEditOrder(ord);
+            bool success = dbm.DBEditOrder(ord);
 
+			// TODO: we probably shouldn't send an email if the edit fails...
             SendNotification("wscspec60683@gmail.com", this.Email, "Order has been assigned to you", "Order " + ord.Id + " has been assigned to you");
+
+			return success;
 		}
 
 		public int PerformQualityCheck(Orders.QualityCheckList check)

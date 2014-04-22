@@ -21,6 +21,8 @@ namespace WSCAutomation.App
 			// only the clerk can enter inv order request details
 			if (Program.CurrentUser.Authority != UserAuthorityType.StockClerk)
 				btnSubmitRequestDetails.Visible = false;
+
+			btnSubmitRequestDetails.Enabled = false;
         }
 
 		protected override void ToggleFieldsForEnterEditFormMode()
@@ -108,6 +110,7 @@ namespace WSCAutomation.App
 			
 			var recordForm = new PurchaseInventoryRequest();
 			recordForm.EnterEditFormMode = EnterEditRecordFormMode.Create;
+			recordForm.SetEnterEditData(invOrder);
 
 			recordForm.ShowDialog(this);
 		}

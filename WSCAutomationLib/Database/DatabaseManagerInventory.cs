@@ -99,11 +99,11 @@ namespace WSCAutomation.Database
 
                 // Add inv_name parameter
                 if (!SkipSearchParameter(inv_invname))
-                    command.AddParameter(INVENTORY_NAME, "inv_name", inv_invname);
+					command.AddParameter(INVENTORY_NAME, "inv_name", inv_invname, useLikeOperator: true);
 
                 // Add inv_manufacturer parameter
                 if (!SkipSearchParameter(inv_manufacturer))
-                    command.AddParameter(INVENTORY_MANUFACTURER, "inv_manufacturer", inv_manufacturer);
+					command.AddParameter(INVENTORY_MANUFACTURER, "inv_manufacturer", inv_manufacturer, useLikeOperator: true);
                 
                 //Add inventoryID parameter
                 if (!SkipSearchParameter(inventoryID))

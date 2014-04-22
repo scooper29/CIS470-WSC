@@ -46,7 +46,8 @@ namespace WSCAutomation.Database
 		/// <param name="parameterName">The parameter name to use in the DbCommand</param>
 		/// <param name="parameterValue">The value to use in the DbCommand</param>
 		/// <remarks>Multiple parameters will be WHERE conditioned with AND</remarks>
-		public void AddParameter(string columnName, string parameterName, object parameterValue)
+		public void AddParameter(string columnName, string parameterName, object parameterValue,
+			bool useLikeOperator = false)
 		{
 			// convention is to prefix DbCommand parameter names with '@'
 			parameterName = "@" + parameterName;
@@ -58,8 +59,13 @@ namespace WSCAutomation.Database
 			if (hasPreviousParameter)
 				query.Append(" AND");
 
+			// figure out the WHERE condition operator we need to use
+			string conditionOperator = "=";
+			if (useLikeOperator)
+				conditionOperator = "LIKE";
+
 			// append the query with the WHERE condition
-			query.AppendFormat(" {0} = {1}", columnName, parameterName);
+			query.AppendFormat(" {0} {1} {2}", columnName, conditionOperator, parameterName);
 			// add the parameter to the DbCommand's parameters list
 			command.Parameters.AddWithValue(parameterName, parameterValue);
 

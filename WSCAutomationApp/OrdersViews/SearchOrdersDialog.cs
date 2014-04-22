@@ -47,9 +47,8 @@ namespace WSCAutomation.App
 				: -1;
 
 			var emp = Program.CurrentUser.EmployeeData;
-			throw new NotImplementedException("TODO");
-//			foreach (var e in emp.GetOrders(orderId, customerId, specialistId))
-//				searchResultsBindingSource.Add(e);
+			foreach (var e in emp.CheckOrder(orderId, customerId, specialistId))
+				searchResultsBindingSource.Add(e);
 		}
 	};
 }

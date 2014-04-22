@@ -10,15 +10,14 @@ namespace WSCAutomation.Database
 	partial class DatabaseManager
 	{
         #region Inventory table column names
-        const string ORDER_TABLE = "Order";
+        const string ORDER_TABLE = "Orders";
 
         const string ORDER_ORDER_ID = "OrderID";
 	    const string ORDER_SALES_ID = "EmployeeID";
 		const string ORDER_SPECIALIST_ID = "Order_AssignedEmpID";
         const string ORDER_CUST_ID = "CustomerID";
         const string ORDER_INVENTORY_ID = "InventoryID";
-        //const string ORDER_QUALITY_ID = "order_QualId";
-	    const string ORDER_CATALOG_NUM = "Order_CatologNum";
+        const string ORDER_QUALITY_ID = "QualityID";
         const string ORDER_MESSAGE = "Order_Message";
         const string ORDER_INVALID_MEMO = "Order_InvalidMemo";
 		const string ORDER_PAID_UP_FRONT = "Order_PaidUpFront";
@@ -32,18 +31,14 @@ namespace WSCAutomation.Database
         {
             var query = new ModificationQueryBuilder(connection, type, ORDER_TABLE);
 
-			object specialistId = DBNull.Value;
-			if (order.SpecialistId != -1)
-				specialistId = order.SpecialistId;
+            query.AddIdParameter(ORDER_ORDER_ID, "OrderId", order.Id);
 
-            query.AddParameter(ORDER_ORDER_ID, "OrderId", order.Id);
+			query.AddNullableFkParameter(ORDER_QUALITY_ID, "QualityId", order.QualityId);
+			query.AddNullableFkParameter(ORDER_SPECIALIST_ID, "SpecialistId", order.SpecialistId);
 
 	        query.AddParameter(ORDER_SALES_ID, "SalesId", order.SalesId );
-			query.AddParameter(ORDER_SPECIALIST_ID, "SpecialistId", specialistId);
             query.AddParameter(ORDER_CUST_ID, "CustomerId", order.CustomerId);
             query.AddParameter(ORDER_INVENTORY_ID, "InventoryId", order.InventoryId);
-            //query.AddParameter(ORDER_QUALITY_ID, "QualityID", order.QualityID );
-	        query.AddParameter(ORDER_CATALOG_NUM, "CatalogNumber", order.CatalogNumber);
             query.AddParameter(ORDER_MESSAGE, "Message", order.Message);
             query.AddParameter(ORDER_INVALID_MEMO, "InvalidMemo", order.InvalidMemo);
 			query.AddParameter(ORDER_PAID_UP_FRONT, "PaidUpFront", order.PaidUpFront);
@@ -138,7 +133,6 @@ namespace WSCAutomation.Database
 						order.SalesId = (int)reader[ORDER_SALES_ID];
                         order.CustomerId = (int)reader[ORDER_CUST_ID];
                         order.InventoryId = (int)reader[ORDER_INVENTORY_ID];
-                        order.CatalogNumber = (int)reader[ORDER_CATALOG_NUM];
                         order.Message = (string)reader[ORDER_MESSAGE];
                         order.PaidUpFront = (bool)reader[ORDER_PAID_UP_FRONT];
 						order.Paid = (bool)reader[ORDER_PAID];
@@ -147,12 +141,8 @@ namespace WSCAutomation.Database
 						order.Complete = (bool)reader[ORDER_COMPLETE];
 						order.Closed = (bool)reader[ORDER_CLOSED];
 
-						var specialistIdObj = reader[ORDER_SPECIALIST_ID];
-						if (specialistIdObj is DBNull)
-							order.SpecialistId = -1;
-						else
-							order.SpecialistId = (int)specialistIdObj;
-
+						order.QualityId = ReadNullableId(reader, ORDER_QUALITY_ID);
+						order.SpecialistId = ReadNullableId(reader, ORDER_SPECIALIST_ID);
 
                         results.Add(order);
                     }

@@ -111,6 +111,19 @@ namespace WSCAutomation.Database
 			hasPreviousParameter = true;
 		}
 
+		/// <summary>Add a query parameter and value that corresponds to a given table's nullable FK column</summary>
+		/// <param name="columnName">The nullable FK column name as it appears in the table we're modifying</param>
+		/// <param name="parameterName">The parameter name to use in the DbCommand</param>
+		/// <param name="parameterValue">The value to use in the DbCommand</param>
+		public void AddNullableFkParameter(string columnName, string parameterName, int parameterValue)
+		{
+			object idObj = DBNull.Value;
+			if (parameterValue != -1)
+				idObj = parameterValue;
+
+			AddParameter(columnName, parameterName, parameterValue);
+		}
+
 		/// <summary>Adds the WHERE clause details for UPDATE queries</summary>
 		/// <param name="idColumnName">The column name of the table's ID</param>
 		/// <param name="idParameterName">The parameter name to use in the DbCommand</param>

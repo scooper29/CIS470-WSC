@@ -81,11 +81,11 @@ namespace WSCAutomation.App
 			// This needs to happen as the .SDF is copied from the Lib\Database\ folder
 			// and thus should have NO records of any kind
 			// NOTE: You need to "rebuild" the App project in order to start from a clean DB
-			if (MessageBox.Show("Perform initial DB setup?", "WSC", MessageBoxButtons.YesNo) == DialogResult.Yes)
+/*			if (MessageBox.Show("Perform initial DB setup?", "WSC", MessageBoxButtons.YesNo) == DialogResult.Yes)
 			{
 				var setup = new WSCAutomation.InitialSetup();
 				setup.Perform();
-			}
+			}*/
 
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
@@ -100,7 +100,7 @@ namespace WSCAutomation.App
 		/// <remarks>http://stackoverflow.com/a/14659892</remarks>
 		public static void OnTextBoxKeyPressAllowNumbersOnly(object sender, KeyPressEventArgs e)
 		{
-			if (!(char.IsDigit(e.KeyChar) && (e.KeyChar == (char)Keys.Back)))
+			if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back && e.KeyChar != (char)Keys.Delete)
 				e.Handled = true;
 		}
 

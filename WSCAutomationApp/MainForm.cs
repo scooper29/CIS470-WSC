@@ -151,8 +151,8 @@ namespace WSCAutomation.App
 		}
 		void HandleNewCreateRecordForm(EnterEditRecordFormBase enterForm, object enterEditData)
 		{
-			enterForm.SetEnterEditData(enterEditData);
 			enterForm.EnterEditFormMode = EnterEditRecordFormMode.Create;
+			enterForm.SetEnterEditData(enterEditData);
 			HandleNewChildForm(enterForm);
 		}
 		/// <summary>Presents a form for editing or viewing a record</summary>
