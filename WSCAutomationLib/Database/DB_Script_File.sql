@@ -13,7 +13,7 @@
 
 /*
 *Changing Data Types
-*ALTER TABLE Customer ALTER COLUMN Cust_ZipCode NTEXT(16);
+*ALTER TABLE Customer ALTER COLUMN Cust_ZipCode VARCHAR(5);
 */
 
 //Payment Table Inserts, Create Before Customer
@@ -56,3 +56,7 @@ INSERT INTO Inventory (Inv_Name, Inv_Manufacturer, Inv_Quantity, Inv_QtySold) VA
 INSERT INTO Inventory (Inv_Name, Inv_Manufacturer, Inv_Quantity, Inv_QtySold) VALUES ('Small Gold Trophy', 'Circle of Winners', 10, 0);
 INSERT INTO Inventory (Inv_Name, Inv_Manufacturer, Inv_Quantity, Inv_QtySold) VALUES ('Medium Gold Trophy', 'Circle of Winners', 5, 0);
 INSERT INTO Inventory (Inv_Name, Inv_Manufacturer, Inv_Quantity, Inv_QtySold) VALUES ('Large Gold Trophy', 'Circle of Winners', 1, 0);
+INSERT INTO Inventory (Inv_Name, Inv_Manufacturer, Inv_Quantity, Inv_QtySold) VALUES ('Large Shirt', 'Top Line', 5, 0);
+INSERT INTO Inventory (Inv_Name, Inv_Manufacturer, Inv_Quantity, Inv_QtySold) VALUES ('Medium Shirt', 'Top Line', 10, 0);
+INSERT INTO Inventory (Inv_Name, Inv_Manufacturer, Inv_Quantity, Inv_QtySold) VALUES ('Small Shirt', 'Top Line', 15, 0);
+INSERT INTO Inventory (Inv_Name, Inv_Manufacturer, Inv_Quantity, Inv_QtySold) VALUES ('Child Shirt', 'Top Line', 20, 0);
