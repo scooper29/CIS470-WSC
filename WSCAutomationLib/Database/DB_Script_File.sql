@@ -11,6 +11,11 @@
 *ALTER TABLE Payment ALTER COLUMN PaymentID IDENTITY (1,1);
 */
 
+/*
+*Changing Data Types
+*ALTER TABLE Customer ALTER COLUMN Cust_ZipCode NTEXT(16);
+*/
+
 //Payment Table Inserts, Create Before Customer
 INSERT INTO Payment (Pay_Type, Pay_CardNum, Pay_ExpDate) VALUES ('VISA', 1234567812345678, '10/01/2015');
 INSERT INTO Payment (Pay_Type, Pay_CardNum, Pay_ExpDate) VALUES ('MASTERCARD', 8765432187654321, '01/01/2016');
