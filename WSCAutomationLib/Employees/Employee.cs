@@ -4,7 +4,6 @@ using System.Net;
 using System.Net.Mail;
 using System.Net.Mime;
 
-
 namespace WSCAutomation.Employees
 {
 	public class Employee
@@ -29,7 +28,7 @@ namespace WSCAutomation.Employees
 		}
 
         // Returns a list of inventory objects of inventory items from DB
-        public virtual List<Inventory.Inventory> CheckInventory(int inventoryIDIn, string mfgNameIn, string itemNameIn)
+        public virtual List<Inventory.Inventory> CheckInventory(int inventoryIDIn = -1, string mfgNameIn = "", string itemNameIn = "")
         {
             return Database.DatabaseManager.Instance.DBGetInventory(itemNameIn, inventoryIDIn, mfgNameIn);
         }
@@ -52,6 +51,13 @@ namespace WSCAutomation.Employees
 			var dbm = Database.DatabaseManager.Instance;
 
 			return dbm.DBGetCustomers(customerId, lastName);
+		}
+
+		public List<Orders.QualityCheckList> GetQualityCheckLists(int qualityId = -1)
+		{
+			var dbm = Database.DatabaseManager.Instance;
+
+			return dbm.DBGetQualityCheckList(qualityId);
 		}
         
         protected void SendNotification(string toAddress, string fromAddress, string subject, string bodyMessage)

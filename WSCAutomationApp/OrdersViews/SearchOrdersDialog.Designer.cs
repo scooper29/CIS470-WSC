@@ -34,7 +34,12 @@
 			this.txtParameterSpecialistId = new System.Windows.Forms.TextBox();
 			label1 = new System.Windows.Forms.Label();
 			label2 = new System.Windows.Forms.Label();
+			((System.ComponentModel.ISupportInitialize)(this.dgvSearchResults)).BeginInit();
 			this.SuspendLayout();
+			// 
+			// dgvSearchResults
+			// 
+			this.dgvSearchResults.Size = new System.Drawing.Size(398, 150);
 			// 
 			// label1
 			// 
@@ -71,13 +76,14 @@
 			// SearchOrdersDialog
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-			this.ClientSize = new System.Drawing.Size(284, 300);
+			this.ClientSize = new System.Drawing.Size(402, 300);
 			this.Controls.Add(this.txtParameterSpecialistId);
 			this.Controls.Add(label2);
 			this.Controls.Add(this.txtParameterCustomerId);
 			this.Controls.Add(label1);
 			this.Name = "SearchOrdersDialog";
 			this.Text = "Search Orders";
+			this.Controls.SetChildIndex(this.dgvSearchResults, 0);
 			this.Controls.SetChildIndex(this.lblParameterId, 0);
 			this.Controls.SetChildIndex(this.txtParameterId, 0);
 			this.Controls.SetChildIndex(this.btnSearch, 0);
@@ -88,6 +94,7 @@
 			this.Controls.SetChildIndex(this.txtParameterCustomerId, 0);
 			this.Controls.SetChildIndex(label2, 0);
 			this.Controls.SetChildIndex(this.txtParameterSpecialistId, 0);
+			((System.ComponentModel.ISupportInitialize)(this.dgvSearchResults)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 

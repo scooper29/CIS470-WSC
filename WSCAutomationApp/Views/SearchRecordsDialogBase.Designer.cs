@@ -32,7 +32,7 @@
 			this.txtParameterId = new System.Windows.Forms.TextBox();
 			this.btnSearch = new System.Windows.Forms.Button();
 			this.btnCancel = new System.Windows.Forms.Button();
-			this.dgvSearchResults = new System.Windows.Forms.DataGridView();
+			this.dgvSearchResults = new WSCAutomation.App.InheritableDataGridView();
 			this.btnSelect = new System.Windows.Forms.Button();
 			this.btnEdit = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.dgvSearchResults)).BeginInit();
@@ -82,6 +82,7 @@
 			this.dgvSearchResults.AllowUserToDeleteRows = false;
 			this.dgvSearchResults.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.dgvSearchResults.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
 			this.dgvSearchResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dgvSearchResults.Location = new System.Drawing.Point(4, 109);
 			this.dgvSearchResults.MultiSelect = false;
@@ -150,7 +151,7 @@
 		protected System.Windows.Forms.TextBox txtParameterId;
 		protected System.Windows.Forms.Button btnSearch;
 		protected System.Windows.Forms.Button btnCancel;
-		protected System.Windows.Forms.DataGridView dgvSearchResults;
+		protected InheritableDataGridView dgvSearchResults;
 		protected System.Windows.Forms.Button btnSelect;
 		protected System.Windows.Forms.Button btnEdit;
 	}

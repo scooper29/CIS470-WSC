@@ -49,10 +49,5 @@ namespace WSCAutomation.Employees
             
             SendNotification("wscman60683@gmail.com", this.Email, "Order Complete", "[THIS ORDER] has been completed.");
         }
-        
-        public List<Orders.QualityCheckList> ReviewQualityCheck(int checkId)
-		{
-            return Database.DatabaseManager.Instance.DBGetQualityCheckList(QUALITY_Log_ID:checkId);
-		}
 	};
 }

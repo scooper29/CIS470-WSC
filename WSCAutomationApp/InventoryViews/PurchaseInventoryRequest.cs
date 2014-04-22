@@ -18,6 +18,8 @@ namespace WSCAutomation.App
 
 			base.recordKindName = "Inventory Order";
 
+			Program.Fix(upDownOrderQty);
+
 			// the ID of the InvOrder isn't useful to the user, don't show it
 			base.lblRecordId.Visible = false;
 			base.txtRecordId.Visible = false;
@@ -31,8 +33,6 @@ namespace WSCAutomation.App
 			upDownOrderQty.DataBindings.Add("Value", invOrderData, "Quantity");
 			dateTimePickerOrderDate.DataBindings.Add("Value", invOrderData, "OrderDate");
 			dateTimePickerDelieveryDate.DataBindings.Add("Value", invOrderData, "ArrivalDate");
-
-			// TODO: Complete property?
 		}
 
 		public override void SetEnterEditData(object enterEditData)

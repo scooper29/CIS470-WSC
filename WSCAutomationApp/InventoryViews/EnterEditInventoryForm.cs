@@ -18,6 +18,8 @@ namespace WSCAutomation.App
 
 			base.recordKindName = "Inventory";
 
+			Program.Fix(numericUpDownQuantity);
+
 			// only the clerk can enter inv order request details
 			if (Program.CurrentUser.Authority != UserAuthorityType.StockClerk)
 				btnSubmitRequestDetails.Visible = false;

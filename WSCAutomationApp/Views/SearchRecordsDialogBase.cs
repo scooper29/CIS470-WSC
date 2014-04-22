@@ -107,6 +107,8 @@ namespace WSCAutomation.App
 
 		private void OnSearchClick(object sender, EventArgs e)
 		{
+			dgvSearchResults.SuspendLayout();
+
 			if (dgvSearchResults.DataSource == null)
 			{
 				dgvSearchResults.DataSource = new BindingSource();
@@ -120,6 +122,8 @@ namespace WSCAutomation.App
 			// The dialog is now in a valid state to receive search results
 			// TODO: this should be ran on a separate thread, to not block the UI from refreshing while the search is done
 			PerformSearch(bindingSource);
+
+			dgvSearchResults.PerformLayout();
 		}
 
 		protected virtual void OnSearchResultsSelectionChanged(object sender, EventArgs e)

@@ -12,21 +12,20 @@ namespace WSCAutomation.Database
         #region Inventory table column names
         const string QUALITY_TABLE = "QUALITY";
 
-        const string QUALITY_ID = "QUALITY_ID";
-        const string ORDER_ID = "Order_Id";
-        const string QUAl_Description = "QUAl_Description";
-        const string QUAl_Pass = "Quality_Pass";
+        const string QUALITY_ID = "QualityID";
+		const string QUALITY_DESCRIPTION = "Qual_Description";
+		const string QUALITY_PASS = "Qual_Pass";
         #endregion
+
         static SqlCeCommand BuildModificationQuery(SqlCeConnection connection, ModificationQueryType type,
             QualityCheckList qual)
         {
             var query = new ModificationQueryBuilder(connection, type, QUALITY_TABLE);
 
-            query.AddParameter(QUALITY_ID, "quallogId", qual.Id);
+            query.AddIdParameter(QUALITY_ID, "id", qual.Id);
 
-            query.AddParameter(ORDER_ID, "orderId", qual.OrderId);
-            query.AddParameter(QUAl_Pass, "QualityPass", qual.Pass);
-            query.AddParameter(QUAl_Description, "QualityDescription ", qual.Description);
+			query.AddParameter(QUALITY_PASS, "pass", qual.Pass);
+			query.AddParameter(QUALITY_DESCRIPTION, "description", qual.Description);
 
             return query.ToDbCommand();
         }
@@ -61,12 +60,11 @@ namespace WSCAutomation.Database
 
         public int DBAddQualityCheckList(QualityCheckList qual)
         {
+            object idObj = PerformModificationQuery(ModificationQueryType.Insert, qual);
 
-            object Obj = PerformModificationQuery(ModificationQueryType.Insert, qual);
-
-            if (Obj != null)
+			if (idObj != null)
             {
-                qual.Id = Convert.ToInt32(Obj);
+				qual.Id = Convert.ToInt32(idObj);
 
                 return qual.Id;
             }
@@ -81,11 +79,9 @@ namespace WSCAutomation.Database
             return rowsAffected == 1;
         }
 
-        public List<QualityCheckList> DBGetQualityCheckList(int QUALITY_Log_ID = -1, string QUAl_Pass = "", string QUAl_Description = "")
+        public List<QualityCheckList> DBGetQualityCheckList(int qualityId = -1)
         {
-            VerifySearchParameter(QUALITY_ID, "quality_log_Id");
-            VerifySearchParameter(QUAl_Pass, "qual_pass");
-            VerifySearchParameter(QUAl_Description, "qual_description");
+			VerifySearchParameter(qualityId, "qualityId");
 
             var results = new List<QualityCheckList>();
 
@@ -96,16 +92,8 @@ namespace WSCAutomation.Database
                 var command = new SelectQueryBuilder(connection, QUALITY_TABLE);
 
                 // Add QUALITY Log ID
-                if (!SkipSearchParameter(QUALITY_ID))
-                    command.AddParameter(QUALITY_ID, "quality_log_Id", QUALITY_ID);
-
-                // Add Quality Description
-                if (!SkipSearchParameter(QUAl_Description))
-                    command.AddParameter(QUAl_Description, "qual_description", QUAl_Description);
-
-                // Add QUALITY Pass
-                if (!SkipSearchParameter(QUAl_Pass))
-                    command.AddParameter(QUAl_Pass, "qual_pass", QUAl_Pass);
+				if (!SkipSearchParameter(qualityId))
+					command.AddParameter(QUALITY_ID, "qualityId", qualityId);
 
                 using (var reader = command.ToDbCommand().ExecuteReader())
                 {
@@ -115,10 +103,9 @@ namespace WSCAutomation.Database
                     {
                         QualityCheckList qual = new QualityCheckList();
 
-                        qual.Id = (int)reader[QUALITY_Log_ID];
-                        qual.OrderId = (int)reader[ORDER_ID];
-                        qual.Description = (string)reader[QUAl_Description];
-                        qual.Pass = (bool)reader[QUAl_Pass];
+                        qual.Id = (int)reader[QUALITY_ID];
+                        qual.Description = (string)reader[QUALITY_DESCRIPTION];
+                        qual.Pass = (bool)reader[QUALITY_PASS];
 
                         results.Add(qual);
                     }

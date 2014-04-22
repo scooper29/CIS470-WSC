@@ -103,7 +103,17 @@ namespace WSCAutomation.App
 			if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back && e.KeyChar != (char)Keys.Delete)
 				e.Handled = true;
 		}
+		public static void OnTextBoxKeyPressAllowNumbersOnlyAndNegativeSign(object sender, KeyPressEventArgs e)
+		{
+			OnTextBoxKeyPressAllowNumbersOnly(sender, e);
 
+			// HACK: allow negative sign, to support "-1"
+			bool keyIsMinus = e.KeyChar == (char)Keys.Subtract || e.KeyChar == '-';
+			if (sender is TextBox && ((TextBox)sender).SelectionStart == 0 && keyIsMinus)
+				e.Handled = false;
+		}
+
+		#region Boolean ComboBox binding
 		public static readonly string[] BooleanComboItems = new string[] {
 			"False",
 			"True",
@@ -131,6 +141,46 @@ namespace WSCAutomation.App
 			binding.Format += new ConvertEventHandler(Program.BooleanToString);
 			binding.Parse += new ConvertEventHandler(Program.StringToBoolean);
 		}
+		#endregion
+
+		#region NumericUpDown arrow fixing
+		// fix found at:
+		//http://www.codeproject.com/Messages/2079588/Fix-without-replacing-the-control.aspx
+
+		/// <summary>
+		/// Fixes behavior of NumericUpDown control by disabling or enabling up and down buttons
+		/// according to its ReadOnly property.
+		/// </summary>
+		/// <param name="numericUpDown">NumericUpDown control to fix.</param>
+		/// <exception cref="ArgumentNullException">Thrown when numericUpDown is set to null.</exception>
+		static public void Fix(NumericUpDown numericUpDown)
+		{
+			if (numericUpDown == null)
+				throw new ArgumentNullException("numericUpDown");
+
+			foreach (Control control in numericUpDown.Controls)
+			{
+				TextBox textBox = control as TextBox;
+
+				if (textBox != null)
+				{
+					textBox.ReadOnlyChanged -= numericUpDown_ReadOnlyChanged; // in case it was already fixed
+					textBox.ReadOnlyChanged += numericUpDown_ReadOnlyChanged;
+					numericUpDown_ReadOnlyChanged(textBox, EventArgs.Empty);
+				}
+			}
+		}
+
+		static void numericUpDown_ReadOnlyChanged(object sender, EventArgs e)
+		{
+			TextBox textBox = (TextBox)sender;
+			NumericUpDown numericUpDown = (NumericUpDown)textBox.Parent;
+
+			foreach (Control control in numericUpDown.Controls)
+				if (control.GetType().Name == "UpDownButtons")
+					control.Enabled = !textBox.ReadOnly;
+		}
+		#endregion
 
 		public static TRecord UserSearchForRecord<TDialog, TRecord>(
 			IWin32Window owner)

@@ -30,10 +30,25 @@ namespace WSCAutomation.App
 		{
 			base.CreateSearchResultsColumns();
 
-			var dgcUserName = new DataGridViewTextBoxColumn();
-			dgcUserName.DataPropertyName = "UserName";
-			dgcUserName.Name = "User Name";
-			dgvSearchResults.Columns.Add(dgcUserName);
+			var dgcCustomerId = new DataGridViewTextBoxColumn();
+			dgcCustomerId.DataPropertyName = "CustomerId";
+			dgcCustomerId.Name = "Customer";
+			dgvSearchResults.Columns.Add(dgcCustomerId);
+
+			var dgcSpecialistId = new DataGridViewTextBoxColumn();
+			dgcSpecialistId.DataPropertyName = "SpecialistId";
+			dgcSpecialistId.Name = "Specialist";
+			dgvSearchResults.Columns.Add(dgcSpecialistId);
+
+			var dgcValidated = new DataGridViewTextBoxColumn();
+			dgcValidated.DataPropertyName = "Validated";
+			dgcValidated.Name = "Validated";
+			dgvSearchResults.Columns.Add(dgcValidated);
+
+			var dgcComplete = new DataGridViewTextBoxColumn();
+			dgcComplete.DataPropertyName = "Complete";
+			dgcComplete.Name = "Complete";
+			dgvSearchResults.Columns.Add(dgcComplete);
 		}
 
 		protected override void PerformSearch(BindingSource searchResultsBindingSource)

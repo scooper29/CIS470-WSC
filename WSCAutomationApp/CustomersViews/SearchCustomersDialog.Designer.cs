@@ -31,7 +31,12 @@
 			System.Windows.Forms.Label label3;
 			this.txtCustomerLastName = new System.Windows.Forms.TextBox();
 			label3 = new System.Windows.Forms.Label();
+			((System.ComponentModel.ISupportInitialize)(this.dgvSearchResults)).BeginInit();
 			this.SuspendLayout();
+			// 
+			// dgvSearchResults
+			// 
+			this.dgvSearchResults.Size = new System.Drawing.Size(444, 150);
 			// 
 			// label3
 			// 
@@ -52,11 +57,12 @@
 			// SearchCustomersDialog
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-			this.ClientSize = new System.Drawing.Size(284, 300);
+			this.ClientSize = new System.Drawing.Size(448, 300);
 			this.Controls.Add(this.txtCustomerLastName);
 			this.Controls.Add(label3);
 			this.Name = "SearchCustomersDialog";
 			this.Text = "Search Customers";
+			this.Controls.SetChildIndex(this.dgvSearchResults, 0);
 			this.Controls.SetChildIndex(this.lblParameterId, 0);
 			this.Controls.SetChildIndex(this.txtParameterId, 0);
 			this.Controls.SetChildIndex(this.btnSearch, 0);
@@ -65,6 +71,7 @@
 			this.Controls.SetChildIndex(this.btnEdit, 0);
 			this.Controls.SetChildIndex(label3, 0);
 			this.Controls.SetChildIndex(this.txtCustomerLastName, 0);
+			((System.ComponentModel.ISupportInitialize)(this.dgvSearchResults)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 

@@ -38,6 +38,7 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -85,12 +86,6 @@
     <Compile Include="InventoryViews\SearchInventoryDialog.Designer.cs">
       <DependentUpon>SearchInventoryDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="OrdersViews\EditOrderQualityDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="OrdersViews\EditOrderQualityDialog.Designer.cs">
-      <DependentUpon>EditOrderQualityDialog.cs</DependentUpon>
-    </Compile>
     <Compile Include="OrdersViews\EnterEditOrderForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -108,6 +103,12 @@
     </Compile>
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OrdersViews\EnterEditOrderQualityDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OrdersViews\EnterEditOrderQualityDialog.Designer.cs">
+      <DependentUpon>EnterEditOrderQualityDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="OrdersViews\SearchOrdersDialog.cs">
       <SubType>Form</SubType>
@@ -132,6 +133,9 @@
       <DependentUpon>EnterEditRecordFormBase.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\EnterEditRecordFormMode.cs" />
+    <Compile Include="Views\InheritableDataGridView.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Views\SearchRecordsDialogBase.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -161,9 +165,6 @@
     <EmbeddedResource Include="InventoryViews\SearchInventoryDialog.resx">
       <DependentUpon>SearchInventoryDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OrdersViews\EditOrderQualityDialog.resx">
-      <DependentUpon>EditOrderQualityDialog.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="OrdersViews\EnterEditOrderForm.resx">
       <DependentUpon>EnterEditOrderForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -172,6 +173,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OrdersViews\EnterEditOrderQualityDialog.resx">
+      <DependentUpon>EnterEditOrderQualityDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OrdersViews\SearchOrdersDialog.resx">
       <DependentUpon>SearchOrdersDialog.cs</DependentUpon>

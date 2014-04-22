@@ -19,7 +19,7 @@ namespace WSCAutomation.App
 			base.recordKindName = "Order";
 
 			txtSalesId.KeyPress += new KeyPressEventHandler(Program.OnTextBoxKeyPressAllowNumbersOnly);
-			txtSpecialistId.KeyPress += new KeyPressEventHandler(Program.OnTextBoxKeyPressAllowNumbersOnly);
+			txtSpecialistId.KeyPress += new KeyPressEventHandler(Program.OnTextBoxKeyPressAllowNumbersOnlyAndNegativeSign);
 			txtCustomerId.KeyPress += new KeyPressEventHandler(Program.OnTextBoxKeyPressAllowNumbersOnly);
 			txtInventoryId.KeyPress += new KeyPressEventHandler(Program.OnTextBoxKeyPressAllowNumbersOnly);
 
@@ -51,7 +51,9 @@ namespace WSCAutomation.App
 			if (false && authority != UserAuthorityType.Manager)
 			{
 				btnSelectSpecialistEmployee.Visible = false;
+
 				txtSpecialistId.ReadOnly = true;
+				cbxOrderValidated.Enabled = false;
 			}
 			// the sales employee is the only one who can change the paid flags
 			if (false && authority != UserAuthorityType.Sales)
@@ -85,6 +87,7 @@ namespace WSCAutomation.App
 		Binding txtSpecialistIdBinding { get { return txtSpecialistId.DataBindings[0]; } }
 		Binding txtCustomerIdBinding { get { return txtCustomerId.DataBindings[0]; } }
 		Binding txtInventoryIdBinding { get { return txtInventoryId.DataBindings[0]; } }
+		Binding txtQualityIdBinding { get { return txtQualityId.DataBindings[0]; } }
 
 		void DataBindToOrderData()
 		{
@@ -136,18 +139,53 @@ namespace WSCAutomation.App
 		protected override bool PreSaveValidation()
 		{
 			bool valid = true;
+			var emp = Program.CurrentUser.EmployeeData;
 
+			#region Customer ID
 			if (orderData.CustomerId == -1)
 			{
 				valid = false;
 				ShowValidationErrorMessage("Please provide a value for {0}", "Customer ID");
 			}
+			else if (!txtCustomerId.ReadOnly && 
+				emp.GetCustomers(orderData.CustomerId).Count == 0)
+			{
+				valid = false;
+				ShowValidationErrorMessage("No {0} exists by the given ID", "Customer");
+			}
+			#endregion
 
+			#region Inventory ID
 			if (orderData.InventoryId == -1)
 			{
 				valid = false;
 				ShowValidationErrorMessage("Please provide a value for {0}", "Inventory ID");
 			}
+			else if (!txtInventoryId.ReadOnly &&
+				emp.CheckInventory(orderData.InventoryId).Count == 0)
+			{
+				valid = false;
+				ShowValidationErrorMessage("No {0} exists by the given ID", "Inventory");
+			}
+			#endregion
+
+			#region Sales ID
+			if (orderData.SalesId != -1 && !txtSalesId.ReadOnly &&
+				emp.GetEmployees(orderData.SalesId).Count == 0)
+			{
+				valid = false;
+				ShowValidationErrorMessage("No {0} exists by the given ID", "Sales Employee");
+			}
+			#endregion
+
+			#region Inventory ID
+			if (orderData.SpecialistId != -1 && !txtSpecialistId.ReadOnly &&
+				emp.GetEmployees(orderData.SpecialistId).Count == 0)
+			{
+				valid = false;
+				ShowValidationErrorMessage("No {0} exists by the given ID", "Specialist");
+			}
+			#endregion
 
 			return valid;
 		}
@@ -171,7 +209,7 @@ namespace WSCAutomation.App
 			{
 				var managerAccess = Program.CurrentUser.AsManager;
 
-				return managerAccess.ValidateOrder(orderData.Id, orderData.Validated, orderData.SpecialistId);
+				return managerAccess.ValidateOrder(orderData);
 			}
 			else
 				throw new InvalidOperationException("This user doesn't have the authority to save changes to orders...");
@@ -227,7 +265,47 @@ namespace WSCAutomation.App
 
 		private void OnEditQualityLog(object sender, EventArgs e)
 		{
-			// TODO
+			var recordFormMode = EnterEditRecordFormMode.Create;
+
+			Orders.QualityCheckList quality = null;
+			if (orderData.QualityId == null)
+				quality = new Orders.QualityCheckList();
+			else
+			{
+				var emp = Program.CurrentUser.EmployeeData;
+
+				var lists = emp.GetQualityCheckLists(orderData.QualityId);
+				if (lists.Count != 1)
+					throw new InvalidOperationException("GetQualityCheckLists returned an unexpected number of lists");
+
+				quality = lists[0];
+
+				switch (Program.CurrentUser.Authority)
+				{
+					case UserAuthorityType.Manager:
+						recordFormMode = EnterEditRecordFormMode.Edit;
+						break;
+
+					case UserAuthorityType.Specialist:
+						recordFormMode = EnterEditRecordFormMode.View;
+						break;
+
+					default:
+						throw new InvalidOperationException();
+				}
+			}
+
+			var recordForm = new EnterEditOrderQualityDialog();
+			recordForm.SetEnterEditData(quality, orderData);
+			recordForm.EnterEditFormMode = recordFormMode;
+
+			// if the quality data was saved and we were creating a new
+			// quality checklist, force the quality ID UI to update with the new ID
+			if (recordForm.ShowDialog(this) == DialogResult.OK &&
+				recordFormMode == EnterEditRecordFormMode.Create)
+			{
+				txtQualityIdBinding.ReadValue();
+			}
 		}
     };
 }

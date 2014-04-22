@@ -13,62 +13,46 @@ namespace WSCAutomation.Employees
             SendNotification("showandy@gmail.com", this.Email, "Payment Failed", "We were unable to complete your payment.  Please contact your sales representative to arrange a new payment.");
         }
 
-		public bool ValidateOrder(int orderID, bool validated, int specialistId)
+		public bool ValidateOrder(Orders.Order ord)
 		{
             // creates instance of the DBManager
             var dbm = Database.DatabaseManager.Instance;
 
-            // returns results from DBGetInventory
-            var result = dbm.DBGetOrders(orderID: orderID);
-
-            // this throws an excpetion if more or less that 1 result is returned
-            // should never happen here
-            if (result.Count != 1)
-            {
-                throw new InvalidOperationException("Unexpected order results");
-            }
-
-            // creates inv object from the returned list (only one)
-            var ord = result[0];
-
-            // assign values to corresponding attributes of the order object
-            ord.Validated = validated;
-            ord.SpecialistId = specialistId;
-
             // call make the change in the DB
-            bool success = dbm.DBEditOrder(ord);
+			bool success = dbm.DBEditOrder(ord);
 
-			// TODO: we probably shouldn't send an email if the edit fails...
-            SendNotification("wscspec60683@gmail.com", this.Email, "Order has been assigned to you", "Order " + ord.Id + " has been assigned to you");
+			if (success)
+				SendNotification("wscspec60683@gmail.com", this.Email,
+					"Order has been assigned to you", "Order " + ord.Id + " has been assigned to you");
 
 			return success;
 		}
 
-		public int PerformQualityCheck(Orders.QualityCheckList check)
+		public int PerformQualityCheck(int orderId, Orders.QualityCheckList check)
 		{
             if (check.Pass)
             {
-                SendNotification("showandy@gmail.com", this.Email, "Order Finished", "Your order " + check.OrderId + " is finished and is ready to be shipped or picked up.");
-                SendNotification("wscsales60683@gmail.com", this.Email, "Close Order", "Please close Order number " + check.OrderId);
+				SendNotification("showandy@gmail.com", this.Email, "Order Finished", "Your order " + orderId + " is finished and is ready to be shipped or picked up.");
+				SendNotification("wscsales60683@gmail.com", this.Email, "Close Order", "Please close Order number " + orderId);
             }
             else
             {
-                SendNotification("wscspec60683@gmail.com", this.Email, "Order Failed Quality Check", "Order number " + check.OrderId + " that you worked on did not pass the quality check.");
+				SendNotification("wscspec60683@gmail.com", this.Email, "Order Failed Quality Check", "Order number " + orderId + " that you worked on did not pass the quality check.");
             }
 
             return Database.DatabaseManager.Instance.DBAddQualityCheckList(check);
 		}
 
-        public bool ReevaluateQualityCheck(Orders.QualityCheckList check)
+        public bool ReevaluateQualityCheck(int orderId, Orders.QualityCheckList check)
         {
             if (check.Pass)
             {
-                SendNotification("showandy@gmail.com", this.Email, "Order Finished", "Your order " + check.OrderId + " is finished and is ready to be shipped or picked up.");
-                SendNotification("wscsales60683@gmail.com", this.Email, "Close Order", "Please close Order number " + check.OrderId);
+				SendNotification("showandy@gmail.com", this.Email, "Order Finished", "Your order " + orderId + " is finished and is ready to be shipped or picked up.");
+				SendNotification("wscsales60683@gmail.com", this.Email, "Close Order", "Please close Order number " + orderId);
             }
             else
             {
-                SendNotification("wscspec60683@gmail.com", this.Email, "Order Failed Quality Check", "Order number " + check.OrderId + " that you worked on did not pass the quality check, again.");
+				SendNotification("wscspec60683@gmail.com", this.Email, "Order Failed Quality Check", "Order number " + orderId + " that you worked on did not pass the quality check, again.");
             }
 
             return Database.DatabaseManager.Instance.DBEditQualityChecklist(check);
