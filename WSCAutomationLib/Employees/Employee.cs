@@ -56,20 +56,24 @@ namespace WSCAutomation.Employees
         
         protected void SendNotification(string toAddress, string fromAddress, string subject, string bodyMessage)
         {
-            MailAddress to = new MailAddress(toAddress);
-            MailAddress from = new MailAddress(fromAddress);
-            MailMessage message = new MailMessage(from, to);
-            message.Subject = subject;
-            message.SubjectEncoding = System.Text.Encoding.UTF8;
-            message.Body = bodyMessage;
-            message.BodyEncoding = System.Text.Encoding.UTF8;
-            string server;
-            int port;
-            server = "stmp.gmail.com";
-            port = 587;
-            SmtpClient smtp = new SmtpClient(server, port);
-            smtp.Credentials = new System.Net.NetworkCredential(fromAddress, "senprojCIS470");
-            smtp.Send(message);
+            // This is our constant password for our project
+            const string emailPassword = "senprojCIS470";
+
+            // This composes the email dependent on input
+            MailMessage mail = new MailMessage();
+            mail.From = new MailAddress(fromAddress);
+            mail.To.Add(toAddress);
+            mail.Subject = subject;
+            mail.Body = bodyMessage;
+
+            // Configures server
+            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+            SmtpServer.Port = 587;
+            SmtpServer.Credentials = new System.Net.NetworkCredential(fromAddress, emailPassword);
+            SmtpServer.EnableSsl = true;
+
+            // Send the email
+            SmtpServer.Send(mail);
         }
 		/// <summary>
 		/// Do to the fact we don't use controllers for employee operations, but instead use
