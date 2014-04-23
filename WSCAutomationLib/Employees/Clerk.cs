@@ -33,28 +33,13 @@ namespace WSCAutomation.Employees
         //called when the specialist requests and item that IS in stock
         public bool PullInventory(Inventory.Inventory invIn)
         {
-            var dbm = Database.DatabaseManager.Instance;
-
-            // returns results from DBGetInventory
-            var results = dbm.DBGetInventory(inventoryID: invIn.Id);
-
-            // this throws an excpetion if more or less that 1 result is returned
-            // should never happen here
-            if (results.Count != 1)
-            {
-                throw new InvalidOperationException("Unexpected inventory results");
-            }
-
-            // creates inv object from the returned list (only one)
-            var inv = results[0];
-
             // Decreases quantity on hand and quantity sold after pulling order
-            inv.QtySold -= 1;
-            inv.Quantity -= 1;
+            invIn.QtySold -= 1;
+            invIn.Quantity -= 1;
 
             SendNotification("wscspec60683@gmail.com", this.Email, "Inventory Pulled", "Inventory " + invIn.Id + " that you requested has been pulled.");
 
-            return dbm.DBEditInventory(inv);
+            return Database.DatabaseManager.Instance.DBEditInventory(invIn);
         }
     };
 }
