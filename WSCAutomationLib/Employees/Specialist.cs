@@ -9,32 +9,24 @@ namespace WSCAutomation.Employees
 		{
 		}
 
-        public bool RequestInstockInventory(int invIDIn)
+		public bool RequestInstockInventory(Inventory.Inventory inv, int specialistId)
         {
             // creates instance of the DBManager
             var dbm = Database.DatabaseManager.Instance;
 
-            // returns results from DBGetInventory
-            var results = dbm.DBGetInventory(inventoryID: invIDIn);
-
-            // this throws an excpetion if more or less that 1 result is returned
-            // should never happen here
-            if (results.Count != 1)
-            {
-                throw new InvalidOperationException("Unexpected inventory results");
-            }
-
-            // creates inv object from the returned list (only one)
-            var inv = results[0];
-
             // increases the qty sold field
             inv.QtySold += 1;
             
-            string body = "Inventory item " + Convert.ToString(invIDIn) + " is in stock, please pull from shelf.";
-            SendNotification("wscclerk60683@gmail.com", this.Email, "In stock inventory requested", body);
-            
             // returns true of the edit is successful
-            return dbm.DBEditInventory(inv);
+            bool success = dbm.DBEditInventory(inv);
+
+			if (success)
+			{
+				string body = "Inventory item #" + inv.Id + " is in stock, please pull from shelf for Specialist #" + specialistId;
+				SendNotification("wscclerk60683@gmail.com", this.Email, "In stock inventory requested", body);
+			}
+
+			return success;
         }
 
         public void RequestOutofstockInventory(Inventory.Inventory invIn)
@@ -43,11 +35,20 @@ namespace WSCAutomation.Employees
             SendNotification("wscclerk60683@gmail.com", this.Email, "Out of stock inventory needed", body);
         }
 
-        public void MarkOrderComplete(Orders.Order order, bool complete)
+        public bool MarkOrderComplete(Orders.Order order, int specialistId)
         {
-            UpdateOrder(order.Id, true);
-            
-            SendNotification("wscman60683@gmail.com", this.Email, "Order Complete", "[THIS ORDER] has been completed.");
+			order.Complete = true;
+
+            bool success = UpdateOrder(order);
+
+			if (success)
+			{
+				string body = string.Format("Specialist #{0} has marked Order #{1} as complete",
+					specialistId, order.Id);
+				SendNotification("wscman60683@gmail.com", this.Email, "Order Complete", body);
+			}
+
+			return success;
         }
 	};
 }

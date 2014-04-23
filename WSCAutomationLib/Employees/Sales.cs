@@ -25,9 +25,12 @@ namespace WSCAutomation.Employees
 		{
             var dbm = Database.DatabaseManager.Instance;
 
-            SendNotification("wscman60683@gmail.com", this.Email, "New Order", "Order " + order.Id + " has been placed.");
+			dbm.DBAddOrder(order);
 
-            return dbm.DBAddOrder(order);
+			if (order.Id != -1)
+				SendNotification("wscman60683@gmail.com", this.Email, "New Order", "Order " + order.Id + " has been placed.");
+
+			return order.Id;
 		}
 
 		public bool EditOrder(Orders.Order order)

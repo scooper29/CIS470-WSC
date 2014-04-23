@@ -11,6 +11,7 @@ namespace WSCAutomation.App
     public partial class EnterEditCustomerForm : WSCAutomation.App.EnterEditRecordFormBase
     {
 		Customers.Customer customerData;
+		Customers.Payment paymentData;
 
         public EnterEditCustomerForm()
         {
@@ -20,15 +21,51 @@ namespace WSCAutomation.App
 
 			txtPhoneNumber.KeyPress += new KeyPressEventHandler(Program.OnTextBoxKeyPressAllowNumbersOnly);
 			txtZipCode.KeyPress += new KeyPressEventHandler(Program.OnTextBoxKeyPressAllowNumbersOnly);
-
-			// only sales can get/edit the payment details
-			if (Program.CurrentUser.Authority != UserAuthorityType.Sales)
-				btnEditPayment.Visible = false;
         }
+
+		private void EnterEditCustomerForm_Load(object sender, EventArgs e)
+		{
+			var authority = Program.CurrentUser.Authority;
+
+			// change the display name of the Edit button to View for specialists
+			if (authority != UserAuthorityType.Sales ||
+				this.EnterEditFormMode == EnterEditRecordFormMode.View)
+				btnEditPayment.Text = "View";
+			
+			if (authority == UserAuthorityType.Specialist)
+				btnEditPayment.Visible = false;
+		}
+
+		protected override void ToggleFieldsForEnterEditFormMode()
+		{
+			base.ToggleFieldsForEnterEditFormMode();
+
+			switch (EnterEditFormMode)
+			{
+				case EnterEditRecordFormMode.View:
+					if (btnEditPayment.Visible)
+						btnEditPayment.Enabled = false;
+					break;
+
+				case EnterEditRecordFormMode.Edit:
+					if (btnEditPayment.Visible)
+						btnEditPayment.Enabled = true;
+					break;
+
+				case EnterEditRecordFormMode.Create:
+//					if (btnEditPayment.Visible)
+//						btnEditPayment.Enabled = false;
+					break;
+			}
+		}
+
+		Binding txtPaymentIdBinding { get { return txtPaymentId.DataBindings[0]; } }
 
 		void DataBindToCustomerData()
 		{
 			SetRecordIdDataBinding(customerData);
+
+			txtPaymentId.DataBindings.Add("Text", customerData, "PaymentId");
 
 			txtFirstName.DataBindings.Add("Text", customerData, "FirstName");
 			txtLastName.DataBindings.Add("Text", customerData, "LastName");
@@ -65,6 +102,12 @@ namespace WSCAutomation.App
 		protected override bool PreSaveValidation()
 		{
 			bool valid = true;
+
+			if (customerData.PaymentId == -1)
+			{
+				valid = false;
+				ShowValidationErrorMessage("Please add customer the payment details first");
+			}
 
 			if (customerData.FirstName == "")
 			{
@@ -122,6 +165,9 @@ namespace WSCAutomation.App
 		{
 			var salesAccess = Program.CurrentUser.AsSales;
 
+			customerData.PaymentId = salesAccess.AddPayment(paymentData);
+			System.Diagnostics.Debug.Assert(customerData.PaymentId != -1);
+
 			return salesAccess.AddCustomer(customerData);
 		}
 		protected override bool SaveEnterEditData()
@@ -133,23 +179,48 @@ namespace WSCAutomation.App
 
 		private void OnEditPayment(object sender, EventArgs e)
 		{
-			var salesAccess = Program.CurrentUser.AsSales;
+			var recordFormMode = EnterEditRecordFormMode.Create;
 
-			Customers.Payment paymentData;
+			var salesAccess = Program.CurrentUser.AsSales;
 
 			if (customerData.PaymentId == -1)
 			{
 				paymentData = new Customers.Payment();
 			}
-			else
+			else if(paymentData == null)
 			{
 				var payments = salesAccess.GetPayments(customerData.PaymentId);
 				System.Diagnostics.Debug.Assert(payments.Count == 1);
 
 				paymentData = payments[0];
+
+				if (this.EnterEditFormMode == EnterEditRecordFormMode.View)
+					recordFormMode = EnterEditRecordFormMode.View;
+				else
+				{
+					switch (Program.CurrentUser.Authority)
+					{
+						case UserAuthorityType.Sales:
+							recordFormMode = EnterEditRecordFormMode.Edit;
+							break;
+
+						default:
+							recordFormMode = EnterEditRecordFormMode.View;
+							break;
+					}
+				}
 			}
 
-			throw new NotImplementedException("TODO");
+			var recordForm = new EnterEditPaymentDialog();
+			recordForm.SetEnterEditData(paymentData);
+			recordForm.EnterEditFormMode = recordFormMode;
+
+			if (recordForm.ShowDialog(this) == DialogResult.OK &&
+				recordFormMode == EnterEditRecordFormMode.Create)
+			{
+				customerData.PaymentId = paymentData.Id;
+				txtPaymentIdBinding.ReadValue();
+			}
 		}
     };
 }

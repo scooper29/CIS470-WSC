@@ -91,6 +91,18 @@ namespace WSCAutomation
 			AddAndVerifyNewEmployee(fakeAdmin, emp, empExpectedId++);
 		}
 
+		Employees.Employee GetEmployee(string userName)
+		{
+			var dbm = Database.DatabaseManager.Instance;
+
+			var employees = dbm.DBGetEmployees(userId: userName, asEmployeeObjectsOnly: false);
+
+			if (employees.Count == 0)
+				throw new ArgumentException("failed to find employee: " + userName);
+
+			return employees[0];
+		}
+
 		void AddAndVerifyNewCustomer(Employees.Sales fakeSales,
 			Customers.Customer cust, int expectedId)
 		{
@@ -131,15 +143,82 @@ namespace WSCAutomation
 		{
 		}
 
+		void AddAndVerifyNewOrder(Employees.Sales fakeSales,
+			Orders.Order order, int expectedId)
+		{
+			int orderId = fakeSales.AddOrder(order);
+
+			if (orderId < 0)
+				throw new InvalidOperationException("Failed to add order");
+
+			if (orderId != expectedId)
+				throw new InvalidOperationException("Unexpected order ID when adding customer" );
+		}
+		void AddAndVerifyNewQualityCheckList(Employees.Manager fakeManager,
+			Orders.Order order, Orders.QualityCheckList quality)
+		{
+			int qualityId = fakeManager.PerformQualityCheck(order.Id, quality);
+
+			if (qualityId < 0)
+				throw new InvalidOperationException("Failed to add quality checklist");
+
+			order.QualityId = qualityId;
+
+			bool success = fakeManager.UpdateOrder(order);
+
+			if (!success)
+				throw new InvalidOperationException("Failed to update order with new quality checklist");
+		}
+		void SetupOrders()
+		{
+			var fakeSales = (Employees.Sales)GetEmployee("chris");
+			var fakeManager = (Employees.Manager)GetEmployee("jon");
+			// temporary order object used to hold the data we'll be adding to the order table
+			Orders.Order order;
+			Orders.QualityCheckList quality;
+			// the expected ID of the next order we're adding. DB Identity starts at 1, so we do as well
+			int orderExpectedId = 1;
+
+			const int SALES_ID = 7; // chris
+			const int SPECIALIST_ID = 6; // sean
+			const int CUSTOMER_ID = 2;
+			const int INVENTORY_ID = 1;
+
+			order = new Orders.Order
+			{
+				SalesId = SALES_ID,
+				SpecialistId = SPECIALIST_ID,
+				CustomerId = CUSTOMER_ID,
+				InventoryId = INVENTORY_ID,
+
+				Message = "#YOLO",
+
+				PaidUpFront = true,
+				Paid = true,
+				Validated = true,
+			};
+			AddAndVerifyNewOrder(fakeSales, order, orderExpectedId++);
+
+			quality = new Orders.QualityCheckList
+			{
+				Pass = false,
+				Description = "You're fired.",
+			};
+			AddAndVerifyNewQualityCheckList(fakeManager, order, quality);
+		}
+
 		/// <summary>Perform all the initial setup steps</summary>
 		public void Perform()
 		{
+#if false // Ryan already setup this data in the DB
 			if (!dbm.InitializeAccessCodes())
 				throw new Exception("Failed to initialize AccessCode table");
 
 			SetupEmployees();
 			SetupCustomers();
 			SetupInventory();
+#endif
+			SetupOrders();
 		}
 	};
 }

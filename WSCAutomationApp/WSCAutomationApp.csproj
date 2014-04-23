@@ -62,17 +62,17 @@
     <Compile Include="CustomersViews\EnterEditCustomerForm.Designer.cs">
       <DependentUpon>EnterEditCustomerForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CustomersViews\EnterEditPaymentDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomersViews\EnterEditPaymentDialog.Designer.cs">
+      <DependentUpon>EnterEditPaymentDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="CustomersViews\SearchCustomersDialog.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="CustomersViews\SearchCustomersDialog.Designer.cs">
       <DependentUpon>SearchCustomersDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="CustomersViews\EditPaymentDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CustomersViews\EditPaymentDialog.Designer.cs">
-      <DependentUpon>EditPaymentDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="InventoryViews\EnterEditInventoryForm.cs">
       <SubType>Form</SubType>
@@ -150,11 +150,11 @@
     <EmbeddedResource Include="AdminViews\SearchEmployeesDialog.resx">
       <DependentUpon>SearchEmployeesDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CustomersViews\EditPaymentDialog.resx">
-      <DependentUpon>EditPaymentDialog.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="CustomersViews\EnterEditCustomerForm.resx">
       <DependentUpon>EnterEditCustomerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomersViews\EnterEditPaymentDialog.resx">
+      <DependentUpon>EnterEditPaymentDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomersViews\SearchCustomersDialog.resx">
       <DependentUpon>SearchCustomersDialog.cs</DependentUpon>

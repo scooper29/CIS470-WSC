@@ -35,6 +35,8 @@
 			this.label4 = new System.Windows.Forms.Label();
 			this.numericUpDownQuantity = new System.Windows.Forms.NumericUpDown();
 			this.btnSubmitRequestDetails = new System.Windows.Forms.Button();
+			this.btnRequestInventory = new System.Windows.Forms.Button();
+			this.btnMarkAsDelivered = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -96,7 +98,7 @@
 			// 
 			// btnSubmitRequestDetails
 			// 
-			this.btnSubmitRequestDetails.Location = new System.Drawing.Point(85, 108);
+			this.btnSubmitRequestDetails.Location = new System.Drawing.Point(93, 137);
 			this.btnSubmitRequestDetails.Name = "btnSubmitRequestDetails";
 			this.btnSubmitRequestDetails.Size = new System.Drawing.Size(139, 23);
 			this.btnSubmitRequestDetails.TabIndex = 14;
@@ -104,10 +106,32 @@
 			this.btnSubmitRequestDetails.UseVisualStyleBackColor = true;
 			this.btnSubmitRequestDetails.Click += new System.EventHandler(this.OnSubmitRequestDetails);
 			// 
+			// btnRequestInventory
+			// 
+			this.btnRequestInventory.Location = new System.Drawing.Point(1, 108);
+			this.btnRequestInventory.Name = "btnRequestInventory";
+			this.btnRequestInventory.Size = new System.Drawing.Size(83, 23);
+			this.btnRequestInventory.TabIndex = 15;
+			this.btnRequestInventory.Text = "Mark As Sold";
+			this.btnRequestInventory.UseVisualStyleBackColor = true;
+			this.btnRequestInventory.Click += new System.EventHandler(this.OnMarkAsSold);
+			// 
+			// btnMarkAsDelivered
+			// 
+			this.btnMarkAsDelivered.Location = new System.Drawing.Point(93, 108);
+			this.btnMarkAsDelivered.Name = "btnMarkAsDelivered";
+			this.btnMarkAsDelivered.Size = new System.Drawing.Size(139, 23);
+			this.btnMarkAsDelivered.TabIndex = 16;
+			this.btnMarkAsDelivered.Text = "Mark As Delivered";
+			this.btnMarkAsDelivered.UseVisualStyleBackColor = true;
+			this.btnMarkAsDelivered.Click += new System.EventHandler(this.OnMarkAsDelivered);
+			// 
 			// EnterEditInventoryForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.ClientSize = new System.Drawing.Size(237, 221);
+			this.Controls.Add(this.btnMarkAsDelivered);
+			this.Controls.Add(this.btnRequestInventory);
 			this.Controls.Add(this.btnSubmitRequestDetails);
 			this.Controls.Add(this.numericUpDownQuantity);
 			this.Controls.Add(this.label4);
@@ -116,6 +140,7 @@
 			this.Controls.Add(this.label3);
 			this.Controls.Add(this.label2);
 			this.Name = "EnterEditInventoryForm";
+			this.Load += new System.EventHandler(this.EnterEditInventoryForm_Load);
 			this.Controls.SetChildIndex(this.lblRecordId, 0);
 			this.Controls.SetChildIndex(this.txtRecordId, 0);
 			this.Controls.SetChildIndex(this.btnSave, 0);
@@ -127,6 +152,8 @@
 			this.Controls.SetChildIndex(this.label4, 0);
 			this.Controls.SetChildIndex(this.numericUpDownQuantity, 0);
 			this.Controls.SetChildIndex(this.btnSubmitRequestDetails, 0);
+			this.Controls.SetChildIndex(this.btnRequestInventory, 0);
+			this.Controls.SetChildIndex(this.btnMarkAsDelivered, 0);
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
@@ -142,5 +169,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.NumericUpDown numericUpDownQuantity;
 		private System.Windows.Forms.Button btnSubmitRequestDetails;
+		private System.Windows.Forms.Button btnRequestInventory;
+		private System.Windows.Forms.Button btnMarkAsDelivered;
     }
 }

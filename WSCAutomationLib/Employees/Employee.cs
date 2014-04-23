@@ -62,7 +62,14 @@ namespace WSCAutomation.Employees
         
         protected void SendNotification(string toAddress, string fromAddress, string subject, string bodyMessage)
         {
-            // This is our constant password for our project
+			System.Diagnostics.Debug.WriteLine(
+				"{0}\n" +
+				"\tTo   {1}\n" +
+				"\tFrom {2}\n" +
+				"\t\t{3}\n\n",
+				subject, toAddress, fromAddress, bodyMessage);
+
+			// This is our constant password for our project
             const string emailPassword = "senprojCIS470";
 
             // This composes the email dependent on input
@@ -154,29 +161,13 @@ namespace WSCAutomation.Employees
 			return validEmp;
 		}
 
-        public void UpdateOrder(int orderID, bool complete)
-        {
-            // creates instance of the DBManager
-            var dbm = Database.DatabaseManager.Instance;
+		public bool UpdateOrder(Orders.Order ord)
+		{
+			// creates instance of the DBManager
+			var dbm = Database.DatabaseManager.Instance;
 
-            // returns results from DBGetInventory
-            var result = dbm.DBGetOrders(orderID: orderID);
-
-            // this throws an excpetion if more or less that 1 result is returned
-            // should never happen here
-            if (result.Count != 1)
-            {
-                throw new InvalidOperationException("Unexpected order results");
-            }
-
-            // creates inv object from the returned list (only one)
-            var ord = result[0];
-
-            // assign values to corresponding attributes of the order object
-            ord.Complete = complete;
-
-            // call make the change in the DB
-            dbm.DBEditOrder(ord);
-        }
+			// call make the change in the DB
+			return dbm.DBEditOrder(ord);
+		}
 	};
 }

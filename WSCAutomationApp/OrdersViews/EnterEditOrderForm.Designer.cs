@@ -57,6 +57,8 @@
 			this.cbxOrderComplete = new System.Windows.Forms.ComboBox();
 			this.btnEditQuality = new System.Windows.Forms.Button();
 			this.txtQualityId = new System.Windows.Forms.TextBox();
+			this.btnValidateOrder = new System.Windows.Forms.Button();
+			this.btnMarkCompleted = new System.Windows.Forms.Button();
 			label10 = new System.Windows.Forms.Label();
 			label9 = new System.Windows.Forms.Label();
 			label7 = new System.Windows.Forms.Label();
@@ -82,7 +84,7 @@
 			// label10
 			// 
 			label10.AutoSize = true;
-			label10.Location = new System.Drawing.Point(232, 131);
+			label10.Location = new System.Drawing.Point(244, 131);
 			label10.Name = "label10";
 			label10.Size = new System.Drawing.Size(70, 13);
 			label10.TabIndex = 65;
@@ -91,7 +93,7 @@
 			// label9
 			// 
 			label9.AutoSize = true;
-			label9.Location = new System.Drawing.Point(232, 6);
+			label9.Location = new System.Drawing.Point(244, 6);
 			label9.Name = "label9";
 			label9.Size = new System.Drawing.Size(67, 13);
 			label9.TabIndex = 57;
@@ -118,7 +120,7 @@
 			// label4
 			// 
 			label4.AutoSize = true;
-			label4.Location = new System.Drawing.Point(232, 87);
+			label4.Location = new System.Drawing.Point(244, 87);
 			label4.Name = "label4";
 			label4.Size = new System.Drawing.Size(51, 13);
 			label4.TabIndex = 53;
@@ -136,7 +138,7 @@
 			// label11
 			// 
 			label11.AutoSize = true;
-			label11.Location = new System.Drawing.Point(232, 60);
+			label11.Location = new System.Drawing.Point(244, 60);
 			label11.Name = "label11";
 			label11.Size = new System.Drawing.Size(51, 13);
 			label11.TabIndex = 73;
@@ -145,7 +147,7 @@
 			// label12
 			// 
 			label12.AutoSize = true;
-			label12.Location = new System.Drawing.Point(232, 33);
+			label12.Location = new System.Drawing.Point(244, 33);
 			label12.Name = "label12";
 			label12.Size = new System.Drawing.Size(28, 13);
 			label12.TabIndex = 74;
@@ -154,7 +156,7 @@
 			// label13
 			// 
 			label13.AutoSize = true;
-			label13.Location = new System.Drawing.Point(232, 110);
+			label13.Location = new System.Drawing.Point(244, 110);
 			label13.Name = "label13";
 			label13.Size = new System.Drawing.Size(39, 13);
 			label13.TabIndex = 75;
@@ -200,7 +202,7 @@
 			this.txtOrderMessage.Location = new System.Drawing.Point(85, 159);
 			this.txtOrderMessage.Multiline = true;
 			this.txtOrderMessage.Name = "txtOrderMessage";
-			this.txtOrderMessage.Size = new System.Drawing.Size(141, 44);
+			this.txtOrderMessage.Size = new System.Drawing.Size(147, 44);
 			this.txtOrderMessage.TabIndex = 64;
 			// 
 			// txtInventoryId
@@ -229,6 +231,7 @@
 			// cbxOrderValidated
 			// 
 			this.cbxOrderValidated.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.cbxOrderValidated.Enabled = false;
 			this.cbxOrderValidated.FormattingEnabled = true;
 			this.cbxOrderValidated.Location = new System.Drawing.Point(318, 55);
 			this.cbxOrderValidated.Name = "cbxOrderValidated";
@@ -310,6 +313,7 @@
 			// cbxOrderComplete
 			// 
 			this.cbxOrderComplete.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.cbxOrderComplete.Enabled = false;
 			this.cbxOrderComplete.FormattingEnabled = true;
 			this.cbxOrderComplete.Location = new System.Drawing.Point(318, 79);
 			this.cbxOrderComplete.Name = "cbxOrderComplete";
@@ -320,7 +324,7 @@
 			// 
 			this.btnEditQuality.Location = new System.Drawing.Point(186, 131);
 			this.btnEditQuality.Name = "btnEditQuality";
-			this.btnEditQuality.Size = new System.Drawing.Size(40, 23);
+			this.btnEditQuality.Size = new System.Drawing.Size(46, 23);
 			this.btnEditQuality.TabIndex = 92;
 			this.btnEditQuality.Text = "Edit";
 			this.btnEditQuality.UseVisualStyleBackColor = true;
@@ -334,10 +338,32 @@
 			this.txtQualityId.Size = new System.Drawing.Size(100, 20);
 			this.txtQualityId.TabIndex = 91;
 			// 
+			// btnValidateOrder
+			// 
+			this.btnValidateOrder.Location = new System.Drawing.Point(175, 211);
+			this.btnValidateOrder.Name = "btnValidateOrder";
+			this.btnValidateOrder.Size = new System.Drawing.Size(57, 23);
+			this.btnValidateOrder.TabIndex = 93;
+			this.btnValidateOrder.Text = "Validate";
+			this.btnValidateOrder.UseVisualStyleBackColor = true;
+			this.btnValidateOrder.Click += new System.EventHandler(this.OnValidateOrder);
+			// 
+			// btnMarkCompleted
+			// 
+			this.btnMarkCompleted.Location = new System.Drawing.Point(238, 211);
+			this.btnMarkCompleted.Name = "btnMarkCompleted";
+			this.btnMarkCompleted.Size = new System.Drawing.Size(73, 23);
+			this.btnMarkCompleted.TabIndex = 94;
+			this.btnMarkCompleted.Text = "Completed";
+			this.btnMarkCompleted.UseVisualStyleBackColor = true;
+			this.btnMarkCompleted.Click += new System.EventHandler(this.OnMarkCompleted);
+			// 
 			// EnterEditOrderForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.ClientSize = new System.Drawing.Size(423, 246);
+			this.Controls.Add(this.btnMarkCompleted);
+			this.Controls.Add(this.btnValidateOrder);
 			this.Controls.Add(this.btnEditQuality);
 			this.Controls.Add(this.txtQualityId);
 			this.Controls.Add(label6);
@@ -368,6 +394,7 @@
 			this.Controls.Add(label4);
 			this.Controls.Add(label2);
 			this.Name = "EnterEditOrderForm";
+			this.Load += new System.EventHandler(this.EnterEditOrderForm_Load);
 			this.Controls.SetChildIndex(label2, 0);
 			this.Controls.SetChildIndex(label4, 0);
 			this.Controls.SetChildIndex(label5, 0);
@@ -401,6 +428,8 @@
 			this.Controls.SetChildIndex(label6, 0);
 			this.Controls.SetChildIndex(this.txtQualityId, 0);
 			this.Controls.SetChildIndex(this.btnEditQuality, 0);
+			this.Controls.SetChildIndex(this.btnValidateOrder, 0);
+			this.Controls.SetChildIndex(this.btnMarkCompleted, 0);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -425,5 +454,7 @@
 		private System.Windows.Forms.ComboBox cbxOrderComplete;
 		private System.Windows.Forms.Button btnEditQuality;
 		private System.Windows.Forms.TextBox txtQualityId;
+		private System.Windows.Forms.Button btnValidateOrder;
+		private System.Windows.Forms.Button btnMarkCompleted;
     }
 }

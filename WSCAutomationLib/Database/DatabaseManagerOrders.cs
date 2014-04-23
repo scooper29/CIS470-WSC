@@ -9,7 +9,7 @@ namespace WSCAutomation.Database
 
 	partial class DatabaseManager
 	{
-        #region Inventory table column names
+        #region Order table column names
         const string ORDER_TABLE = "Orders";
 
         const string ORDER_ORDER_ID = "OrderID";
@@ -20,7 +20,7 @@ namespace WSCAutomation.Database
         const string ORDER_QUALITY_ID = "QualityID";
         const string ORDER_MESSAGE = "Order_Message";
         const string ORDER_INVALID_MEMO = "Order_InvalidMemo";
-		const string ORDER_PAID_UP_FRONT = "Order_PaidUpFront";
+		const string ORDER_PAID_UP_FRONT = "Order_PayUpFront";
         const string ORDER_PAID = "Order_Paid";
         const string ORDER_VALIDATED = "Order_Validated";
 	    const string ORDER_COMPLETE = "Order_Complete";

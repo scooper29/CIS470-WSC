@@ -28,15 +28,19 @@ namespace WSCAutomation.App
 			cbxOrderValidated.Items.AddRange(Program.BooleanComboItems);
 			cbxOrderComplete.Items.AddRange(Program.BooleanComboItems);
 			cbxOrderClosed.Items.AddRange(Program.BooleanComboItems);
+        }
 
+		private void EnterEditOrderForm_Load(object sender, EventArgs e)
+		{
 			var authority = Program.CurrentUser.Authority;
 			// only show the Edit/View quality button to managers and specialists
-			btnEditQuality.Visible = 
+			btnEditQuality.Visible =
 				authority == UserAuthorityType.Manager ||
 				authority == UserAuthorityType.Specialist;
 
 			// change the display name of the Edit button to View for specialists
-			if (authority == UserAuthorityType.Specialist)
+			if (authority == UserAuthorityType.Specialist ||
+				this.EnterEditFormMode == EnterEditRecordFormMode.View)
 				btnEditQuality.Text = "View";
 
 			// we currently shouldn't need to let users change the sales employee
@@ -46,24 +50,41 @@ namespace WSCAutomation.App
 				txtSalesId.ReadOnly = true;
 			}
 
-			// TODO: once we're out of testing, remove the explicit false
-			// the manager is the only one who can change the assigned specialist
-			if (false && authority != UserAuthorityType.Manager)
+			#region Disable Manager-only fields
+			if (authority != UserAuthorityType.Manager)
 			{
 				btnSelectSpecialistEmployee.Visible = false;
-
 				txtSpecialistId.ReadOnly = true;
-				cbxOrderValidated.Enabled = false;
+				btnValidateOrder.Visible = false;
+
+				cbxOrderClosed.Enabled = false;
+				txtOrderInvalidMemo.ReadOnly = true;
 			}
-			// the sales employee is the only one who can change the paid flags
-			if (false && authority != UserAuthorityType.Sales)
+			#endregion
+
+			#region Disable Sales-only fields
+			if (authority != UserAuthorityType.Sales)
 			{
+				btnSelectCustomer.Visible = false;
 				txtCustomerId.ReadOnly = true;
+
+				btnSelectInventory.Visible = false;
+				txtInventoryId.ReadOnly = true;
+
+				txtOrderMessage.ReadOnly = true;
 
 				cbxOrderPaidUpFront.Enabled = false;
 				cbxOrderPaid.Enabled = false;
 			}
-        }
+			#endregion
+
+			#region Disable Specialist-only fields
+			if (authority != UserAuthorityType.Specialist)
+			{
+				btnMarkCompleted.Visible = false;
+			}
+			#endregion
+		}
 
 		protected override void ToggleFieldsForEnterEditFormMode()
 		{
@@ -71,6 +92,14 @@ namespace WSCAutomation.App
 
 			switch (EnterEditFormMode)
 			{
+				case EnterEditRecordFormMode.View:
+					btnSelectCustomer.Visible = false;
+					btnSelectInventory.Visible = false;
+					btnSelectSalesEmployee.Visible = false;
+					btnSelectSpecialistEmployee.Visible = false;
+					btnMarkCompleted.Visible = false;
+					break;
+
 				case EnterEditRecordFormMode.Edit:
 					if (btnEditQuality.Visible)
 						btnEditQuality.Enabled = true;
@@ -88,6 +117,8 @@ namespace WSCAutomation.App
 		Binding txtCustomerIdBinding { get { return txtCustomerId.DataBindings[0]; } }
 		Binding txtInventoryIdBinding { get { return txtInventoryId.DataBindings[0]; } }
 		Binding txtQualityIdBinding { get { return txtQualityId.DataBindings[0]; } }
+		Binding cbxOrderValidatedBinding { get { return cbxOrderValidated.DataBindings[0]; } }
+		Binding cbxOrderCompleteBinding { get { return cbxOrderComplete.DataBindings[0]; } }
 
 		void DataBindToOrderData()
 		{
@@ -129,6 +160,21 @@ namespace WSCAutomation.App
 
 			orderData = order;
 			DataBindToOrderData();
+
+			if (orderData.Validated)
+			{
+				btnValidateOrder.Enabled = false;
+				txtSpecialistId.ReadOnly = true;
+			}
+			if (orderData.Complete)
+			{
+				btnMarkCompleted.Enabled = false;
+			}
+			if(orderData.QualityId == -1 &&
+				EnterEditFormMode == EnterEditRecordFormMode.View)
+			{
+				btnEditQuality.Visible = false;
+			}
 		}
 
 		public override int GetRecordIdValue()
@@ -184,6 +230,14 @@ namespace WSCAutomation.App
 			{
 				valid = false;
 				ShowValidationErrorMessage("No {0} exists by the given ID", "Specialist");
+			}
+			#endregion
+
+			#region Message
+			if (orderData.Message == "")
+			{
+				valid = false;
+				ShowValidationErrorMessage("Please provide a value for {0}", "Message");
 			}
 			#endregion
 
@@ -268,7 +322,7 @@ namespace WSCAutomation.App
 			var recordFormMode = EnterEditRecordFormMode.Create;
 
 			Orders.QualityCheckList quality = null;
-			if (orderData.QualityId == null)
+			if (orderData.QualityId == -1)
 				quality = new Orders.QualityCheckList();
 			else
 			{
@@ -280,18 +334,23 @@ namespace WSCAutomation.App
 
 				quality = lists[0];
 
-				switch (Program.CurrentUser.Authority)
+				if (this.EnterEditFormMode == EnterEditRecordFormMode.View)
+					recordFormMode = EnterEditRecordFormMode.View;
+				else
 				{
-					case UserAuthorityType.Manager:
-						recordFormMode = EnterEditRecordFormMode.Edit;
-						break;
+					switch (Program.CurrentUser.Authority)
+					{
+						case UserAuthorityType.Manager:
+							recordFormMode = EnterEditRecordFormMode.Edit;
+							break;
 
-					case UserAuthorityType.Specialist:
-						recordFormMode = EnterEditRecordFormMode.View;
-						break;
+						case UserAuthorityType.Specialist:
+							recordFormMode = EnterEditRecordFormMode.View;
+							break;
 
-					default:
-						throw new InvalidOperationException();
+						default:
+							throw new InvalidOperationException();
+					}
 				}
 			}
 
@@ -304,8 +363,53 @@ namespace WSCAutomation.App
 			if (recordForm.ShowDialog(this) == DialogResult.OK &&
 				recordFormMode == EnterEditRecordFormMode.Create)
 			{
+				var managerAccess = Program.CurrentUser.AsManager;
+				managerAccess.UpdateOrder(orderData);
+
 				txtQualityIdBinding.ReadValue();
 			}
+		}
+
+		private void OnValidateOrder(object sender, EventArgs e)
+		{
+			var managerAccess = Program.CurrentUser.AsManager;
+
+			orderData.Validated = true;
+			if (managerAccess.ValidateOrder(orderData))
+			{
+				btnSelectSpecialistEmployee.Enabled = false;
+				txtSpecialistId.ReadOnly = true;
+				btnValidateOrder.Enabled = false;
+				cbxOrderValidatedBinding.ReadValue();
+
+				MessageBox.Show(this, "Order validated!", "Success");
+			}
+			else
+			{
+				orderData.Validated = false;
+
+				MessageBox.Show(this, "Order failed to validate! Contact support", "Failure");
+			}
+		}
+
+		private void OnMarkCompleted(object sender, EventArgs e)
+		{
+			var specAccess = Program.CurrentUser.AsSpecialist;
+
+			bool success = specAccess.MarkOrderComplete(orderData, specAccess.Id);
+
+			string message = "";
+			if (success)
+			{
+				message = "Order marked as complete. A manager will be notified shortly.";
+
+				btnMarkCompleted.Enabled = false;
+				cbxOrderCompleteBinding.ReadValue();
+			}
+			else
+				message = "Failed to mark as completed. Contact support";
+
+			MessageBox.Show(this, message, "Success");
 		}
     };
 }

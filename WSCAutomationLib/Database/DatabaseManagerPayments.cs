@@ -9,7 +9,7 @@ namespace WSCAutomation.Database
 
 	partial class DatabaseManager
 	{
-        #region Inventory table column names
+        #region Payment table column names
         const string PAYMENT_TABLE = "Payment";
 
         const string PAYMENT_ID = "PaymentID";
@@ -23,7 +23,7 @@ namespace WSCAutomation.Database
         {
             var query = new ModificationQueryBuilder(connection, type, PAYMENT_TABLE);
 
-            query.AddParameter(PAYMENT_ID, "payId", pay.Id);
+            query.AddIdParameter(PAYMENT_ID, "payId", pay.Id);
 
             query.AddParameter(PAYMENT_TYPE, "payType", pay.Type);
             query.AddParameter(PAYMENT_CARD_NUMBER, "paymentCardNumber", pay.CardNumber);
@@ -62,11 +62,11 @@ namespace WSCAutomation.Database
 
         public int DBAddPayment(Payment pay)
 		{
-            object Obj = PerformModificationQuery(ModificationQueryType.Insert, pay);
+            object idObj = PerformModificationQuery(ModificationQueryType.Insert, pay);
 
-            if (Obj != null)
+			if (idObj != null)
             {
-                pay.Id = Convert.ToInt32(Obj);
+				pay.Id = Convert.ToInt32(idObj);
 
                 return pay.Id;
             }

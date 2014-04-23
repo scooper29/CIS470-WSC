@@ -36,14 +36,6 @@
 			label1 = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
-			// txtQualityDescription
-			// 
-			this.txtQualityDescription.Location = new System.Drawing.Point(85, 56);
-			this.txtQualityDescription.Multiline = true;
-			this.txtQualityDescription.Name = "txtQualityDescription";
-			this.txtQualityDescription.Size = new System.Drawing.Size(187, 165);
-			this.txtQualityDescription.TabIndex = 7;
-			// 
 			// label2
 			// 
 			label2.AutoSize = true;
@@ -53,14 +45,6 @@
 			label2.TabIndex = 6;
 			label2.Text = "Description";
 			// 
-			// cbxGrade
-			// 
-			this.cbxGrade.FormattingEnabled = true;
-			this.cbxGrade.Location = new System.Drawing.Point(85, 29);
-			this.cbxGrade.Name = "cbxGrade";
-			this.cbxGrade.Size = new System.Drawing.Size(100, 21);
-			this.cbxGrade.TabIndex = 5;
-			// 
 			// label1
 			// 
 			label1.AutoSize = true;
@@ -69,6 +53,23 @@
 			label1.Size = new System.Drawing.Size(36, 13);
 			label1.TabIndex = 4;
 			label1.Text = "Grade";
+			// 
+			// txtQualityDescription
+			// 
+			this.txtQualityDescription.Location = new System.Drawing.Point(85, 56);
+			this.txtQualityDescription.MaxLength = 30;
+			this.txtQualityDescription.Multiline = true;
+			this.txtQualityDescription.Name = "txtQualityDescription";
+			this.txtQualityDescription.Size = new System.Drawing.Size(187, 165);
+			this.txtQualityDescription.TabIndex = 7;
+			// 
+			// cbxGrade
+			// 
+			this.cbxGrade.FormattingEnabled = true;
+			this.cbxGrade.Location = new System.Drawing.Point(85, 29);
+			this.cbxGrade.Name = "cbxGrade";
+			this.cbxGrade.Size = new System.Drawing.Size(100, 21);
+			this.cbxGrade.TabIndex = 5;
 			// 
 			// EnterEditOrderQualityDialog
 			// 

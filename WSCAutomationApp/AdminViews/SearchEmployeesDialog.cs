@@ -27,6 +27,11 @@ namespace WSCAutomation.App
 			dgcUserName.DataPropertyName = "UserName";
 			dgcUserName.Name = "User Name";
 			dgvSearchResults.Columns.Add(dgcUserName);
+
+			var dgcAccess = new DataGridViewTextBoxColumn();
+			dgcAccess.DataPropertyName = "Access";
+			dgcAccess.Name = "Access";
+			dgvSearchResults.Columns.Add(dgcAccess);
 		}
 
 		protected override void PerformSearch(BindingSource searchResultsBindingSource)

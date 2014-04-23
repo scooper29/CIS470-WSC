@@ -14,8 +14,9 @@ namespace WSCAutomation.Customers
 		{
 			Id = -1;
 
-			Type = CardNumber =
-				"";
+			Type = "VISA";
+
+			CardNumber = "";
 
 			ExpirationDate = DateTime.Today;
 		}

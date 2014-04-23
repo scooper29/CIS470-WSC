@@ -146,6 +146,7 @@
 			// txtFirstName
 			// 
 			this.txtFirstName.Location = new System.Drawing.Point(80, 29);
+			this.txtFirstName.MaxLength = 30;
 			this.txtFirstName.Name = "txtFirstName";
 			this.txtFirstName.Size = new System.Drawing.Size(160, 20);
 			this.txtFirstName.TabIndex = 13;
@@ -153,6 +154,7 @@
 			// txtLastName
 			// 
 			this.txtLastName.Location = new System.Drawing.Point(80, 55);
+			this.txtLastName.MaxLength = 30;
 			this.txtLastName.Name = "txtLastName";
 			this.txtLastName.Size = new System.Drawing.Size(160, 20);
 			this.txtLastName.TabIndex = 14;
@@ -160,6 +162,7 @@
 			// txtAddress
 			// 
 			this.txtAddress.Location = new System.Drawing.Point(311, 3);
+			this.txtAddress.MaxLength = 35;
 			this.txtAddress.Name = "txtAddress";
 			this.txtAddress.Size = new System.Drawing.Size(160, 20);
 			this.txtAddress.TabIndex = 15;
@@ -167,6 +170,7 @@
 			// txtCity
 			// 
 			this.txtCity.Location = new System.Drawing.Point(311, 29);
+			this.txtCity.MaxLength = 35;
 			this.txtCity.Name = "txtCity";
 			this.txtCity.Size = new System.Drawing.Size(113, 20);
 			this.txtCity.TabIndex = 16;
@@ -174,6 +178,7 @@
 			// txtZipCode
 			// 
 			this.txtZipCode.Location = new System.Drawing.Point(311, 80);
+			this.txtZipCode.MaxLength = 5;
 			this.txtZipCode.Name = "txtZipCode";
 			this.txtZipCode.Size = new System.Drawing.Size(83, 20);
 			this.txtZipCode.TabIndex = 17;
@@ -181,6 +186,7 @@
 			// txtEmail
 			// 
 			this.txtEmail.Location = new System.Drawing.Point(80, 80);
+			this.txtEmail.MaxLength = 35;
 			this.txtEmail.Name = "txtEmail";
 			this.txtEmail.Size = new System.Drawing.Size(160, 20);
 			this.txtEmail.TabIndex = 18;
@@ -188,6 +194,7 @@
 			// txtPhoneNumber
 			// 
 			this.txtPhoneNumber.Location = new System.Drawing.Point(80, 106);
+			this.txtPhoneNumber.MaxLength = 10;
 			this.txtPhoneNumber.Name = "txtPhoneNumber";
 			this.txtPhoneNumber.Size = new System.Drawing.Size(126, 20);
 			this.txtPhoneNumber.TabIndex = 19;
@@ -243,6 +250,7 @@
 			this.Controls.Add(label2);
 			this.Controls.Add(label1);
 			this.Name = "EnterEditCustomerForm";
+			this.Load += new System.EventHandler(this.EnterEditCustomerForm_Load);
 			this.Controls.SetChildIndex(label1, 0);
 			this.Controls.SetChildIndex(label2, 0);
 			this.Controls.SetChildIndex(label3, 0);

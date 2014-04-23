@@ -25,7 +25,7 @@ namespace WSCAutomation.Employees
         //called when the specialist requests an item that is NOT in stock
         public int OrderInventory(Inventory.InventoryOrder invOrder)
         {
-            SendNotification("wscspec60683@gmail.com", this.Email, "Inventory Ordered", "Inventory " + invOrder.InventoryId + " that you requested that was not in stock has been ordered. Delievery expected: " + invOrder.ArrivalDate.ToShortDateString());
+            SendNotification("wscspec60683@gmail.com", this.Email, "Inventory Ordered", "Inventory #" + invOrder.InventoryId + " that you requested that was not in stock has been ordered. Delivery expected: " + invOrder.ArrivalDate.ToShortDateString());
             
             return Database.DatabaseManager.Instance.DBAddInventoryOrder(invOrder);
         }
@@ -37,7 +37,7 @@ namespace WSCAutomation.Employees
             invIn.QtySold -= 1;
             invIn.Quantity -= 1;
 
-            SendNotification("wscspec60683@gmail.com", this.Email, "Inventory Pulled", "Inventory " + invIn.Id + " that you requested has been pulled.");
+            SendNotification("wscspec60683@gmail.com", this.Email, "Inventory Pulled", "Inventory #" + invIn.Id + " that you requested has been pulled.");
 
             return Database.DatabaseManager.Instance.DBEditInventory(invIn);
         }

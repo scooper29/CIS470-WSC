@@ -23,7 +23,7 @@ namespace WSCAutomation.Employees
 
 			if (success)
 				SendNotification("wscspec60683@gmail.com", this.Email,
-					"Order has been assigned to you", "Order " + ord.Id + " has been assigned to you");
+					"Order has been assigned to you", "Order #" + ord.Id + " has been assigned to Specialist #" + ord.SpecialistId);
 
 			return success;
 		}
@@ -32,12 +32,12 @@ namespace WSCAutomation.Employees
 		{
             if (check.Pass)
             {
-				SendNotification("showandy@gmail.com", this.Email, "Order Finished", "Your order " + orderId + " is finished and is ready to be shipped or picked up.");
-				SendNotification("wscsales60683@gmail.com", this.Email, "Close Order", "Please close Order number " + orderId);
+				SendNotification("showandy@gmail.com", this.Email, "Order Finished", "Your order #" + orderId + " is finished and is ready to be shipped or picked up.");
+				SendNotification("wscsales60683@gmail.com", this.Email, "Close Order", "Please close Order #" + orderId);
             }
             else
             {
-				SendNotification("wscspec60683@gmail.com", this.Email, "Order Failed Quality Check", "Order number " + orderId + " that you worked on did not pass the quality check.");
+				SendNotification("wscspec60683@gmail.com", this.Email, "Order Failed Quality Check", "Order #" + orderId + " that you worked on did not pass the quality check.");
             }
 
             return Database.DatabaseManager.Instance.DBAddQualityCheckList(check);
@@ -48,11 +48,11 @@ namespace WSCAutomation.Employees
             if (check.Pass)
             {
 				SendNotification("showandy@gmail.com", this.Email, "Order Finished", "Your order " + orderId + " is finished and is ready to be shipped or picked up.");
-				SendNotification("wscsales60683@gmail.com", this.Email, "Close Order", "Please close Order number " + orderId);
+				SendNotification("wscsales60683@gmail.com", this.Email, "Close Order", "Please close Order #" + orderId);
             }
             else
             {
-				SendNotification("wscspec60683@gmail.com", this.Email, "Order Failed Quality Check", "Order number " + orderId + " that you worked on did not pass the quality check, again.");
+				SendNotification("wscspec60683@gmail.com", this.Email, "Order Failed Quality Check", "Order #" + orderId + " that you worked on did not pass the quality check, again.");
             }
 
             return Database.DatabaseManager.Instance.DBEditQualityChecklist(check);
