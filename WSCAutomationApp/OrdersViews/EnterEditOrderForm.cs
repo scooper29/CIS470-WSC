@@ -59,7 +59,7 @@ namespace WSCAutomation.App
 
 				cbxOrderClosed.Enabled = false;
 				txtOrderInvalidMemo.ReadOnly = true;
-			}
+			}				
 			#endregion
 
 			#region Disable Sales-only fields
@@ -84,6 +84,33 @@ namespace WSCAutomation.App
 				btnMarkCompleted.Visible = false;
 			}
 			#endregion
+
+			if (EnterEditFormMode == EnterEditRecordFormMode.Edit)
+			{
+				if (orderData.Validated)
+				{
+					btnValidateOrder.Enabled = false;
+					txtSpecialistId.ReadOnly = true;
+				}
+				// Only the manager can reverse a completion
+				if (orderData.Complete &&
+					authority == UserAuthorityType.Specialist)
+				{
+					btnMarkCompleted.Enabled = false;
+				}
+				if (orderData.Complete &&
+					authority == UserAuthorityType.Manager)
+				{
+					cbxOrderComplete.Enabled = true;
+				}
+			}
+
+			if (orderData.QualityId == -1 &&
+				(authority != UserAuthorityType.Manager ||
+				 EnterEditFormMode == EnterEditRecordFormMode.View))
+			{
+				btnEditQuality.Visible = false;
+			}
 		}
 
 		protected override void ToggleFieldsForEnterEditFormMode()
@@ -98,6 +125,7 @@ namespace WSCAutomation.App
 					btnSelectSalesEmployee.Visible = false;
 					btnSelectSpecialistEmployee.Visible = false;
 					btnMarkCompleted.Visible = false;
+					btnValidateOrder.Visible = false;
 					break;
 
 				case EnterEditRecordFormMode.Edit:
@@ -159,22 +187,7 @@ namespace WSCAutomation.App
 				order.SalesId = Program.CurrentUser.EmployeeData.Id;
 
 			orderData = order;
-			DataBindToOrderData();
-
-			if (orderData.Validated)
-			{
-				btnValidateOrder.Enabled = false;
-				txtSpecialistId.ReadOnly = true;
-			}
-			if (orderData.Complete)
-			{
-				btnMarkCompleted.Enabled = false;
-			}
-			if(orderData.QualityId == -1 &&
-				EnterEditFormMode == EnterEditRecordFormMode.View)
-			{
-				btnEditQuality.Visible = false;
-			}
+			DataBindToOrderData();			
 		}
 
 		public override int GetRecordIdValue()
@@ -263,7 +276,10 @@ namespace WSCAutomation.App
 			{
 				var managerAccess = Program.CurrentUser.AsManager;
 
-				return managerAccess.ValidateOrder(orderData);
+				if (!orderData.Validated)
+					return managerAccess.ValidateOrder(orderData);
+				else
+					return managerAccess.UpdateOrder(orderData);
 			}
 			else
 				throw new InvalidOperationException("This user doesn't have the authority to save changes to orders...");

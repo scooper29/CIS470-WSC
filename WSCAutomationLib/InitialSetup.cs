@@ -205,6 +205,22 @@ namespace WSCAutomation
 				Description = "You're fired.",
 			};
 			AddAndVerifyNewQualityCheckList(fakeManager, order, quality);
+
+			// order without a checklist
+			order = new Orders.Order
+			{
+				SalesId = SALES_ID,
+				SpecialistId = SPECIALIST_ID,
+				CustomerId = CUSTOMER_ID,
+				InventoryId = INVENTORY_ID,
+
+				Message = "World's Greatest Order",
+
+				PaidUpFront = true,
+				Paid = true,
+				Validated = true,
+			};
+			AddAndVerifyNewOrder(fakeSales, order, orderExpectedId++);
 		}
 
 		/// <summary>Perform all the initial setup steps</summary>
