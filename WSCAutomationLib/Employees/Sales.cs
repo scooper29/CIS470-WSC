@@ -53,12 +53,5 @@ namespace WSCAutomation.Employees
 
             return dbm.DBEditPayment(payment);
 		}
-
-		public List<Customers.Payment> GetPayments(int paymentId = -1)
-		{
-			var dbm = Database.DatabaseManager.Instance;
-
-			return dbm.DBGetPayments(paymentId);
-		}
 	};
 }

@@ -181,7 +181,7 @@ namespace WSCAutomation.App
 		{
 			var recordFormMode = EnterEditRecordFormMode.Create;
 
-			var salesAccess = Program.CurrentUser.AsSales;
+			var emp = Program.CurrentUser.EmployeeData;
 
 			if (customerData.PaymentId == -1)
 			{
@@ -189,7 +189,7 @@ namespace WSCAutomation.App
 			}
 			else if(paymentData == null)
 			{
-				var payments = salesAccess.GetPayments(customerData.PaymentId);
+				var payments = emp.GetPayments(customerData.PaymentId);
 				System.Diagnostics.Debug.Assert(payments.Count == 1);
 
 				paymentData = payments[0];

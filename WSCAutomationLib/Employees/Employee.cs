@@ -59,6 +59,13 @@ namespace WSCAutomation.Employees
 
 			return dbm.DBGetQualityCheckList(qualityId);
 		}
+
+		public List<Customers.Payment> GetPayments(int paymentId = -1)
+		{
+			var dbm = Database.DatabaseManager.Instance;
+
+			return dbm.DBGetPayments(paymentId);
+		}
         
         protected void SendNotification(string toAddress, string fromAddress, string subject, string bodyMessage)
         {
